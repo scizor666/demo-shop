@@ -1,0 +1,27 @@
+.Modal-wrapper {
+  max-width: 500px;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+}
+
+.Modal-title {
+  background-color: #ffffff;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 20px;
+  font-weight: 800;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.Modal-content {
+  padding: 20px;
+  text-align: justify;
+  background-color: #e2e3e2;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  border-radius: 0 0 10px 10px;
+}

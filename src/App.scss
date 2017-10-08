@@ -1,0 +1,18 @@
+.App-header {
+  margin: 0 auto;
+  height: 30px;
+  background: #32c3d2;
+  padding: 10px 5%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.App-footer {
+  width: 100%;
+  background: #32c3d2;
+  text-align: center;
+  line-height: 50px;
+  position: fixed;
+  bottom: 0;
+}
