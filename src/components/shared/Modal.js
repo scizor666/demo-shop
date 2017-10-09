@@ -16,7 +16,7 @@ export default class Modal extends Component {
     render() {
         return <div className="Modal-wrapper">
             <div className="Modal-title">{this.props.title}</div>
-            <div className="Modal-content">{this.props.content}</div>
+            <div className="Modal-content">{this.props.children || this.props.content}</div>
         </div>
     };
 }

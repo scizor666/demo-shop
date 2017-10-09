@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import SignOut from "./components/login/SignOut";
-import Modal from "./components/shared/Modal";
+import LoginModal from "./components/login/LoginModal";
 
 class App extends Component {
     render() {
@@ -12,7 +12,7 @@ class App extends Component {
                     <SignOut/>
                 </header>
                 <main className="App-main">
-                    <Modal/>
+                    <LoginModal/>
                 </main>
                 <footer className="App-footer">Copyright "Demo Shop", 2017</footer>
             </div>

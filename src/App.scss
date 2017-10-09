@@ -1,7 +1,9 @@
+@import './components/shared/shared.scss';
+
 .App-header {
   margin: 0 auto;
   height: 30px;
-  background: #32c3d2;
+  background: $main-color;
   padding: 10px 5%;
   display: flex;
   justify-content: space-between;
@@ -10,7 +12,7 @@
 
 .App-footer {
   width: 100%;
-  background: #32c3d2;
+  background: $main-color;
   text-align: center;
   line-height: 50px;
   position: fixed;

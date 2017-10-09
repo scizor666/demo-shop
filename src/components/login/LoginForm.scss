@@ -1,0 +1,63 @@
+@import '../shared/shared.scss';
+
+.LoginForm-wrapper {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.LoginForm-fieldGroup {
+  position: relative;
+  width: 100%;
+}
+
+.LoginForm-field {
+  $padding-left: 10px;
+  $padding-right: 30px;
+
+  display: block;
+  width: calc(100% - #{$padding-left + $padding-right});
+  height: 30px;
+  border-radius: 5px;
+  margin: 5px 0 15px 0;
+  font-size: 1rem;
+  border: 1px solid transparent;
+  padding-left: $padding-left;
+  padding-right: $padding-right;
+}
+
+.LoginForm-fieldIcon {
+  position: absolute;
+  top: 8px;
+  left: calc(100% - 20px);
+  font-size: 20px;
+  color: #a9a9a9;
+}
+
+.LoginForm-field:focus {
+  border-color: $valid-color;
+  outline: none;
+}
+
+.LoginForm-field:invalid {
+  border-color: $invalid-color;
+}
+
+.LoginForm-field:invalid + .fa {
+  color: $invalid-color;
+}
+
+.LoginForm-submit {
+  height: 30px;
+  border-radius: 5px;
+  border-width: 0;
+  background-image: linear-gradient(to bottom, #3498db, #2bafb8);;
+  color: #ffffff;
+  min-width: 100px;
+  float: right;
+  font-size: .8rem;
+  outline: none;
+}
+
+.LoginForm-submit:active {
+  background-image: linear-gradient(to top, #3498db, #2bafb8);
+}
