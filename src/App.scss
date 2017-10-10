@@ -1,5 +1,6 @@
 @import './components/shared/shared.scss';
 
+$footer-height: 50px;
 .App-header {
   margin: 0 auto;
   height: 30px;
@@ -10,11 +11,15 @@
   position: relative;
 }
 
+.App-main {
+  margin-bottom: $footer-height + 10px
+}
+
 .App-footer {
   width: 100%;
   background: $main-color;
   text-align: center;
-  line-height: 50px;
+  line-height: $footer-height;
   position: fixed;
   bottom: 0;
 }

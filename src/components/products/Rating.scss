@@ -1,0 +1,20 @@
+.Rating-wrapper {
+  background-color: #000000;
+  height: 25px;
+  margin: 0;
+  display: block;
+  padding: 10px 0 0 10px;
+  font-size: 1rem;
+}
+
+.Rating-star {
+  margin-right: 4px;
+}
+
+.Rating-star_full {
+  color: #ffff00;
+}
+
+.Rating-star_blank {
+  color: #ffffff;
+}
