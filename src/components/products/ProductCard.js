@@ -1,16 +1,13 @@
 import React, {Component} from "react";
 import './ProductCard.css';
 import Rating from "./Rating";
+import ArrayUtils from "../../utils/ArrayUtils";
 
 
 export default class ProductCard extends Component {
 
     static defaultProps = {
         currency: '$'
-    };
-
-    randomArrayItem(options) {
-        return options[Math.floor(Math.random() * options.length)];
     };
 
     randomRating() {
@@ -24,7 +21,7 @@ export default class ProductCard extends Component {
             "https://s3-us-west-1.amazonaws.com/cookery-book/user_uploads/ce0bcd9b-fc47-4859-a024-1427a557f726/Supreme_pizza.jpg",
             "https://s3-us-west-1.amazonaws.com/cookery-book/user_uploads/705f14c8-3abb-40a4-972d-74d657d99f34/c700x420.jpg"
         ];
-        return this.randomArrayItem(options)
+        return ArrayUtils.randomItem(options)
     }
 
     randomPrice() {
@@ -39,7 +36,7 @@ export default class ProductCard extends Component {
             "Свинина, курица, пепперони, ветчина, бекон, помидоры",
             // "Пепперони, ветчина, шампиньоны, моцарелла и пармезан as dasd asd asd asd asd asd asdjhasdjhashgjdasd as das das das das das das das das das das das das das das dasd asd asf sdg dfh fgj se fe f wet eryergerf wef werf wefw efe ryrt hrtherge rge"
         ];
-        return this.randomArrayItem(options);
+        return ArrayUtils.randomItem(options);
     }
 
     randomName() {
@@ -49,7 +46,7 @@ export default class ProductCard extends Component {
             "Пицца Карбонара",
             "Пицца Гавайская"
         ];
-        return this.randomArrayItem(options);
+        return ArrayUtils.randomItem(options);
     }
 
     render() {

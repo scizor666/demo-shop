@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import './Rating.css';
+import ArrayUtils from "../../utils/ArrayUtils";
 
 export default class Rating extends Component {
 
@@ -11,8 +12,7 @@ export default class Rating extends Component {
 
     render() {
         return <div className="Rating-wrapper">
-            {Array.apply(null, new Array(this.props.max))
-                .map((_, i) => {
+            {ArrayUtils.times(this.props.max, i => {
                     const starState = `Rating-star_${i < this.props.value ? 'full' : 'blank'}`;
                     return <i key={i} className={`fa fa-star Rating-star ${starState}`} aria-hidden="true"/>;
                 })
