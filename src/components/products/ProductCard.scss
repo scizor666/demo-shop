@@ -1,8 +1,57 @@
+@import '../shared/shared.scss';
+
+$data-padding: 10px;
+$data-margin: $data-padding;
+
 .ProductCard-wrapper {
   margin: 0 auto 20px;
+  height: 100%;
+  min-width: calc(#{$button-width} + 100px);
 }
 
 .ProductCard-image {
   width: 100%;
   display: block;
+}
+
+.ProductCard-title {
+  font-weight: 800;
+  padding-bottom: $data-padding;
+  margin-bottom: $data-margin;
+  border-bottom: solid;
+  border-color: $main-color;
+  border-width: 2px;
+}
+
+.ProductCard-data {
+  background-color: #f1f2f1;
+  display: block;
+  padding: $data-padding;
+  position: relative;
+  padding-bottom: calc(#{$data-padding} * 2 + #{$button-height});
+  //height: 30%;
+}
+
+.ProductCard-button {
+  @extend .DemoShop-button;
+  position: absolute;
+  right: $data-padding;
+  bottom: $data-padding;
+}
+
+.ProductCard-button:active {
+  @extend .DemoShop-button_active;
+}
+
+.ProductCard-currency {
+  color: $main-color;
+  font-size: 110%;
+}
+
+.ProductCard-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  position: absolute;
+  bottom: $data-padding;
+  left: $data-padding;
 }

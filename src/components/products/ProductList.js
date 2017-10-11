@@ -5,29 +5,20 @@ import {Grid, Row, Col} from 'react-flexbox-grid';
 
 export default class ProductList extends Component {
 
+    renderRandomProducts() {
+        return Array.apply(null, new Array(Math.floor((Math.random() * 50) + 10)))
+                .map((_, i) => {
+                    return <Col key={i} sm={6} md={4}>
+                        <ProductCard/>
+                    </Col>;
+                })
+
+    }
+
     render() {
         return <div className="ProductList-wrapper">
             <Grid fluid>
-                <Row>
-                    <Col xs={6} md={4}>
-                        <ProductCard/>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <ProductCard/>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <ProductCard/>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <ProductCard/>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <ProductCard/>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <ProductCard/>
-                    </Col>
-                </Row>
+                <Row>{this.renderRandomProducts()}</Row>
             </Grid>
         </div>
     }

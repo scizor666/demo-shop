@@ -14,7 +14,7 @@ export default class Rating extends Component {
             {Array.apply(null, new Array(this.props.max))
                 .map((_, i) => {
                     const starState = `Rating-star_${i < this.props.value ? 'full' : 'blank'}`;
-                    return <i className={`fa fa-star Rating-star ${starState}`} aria-hidden="true"/>;
+                    return <i key={i} className={`fa fa-star Rating-star ${starState}`} aria-hidden="true"/>;
                 })
             }
         </div>;

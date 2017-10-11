@@ -1,3 +1,20 @@
 $main-color: #32c3d2;
 $valid-color: #8ce886;
-$invalid-color: #ff5b51
+$invalid-color: #ff5b51;
+$button-height: 30px;
+$button-width: 100px;
+
+.DemoShop-button {
+  height: $button-height;
+  border-radius: 5px;
+  border-width: 0;
+  background-image: linear-gradient(to bottom, #3498db, #2bafb8);;
+  color: #ffffff;
+  min-width: $button-width;
+  font-size: .8rem;
+  outline: none;
+}
+
+.DemoShop-button_active {
+  background-image: linear-gradient(to top, #3498db, #2bafb8);
+}
