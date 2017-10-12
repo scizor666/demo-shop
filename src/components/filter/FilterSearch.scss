@@ -1,0 +1,24 @@
+@import '../shared/shared.scss';
+
+.FilterSearch-fieldGroup {
+  padding-left: 10px;
+  display: inline-block;
+  position: relative;
+}
+
+.FilterSearch-field {
+  border-radius: 5px;
+  border: 1px solid transparent;
+  line-height: 25px;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+.FilterSearch-field:focus {
+  border-color: $main-color;
+}
+
+.FilterSearch-icon {
+  @extend .DemoShop-fieldIcon;
+  top: 6px;
+}

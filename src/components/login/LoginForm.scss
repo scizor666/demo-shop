@@ -26,11 +26,8 @@
 }
 
 .LoginForm-fieldIcon {
-  position: absolute;
+  @extend .DemoShop-fieldIcon;
   top: 8px;
-  left: calc(100% - 20px);
-  font-size: 20px;
-  color: #a9a9a9;
 }
 
 .LoginForm-field:focus {
@@ -49,8 +46,4 @@
 .LoginForm-submit {
   @extend .DemoShop-button;
   float: right;
-}
-
-.LoginForm-submit:active {
-  @extend .DemoShop-button_active
 }

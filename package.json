@@ -6,6 +6,7 @@
   "dependencies": {
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
+    "rc-slider": "^8.3.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-flexbox-grid": "^1.1.5",

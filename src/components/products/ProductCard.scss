@@ -29,7 +29,6 @@ $data-margin: $data-padding;
   padding: $data-padding;
   position: relative;
   padding-bottom: calc(#{$data-padding} * 2 + #{$button-height});
-  //height: 30%;
 }
 
 .ProductCard-button {
@@ -37,10 +36,6 @@ $data-margin: $data-padding;
   position: absolute;
   right: $data-padding;
   bottom: $data-padding;
-}
-
-.ProductCard-button:active {
-  @extend .DemoShop-button_active;
 }
 
 .ProductCard-currency {
