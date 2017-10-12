@@ -46,3 +46,7 @@
   opacity: 1;
   transform: scale(1);
 }
+
+[type="radio"]:checked + label {
+  color: $main-color
+}

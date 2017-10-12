@@ -23,8 +23,15 @@ export default class FilterModal extends Component {
     renderDelivery() {
         return <div>
             Delivery:
-            <input id="deliverable" type="checkbox" name="deliverable" value={1}/>
-            <label htmlFor="deliverable">Delivery available</label>
+            <label className="DemoShop-switch">
+                <input id="deliverable" type="checkbox" name="deliverable" value={1}/>
+                <span className="DemoShop-slider"/>
+                <span className="DemoShop-switchLabel">Delivery available</span>
+            </label>
+
+
+            {/*<input id="deliverable" type="checkbox" name="deliverable" value={1}/>*/}
+            {/*<label>Delivery available</label>*/}
         </div>;
     }
 
