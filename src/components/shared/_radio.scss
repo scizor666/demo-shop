@@ -11,6 +11,7 @@
   cursor: pointer;
   line-height: 20px;
   display: inline-block;
+  font-size: 0.8em
 }
 
 [type="radio"] + label:before {
@@ -48,5 +49,5 @@
 }
 
 [type="radio"]:checked + label {
-  color: $main-color
+  color: $main-color;
 }

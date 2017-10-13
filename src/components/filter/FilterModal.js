@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './FilterModal.css'
 import FilterRating from "./FilterRating";
 import FilterPrice from "./FilterPrice";
+import {Grid, Row, Col} from 'react-flexbox-grid';
 
 export default class FilterModal extends Component {
 
@@ -23,27 +24,24 @@ export default class FilterModal extends Component {
     renderDelivery() {
         return <div>
             Delivery:
-            <label className="DemoShop-switch">
+            <label className="DemoShop-switch FilterModal-deliveryOption">
                 <input id="deliverable" type="checkbox" name="deliverable" value={1}/>
                 <span className="DemoShop-slider"/>
                 <span className="DemoShop-switchLabel">Delivery available</span>
             </label>
-
-
-            {/*<input id="deliverable" type="checkbox" name="deliverable" value={1}/>*/}
-            {/*<label>Delivery available</label>*/}
         </div>;
     }
 
     renderSizes() {
-        return <div>
+        return <div className="FilterModal-sizeWrapper">
             Size:
-            <div>
-            {Object.entries(this.props.sizes)
-                .map(([key, name]) => <span key={key}>
-                    <input id={`FilterModal-size${key}`} className="FilterModal-sizeRadio" type="radio" name="size" value={key}/>
+            <div className="FilterModal-sizeOptions">
+                {Object.entries(this.props.sizes)
+                    .map(([key, name]) => <label key={key}>
+                    <input id={`FilterModal-size${key}`} className="FilterModal-sizeRadio" type="radio" name="size"
+                           value={key}/>
                     <label htmlFor={`FilterModal-size${key}`} className="FilterModal-sizeLabel">{name}</label>
-                </span>)}
+                </label>)}
             </div>
         </div>
     }
@@ -58,15 +56,29 @@ export default class FilterModal extends Component {
         </div>
     }
 
-
+    //TODO fix it
     render() {
-        return <div className="FilterModal-wrapper">
-            {this.renderDelivery()}
-            {this.renderSizes()}
-            {this.renderCategories()}
-            <FilterRating/>
-            <FilterPrice/>
-        </div>
+        return <Grid fluid className="FilterModal-wrapper">
+            <Row>
+                <Col style={{flex: 1}}>
+                    {this.renderDelivery()}
+                </Col>
+                <Col style={{flex: 1}}>
+                    {this.renderSizes()}
+                </Col>
+                <Col style={{flex: 1}}>
+                    {this.renderCategories()}
+                </Col>
+            </Row>
+            <Row>
+                <Col xs={6}>
+                    <FilterRating/>
+                </Col>
+                <Col xs={6}>
+                    <FilterPrice/>
+                </Col>
+            </Row>
+        </Grid>
     }
 
 }

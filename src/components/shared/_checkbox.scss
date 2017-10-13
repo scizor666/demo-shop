@@ -20,6 +20,7 @@ $slider-handle-size: $switch-height - $slider-handle-padding * 2;
 
 .DemoShop-switch .DemoShop-switchLabel {
   padding-left: $switch-width + $slider-handle-padding * 2;
+  font-size: 0.8em;
   white-space: nowrap;
   vertical-align:middle;
 }

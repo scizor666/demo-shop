@@ -2,12 +2,16 @@
 
 .FilterModal-wrapper {
   background-color: $white-color;
-  width: 500px;
-  display: block;
   position: absolute;
   right: calc(10% + 2em);
   border-radius: 5px;
   text-align: left;
+  padding: 20px;
+  min-width: 600px;
+}
+
+.FilterModal-deliveryOption {
+  display: block;
 }
 
 .FilterModal-categorySelect {
@@ -28,7 +32,14 @@
   border: none;
 }
 
-.FilterModal-sizeRadioGroup {
+.FilterModal-sizeOptions {
+  display: block;
+  width: 100%;
+  white-space:nowrap;
+}
+
+.FilterModal-sizeWrapper {
+  width: 100%;
 }
 
 .FilterModal-sizeLabel {
