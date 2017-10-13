@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import './App.css';
 import SignOut from "./components/login/SignOut";
 import ProductList from "./components/products/ProductList";
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import LoginModal from "./components/login/LoginModal";
+import Modal from "./components/shared/Modal";
 
 class App extends Component {
     render() {
@@ -12,7 +15,13 @@ class App extends Component {
                     <SignOut/>
                 </header>
                 <main className="App-main">
-                    <ProductList/>
+                    <Router>
+                        <Switch>
+                            <Route exact path="/login" component={LoginModal}/>
+                            <Route exact path="/modal" component={Modal}/>
+                            <Route component={ProductList}/>
+                        </Switch>
+                    </Router>
                 </main>
                 <footer className="App-footer">Copyright "Demo Shop", 2017</footer>
             </div>
