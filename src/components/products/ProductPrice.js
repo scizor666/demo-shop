@@ -5,11 +5,12 @@ import './ProductPrice.css';
 const ProductPrice = props =>
     <span className="ProductPrice-wrapper">
         <span className="ProductPrice-currency">{props.currency}</span>
-        {DataUtils.randomPrice()}
+        {props.value}
     </span>;
 
 ProductPrice.defaultProps = {
-    currency: '$'
+    currency: '$',
+    value: DataUtils.randomPrice()
 };
 
 export default ProductPrice;

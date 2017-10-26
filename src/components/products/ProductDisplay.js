@@ -21,19 +21,19 @@ const ProductDisplay = props => {
             <Row>
                 <Col sm={6} className="ProductDisplay-ratedImage">
                     <img className="ProductDisplay-image"
-                         src={DataUtils.randomImage()}
+                         src={props.imageUrl}
                          alt="No Picture found"/>
-                    <Rating value={DataUtils.randomRating()}/>
+                    <Rating value={props.rating}/>
                 </Col>
                 <Col sm={6}>
-                    <h2 className="ProductDisplay-name">{DataUtils.randomName()}</h2>
+                    <h2 className="ProductDisplay-name">{props.name}</h2>
                     <div className="ProductDisplay-details">
                         <div className="ProductDisplay-description">
-                            {DataUtils.randomDescription()}
+                            {props.description}
                         </div>
                         <div className="ProductDisplay-buy">
                             <div>
-                                <ProductPrice />
+                                <ProductPrice {...props.price}/>
                                 {props.isAvailable ? "" : renderSoldOut()}
                             </div>
                             {props.isAvailable ? renderBuyButton() : ""}
@@ -47,7 +47,12 @@ const ProductDisplay = props => {
 
 ProductDisplay.defaultProps = {
     category: "Thin Crust/Less Calories",
-    isAvailable: ArrayUtils.randomItem([true, false])
+    isAvailable: ArrayUtils.randomItem([true, false]),
+    imageUrl: DataUtils.randomImage(),
+    rating: DataUtils.randomRating(),
+    name: DataUtils.randomName(),
+    description: DataUtils.randomDescription(),
+    price: {}
 };
 
 export default ProductDisplay;
