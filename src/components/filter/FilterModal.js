@@ -1,28 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './FilterModal.css'
 import FilterRating from "./FilterRating";
 import FilterPrice from "./FilterPrice";
 import {Grid, Row, Col} from 'react-flexbox-grid';
 
-export default class FilterModal extends Component {
+const FilterModal = props => {
 
-    static defaultProps = {
-        categories: {
-            pan: 'Pan',
-            thickCrust: 'Thick Crust',
-            thinCrust: 'Thin Crust',
-            vegan: 'Vegan',
-            glutenFree: 'Gluten Free'
-        },
-        sizes: {
-            classic: 'Classic',
-            large: 'Large',
-            xLarge: 'X-Large'
-        }
-    };
-
-    renderDelivery() {
-        return <div>
+    const renderDelivery = () =>
+        <div>
             Delivery:
             <label className="DemoShop-switch FilterModal-deliveryOption">
                 <input id="deliverable" type="checkbox" name="deliverable" value={1}/>
@@ -30,55 +15,68 @@ export default class FilterModal extends Component {
                 <span className="DemoShop-switchLabel">Delivery available</span>
             </label>
         </div>;
-    }
 
-    renderSizes() {
-        return <div className="FilterModal-sizeWrapper">
+    const renderSizes = () =>
+        <div className="FilterModal-sizeWrapper">
             Size:
             <div className="FilterModal-sizeOptions">
-                {Object.entries(this.props.sizes)
+                {Object.entries(props.sizes)
                     .map(([key, name]) => <label key={key}>
-                    <input id={`FilterModal-size${key}`} className="FilterModal-sizeRadio" type="radio" name="size"
-                           value={key}/>
-                    <label htmlFor={`FilterModal-size${key}`} className="FilterModal-sizeLabel">{name}</label>
-                </label>)}
+                        <input id={`FilterModal-size${key}`} className="FilterModal-sizeRadio" type="radio" name="size"
+                               value={key}/>
+                        <label htmlFor={`FilterModal-size${key}`} className="FilterModal-sizeLabel">{name}</label>
+                    </label>)}
             </div>
-        </div>
-    }
+        </div>;
 
-    renderCategories() {
-        return <div>
+    const renderCategories = () =>
+        <div>
             Category:
             <select className="FilterModal-categorySelect">
-                {Object.entries(this.props.categories)
+                {Object.entries(props.categories)
                     .map(([key, label]) => <option key={key} value={key}>{label}</option>)}
             </select>
-        </div>
-    }
+        </div>;
 
-    //TODO fix it
-    render() {
-        return <Grid fluid className="FilterModal-wrapper">
+    return <div>
+        <div className="FilterModal-arrowUp"/>
+        <Grid fluid className="FilterModal-wrapper">
             <Row>
-                <Col style={{flex: 1}}>
-                    {this.renderDelivery()}
+                <Col xs={3}>
+                    {renderDelivery()}
                 </Col>
-                <Col style={{flex: 1}}>
-                    {this.renderSizes()}
+                <Col xs={6}>
+                    {renderSizes()}
                 </Col>
-                <Col style={{flex: 1}}>
-                    {this.renderCategories()}
+                <Col xs={3}>
+                    {renderCategories()}
                 </Col>
             </Row>
             <Row>
-                <Col xs={6}>
+                <Col xs={4}>
                     <FilterRating/>
                 </Col>
-                <Col xs={6}>
+                <Col xs={8}>
                     <FilterPrice/>
                 </Col>
             </Row>
         </Grid>
-    }
+    </div>;
+};
 
-}
+FilterModal.defaultProps = {
+    categories: {
+        pan: 'Pan',
+        thickCrust: 'Thick Crust',
+        thinCrust: 'Thin Crust',
+        vegan: 'Vegan',
+        glutenFree: 'Gluten Free'
+    },
+    sizes: {
+        classic: 'Classic',
+        large: 'Large',
+        xLarge: 'X-Large'
+    }
+};
+
+export default FilterModal;

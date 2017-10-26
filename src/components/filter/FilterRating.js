@@ -1,18 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './FilterRating.css'
 import FilterRange from "./FilterRange";
 
-export default class FilterRating extends Component {
+const FilterRating = props =>
+    <div className="FilterRating-wrapper">
+        Rating:
+        <FilterRange {...props}/>
+    </div>;
 
-    static defaultProps = {
-        range: {min: 0, max: 5},
-        start: [1, 3],
-    };
+FilterRating.defaultProps = {
+    range: {min: 0, max: 5},
+    start: [1, 3],
+};
 
-    render() {
-        return <div className="FilterRating-wrapper">
-            Rating:
-            <FilterRange {...this.props}/>
-        </div>
-    }
-}
+export default FilterRating;

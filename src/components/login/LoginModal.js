@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Modal from '../shared/Modal';
 import LoginForm from "./LoginForm";
 
-export default class LoginModal extends Component {
-    render() {
-        return <Modal title='Login to "Demo Shop"'>
-            <LoginForm/>
-        </Modal>
-    }
-}
+const LoginModal = () =>
+    <Modal title='Login to "Demo Shop"'>
+        <LoginForm/>
+    </Modal>;
+
+export default LoginModal;

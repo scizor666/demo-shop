@@ -1,0 +1,42 @@
+@import "../../components/shared/shared.scss";
+
+.ProductDisplay-wrapper {
+  margin: 0 auto;
+  width: 80%;
+  background: rgba(0, 0, 0, .4);
+  min-height: 100vh;
+}
+
+.ProductDisplay-nav {
+  margin: 0 auto;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  color: $white-color;
+}
+
+.ProductDisplay-image {
+  width: 100%;
+  display: block;
+}
+
+.ProductDisplay-ratedImage {
+  display: block;
+  width: 100%;
+}
+
+.ProductDisplay-card {
+  background-color: transparentize($white-color, .1);
+  padding: 20px;
+  width: calc(98% - 20px * 2);
+  margin: 0 auto;
+}
+
+.ProductDisplay-name {
+  margin: 0 0 10px 0;
+}
+
+.ProductDisplay-description {
+  border-top: 1px solid $main-color;
+  padding-top: 20px;
+}

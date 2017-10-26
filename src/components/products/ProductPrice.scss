@@ -1,0 +1,15 @@
+@import '../shared/shared.scss';
+@import './ProductCard.scss';
+
+.ProductPrice-wrapper {
+  font-size: 1.5rem;
+  font-weight: 800;
+  position: absolute;
+  bottom: $data-padding;
+  left: $data-padding;
+}
+
+.ProductPrice-currency {
+  color: $main-color;
+  font-size: 110%;
+}

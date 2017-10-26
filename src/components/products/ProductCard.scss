@@ -37,16 +37,3 @@ $data-margin: $data-padding;
   right: $data-padding;
   bottom: $data-padding;
 }
-
-.ProductCard-currency {
-  color: $main-color;
-  font-size: 110%;
-}
-
-.ProductCard-price {
-  font-size: 1.5rem;
-  font-weight: 800;
-  position: absolute;
-  bottom: $data-padding;
-  left: $data-padding;
-}

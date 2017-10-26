@@ -1,16 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './FilterSearch.css'
 
-export default class FilterSearch extends Component {
+const FilterSearch = props =>
+    <div className="FilterSearch-fieldGroup">
+        <input className="FilterSearch-field" placeholder={props.placeHolder}/>
+        <span className="fa fa-search FilterSearch-icon"/>
+    </div>;
 
-    static defaultProps = {
-      placeHolder: 'Filter by text...'
-    };
+FilterSearch.defaultProps = {
+    placeHolder: 'Filter by text...'
+};
 
-    render() {
-        return <div className="FilterSearch-fieldGroup">
-            <input className="FilterSearch-field" placeholder={this.props.placeHolder}/>
-            <span className="fa fa-search FilterSearch-icon"/>
-        </div>
-    }
-}
+export default FilterSearch;

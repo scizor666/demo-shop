@@ -1,23 +1,22 @@
-import React, {Component} from "react";
+import React from "react";
 import './Modal.css';
 
-export default class Modal extends Component {
+const Modal = props =>
+    <div className="Modal-wrapper">
+        <div className="Modal-title">{props.title}</div>
+        <div className="Modal-content">{props.children || props.content}</div>
+    </div>;
 
-    static defaultProps = {
-        title: 'Some really long Modal default title here to show how it truncated',
-        content: (() => {
-            let res  = "";
-            for(let i = 0; i < 50; i++) {
-                res = res + "Hello from modal "
-            }
-            return res; })()
-    };
+Modal.defaultProps = {
+    title: 'Some really long Modal default title here to show how it truncated',
+    content: (() => {
+        let res = "";
+        for (let i = 0; i < 50; i++) {
+            res = res + "Hello from modal "
+        }
+        return res;
+    })()
+};
 
-    render() {
-        return <div className="Modal-wrapper">
-            <div className="Modal-title">{this.props.title}</div>
-            <div className="Modal-content">{this.props.children || this.props.content}</div>
-        </div>
-    };
-}
+export default Modal;
 
