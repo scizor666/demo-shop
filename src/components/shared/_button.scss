@@ -1,0 +1,19 @@
+.DemoShop-button {
+  height: $button-height;
+  border-radius: 5px;
+  border-width: 0;
+  background-image: linear-gradient(to bottom, #3498db, #2bafb8);;
+  color: #ffffff;
+  min-width: $button-width;
+  font-size: .8rem;
+  outline: none;
+}
+
+.DemoShop-button_secondary {
+  @extend .DemoShop-button;
+  background-image: linear-gradient(to bottom, rgba(105, 105, 105, 0.42), rgba(0, 0, 0, 0.55));
+}
+
+.DemoShop-button:active {
+  background-image: linear-gradient(to top, #3498db, #2bafb8);
+}

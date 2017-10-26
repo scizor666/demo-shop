@@ -53,11 +53,49 @@ $name-margin-size: 10px;
   padding-top: 20px;
 }
 
-.ProductDisplay-buy {
+.ProductDisplay-order {
   display: flex;
   justify-content: space-between;
 }
 
-.ProductDisplay-soldOutLabel {
+.ProductDisplay-notAvailable {
   color: #c11313;
+}
+
+.ProductDisplay-adminActions {
+ padding-top: 20px;
+}
+
+.ProductDisplay-modalContent {
+  min-height: 100px;
+  text-align: center;
+  position: relative;
+}
+
+.ProductDisplay-orderModalButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+// edit modal
+
+.ProductDisplay-field {
+  @extend .DemoShop-field;
+  width: 100%;
+}
+
+.ProductDisplay-select {
+  @extend .DemoShop-select;
+  line-height: 29px;
+  width: 100%;
+}
+
+.ProductDisplay-inputLabel {
+  margin-bottom: 5px;
+}
+
+.ProductDisplay-inputGroup {
+  margin-bottom: 10px;
+  text-align: left;
 }

@@ -51,3 +51,19 @@
 [type="radio"]:checked + label {
   color: $main-color;
 }
+
+.DemoShop-radioOptionWrapper {
+  display: block;
+  width: 100%;
+  white-space:nowrap;
+}
+
+.DemoShop-radioLabel {
+  padding-right: 10px;
+  display: inline-block;
+}
+
+.DemoShop-radioInput {
+  display: inline-block;
+  margin-right: 5px;
+}

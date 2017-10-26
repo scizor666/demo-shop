@@ -1,9 +1,8 @@
 import React from 'react';
-import './FilterPrice.css'
 import FilterRange from "./FilterRange";
 
 const FilterPrice = props =>
-    <div className="FilterRating-wrapper">
+    <div>
         Price:
         <FilterRange {...props}/>
     </div>;

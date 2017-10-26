@@ -1,29 +1,8 @@
 @import "./variables.scss";
 @import "./radio.scss";
 @import "./checkbox.scss";
-
-.DemoShop-button {
-  height: $button-height;
-  border-radius: 5px;
-  border-width: 0;
-  background-image: linear-gradient(to bottom, #3498db, #2bafb8);;
-  color: #ffffff;
-  min-width: $button-width;
-  font-size: .8rem;
-  outline: none;
-}
-
-.DemoShop-button:active {
-  background-image: linear-gradient(to top, #3498db, #2bafb8);
-}
-
-.DemoShop-fieldIcon {
-  position: absolute;
-  left: calc(100% - 20px);
-  color: $inactive-color;
-}
-
-select:-moz-focusring {
-  color: transparent;
-  text-shadow: 0 0 0 #000;
-}
+@import "./input.scss";
+@import "./button.scss";
+@import "./select.scss";
+@import "./link.scss";
+@import "./image.scss";

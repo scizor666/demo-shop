@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './FilterRange.css'
 import {Range} from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
@@ -24,7 +23,7 @@ export default class FilterRange extends Component {
     }
 
     render() {
-        return <div className="FilterRating-wrapper">
+        return <div>
             <Range marks={this.state.marks} min={this.props.range.min} max={this.props.range.max}
                    defaultValue={this.props.start} onChange={e => this.handleChange(e)}/>
         </div>

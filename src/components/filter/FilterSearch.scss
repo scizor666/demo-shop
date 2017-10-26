@@ -7,15 +7,13 @@
 }
 
 .FilterSearch-field {
-  border-radius: 5px;
-  border: 1px solid transparent;
-  line-height: 25px;
+  @extend .DemoShop-field;
   padding-left: 10px;
   padding-right: 20px;
 }
 
 .FilterSearch-field:focus {
-  border-color: $main-color;
+  border-color: transparentize($inactive-color, .7);
 }
 
 .FilterSearch-icon {

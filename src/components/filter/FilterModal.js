@@ -19,12 +19,12 @@ const FilterModal = props => {
     const renderSizes = () =>
         <div className="FilterModal-sizeWrapper">
             Size:
-            <div className="FilterModal-sizeOptions">
+            <div className="DemoShop-radioOptionWrapper">
                 {Object.entries(props.sizes)
                     .map(([key, name]) => <label key={key}>
-                        <input id={`FilterModal-size${key}`} className="FilterModal-sizeRadio" type="radio" name="size"
+                        <input id={`FilterModal-size${key}`} className="DemoShop-radioInput" type="radio" name="size"
                                value={key}/>
-                        <label htmlFor={`FilterModal-size${key}`} className="FilterModal-sizeLabel">{name}</label>
+                        <label htmlFor={`FilterModal-size${key}`} className="DemoShop-radioLabel">{name}</label>
                     </label>)}
             </div>
         </div>;

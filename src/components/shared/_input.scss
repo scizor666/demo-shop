@@ -1,0 +1,18 @@
+.DemoShop-field {
+  border-radius: 5px;
+  border: 2px solid transparent;
+  line-height: 25px;
+  outline: none;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.DemoShop-field:focus {
+  border-color: transparentize($main-color, .7);
+}
+
+.DemoShop-fieldIcon {
+  position: absolute;
+  left: calc(100% - 20px);
+  color: $inactive-color;
+}

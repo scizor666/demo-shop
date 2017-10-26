@@ -19,6 +19,7 @@ const App = () =>
                     <Route exact path="/login" component={LoginModal}/>
                     <Route exact path="/modal" component={Modal}/>
                     <Route exact path="/product" component={ProductDisplay}/>
+                    <Route exact path="/product/edit" render={() => <ProductDisplay editMode={true}/>}/>
                     <Route component={ProductList}/>
                 </Switch>
             </Router>

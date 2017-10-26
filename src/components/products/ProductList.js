@@ -21,7 +21,7 @@ const ProductList = props => {
 };
 
 ProductList.defaultProps = {
-    products: ArrayUtils.times(Math.floor((Math.random() * 50) + 10), _ => {
+    products: ArrayUtils.times(Math.floor((Math.random() * 50) + 10), () => {
             return {
                 name: DataUtils.randomName(),
                 imageUrl: DataUtils.randomImage(),
