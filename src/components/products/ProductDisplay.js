@@ -1,15 +1,16 @@
 import React from "react";
 import './ProductDisplay.css';
 import Rating from "./Rating";
+import ProductPrice from "./ProductPrice";
 import DataUtils from "../../utils/DataUtils";
 import {Col, Grid, Row} from "react-flexbox-grid";
 import ArrayUtils from "../../utils/ArrayUtils";
 
 const ProductDisplay = props => {
 
-    const isAvailable = () => {
-        return ArrayUtils.randomItem([true, false])
-    };
+    const renderSoldOut = () => <b> (<span className="ProductDisplay-soldOutLabel">sold out</span>)</b>;
+
+    const renderBuyButton = () => <button className="DemoShop-button">Buy</button>;
 
     return <div className="ProductDisplay-wrapper">
         <div className="ProductDisplay-nav">
@@ -26,12 +27,17 @@ const ProductDisplay = props => {
                 </Col>
                 <Col sm={6}>
                     <h2 className="ProductDisplay-name">{DataUtils.randomName()}</h2>
-                    <div className="ProductDisplay-description">
-                        {DataUtils.randomDescription()}
-                    </div>
-                    <div className="ProductDisplay-buyBlock">
-
-                        {isAvailable() ? "available" : "not avilable"}
+                    <div className="ProductDisplay-details">
+                        <div className="ProductDisplay-description">
+                            {DataUtils.randomDescription()}
+                        </div>
+                        <div className="ProductDisplay-buy">
+                            <div>
+                                <ProductPrice />
+                                {props.isAvailable ? "" : renderSoldOut()}
+                            </div>
+                            {props.isAvailable ? renderBuyButton() : ""}
+                        </div>
                     </div>
                 </Col>
             </Row>
@@ -40,7 +46,8 @@ const ProductDisplay = props => {
 };
 
 ProductDisplay.defaultProps = {
-    category: "Man/Active Wear"
+    category: "Thin Crust/Less Calories",
+    isAvailable: ArrayUtils.randomItem([true, false])
 };
 
 export default ProductDisplay;

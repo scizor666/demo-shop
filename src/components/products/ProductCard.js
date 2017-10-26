@@ -4,7 +4,7 @@ import Rating from "./Rating";
 import DataUtils from "../../utils/DataUtils";
 import ProductPrice from "./ProductPrice";
 
-const ProductCard = props => {
+const ProductCard = () => {
     return <div className="ProductCard-wrapper">
         <img className="ProductCard-image"
              src={DataUtils.randomImage()}
@@ -13,14 +13,12 @@ const ProductCard = props => {
         <div className="ProductCard-data">
             <div className="ProductCard-title">{DataUtils.randomName()}</div>
             <div className="ProductCard-description">{DataUtils.randomDescription()}</div>
-            <ProductPrice {...props}/>
+            <div className='ProductCard-price'>
+                <ProductPrice />
+            </div>
             <button className="ProductCard-button">Show more</button>
         </div>
     </div>;
-};
-
-ProductCard.defaultProps = {
-    currency: '$'
 };
 
 export default ProductCard;

@@ -1,5 +1,9 @@
 @import "../../components/shared/shared.scss";
 
+$name-size: 1.5em;
+$description-border-size: 1px;
+$name-margin-size: 10px;
+
 .ProductDisplay-wrapper {
   margin: 0 auto;
   width: 80%;
@@ -32,11 +36,28 @@
   margin: 0 auto;
 }
 
+.ProductDisplay-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - #{$name-size} - #{$name-margin-size} - #{$description-border-size});
+}
+
 .ProductDisplay-name {
-  margin: 0 0 10px 0;
+  margin: 0 0 $name-margin-size 0;
+  font-size: $name-size;
 }
 
 .ProductDisplay-description {
-  border-top: 1px solid $main-color;
+  border-top: $description-border-size solid $main-color;
   padding-top: 20px;
+}
+
+.ProductDisplay-buy {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ProductDisplay-soldOutLabel {
+  color: #c11313;
 }

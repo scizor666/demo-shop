@@ -37,3 +37,9 @@ $data-margin: $data-padding;
   right: $data-padding;
   bottom: $data-padding;
 }
+
+.ProductCard-price {
+  position: absolute;
+  bottom: $data-padding;
+  left: $data-padding;
+}

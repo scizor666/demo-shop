@@ -8,4 +8,8 @@ const ProductPrice = props =>
         {DataUtils.randomPrice()}
     </span>;
 
+ProductPrice.defaultProps = {
+    currency: '$'
+};
+
 export default ProductPrice;
