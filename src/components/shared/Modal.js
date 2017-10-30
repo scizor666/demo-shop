@@ -1,11 +1,17 @@
 import React from "react";
 import './Modal.css';
 
-const Modal = props =>
-    <div className="Modal-wrapper">
-        <div className="Modal-title">{props.title}</div>
-        <div className="Modal-content">{props.children || props.content}</div>
+const Modal = props => {
+
+    if (!props.show) return null;
+
+    return <div className="Modal-back">
+        <div className="Modal-wrapper">
+            <div className="Modal-title">{props.title}</div>
+            <div className="Modal-content">{props.children || props.content}</div>
+        </div>
     </div>;
+};
 
 Modal.defaultProps = {
     title: 'Some really long Modal default title here to show how it truncated',

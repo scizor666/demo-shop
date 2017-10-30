@@ -3,7 +3,7 @@ import './App.css';
 import SignOut from "./components/login/SignOut";
 import ProductList from "./components/products/ProductList";
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
-import LoginModal from "./components/login/LoginModal";
+import Login from "./components/login/Login";
 import Modal from "./components/shared/Modal";
 import ProductDisplay from "./components/products/ProductDisplay";
 
@@ -16,7 +16,7 @@ const App = () =>
         <main className="App-main">
             <Router>
                 <Switch>
-                    <Route exact path="/login" component={LoginModal}/>
+                    <Route exact path="/login" component={Login}/>
                     <Route exact path="/modal" component={Modal}/>
                     <Route exact path="/product" component={ProductDisplay}/>
                     <Route exact path="/product/edit" render={() => <ProductDisplay editMode={true}/>}/>

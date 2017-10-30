@@ -2,9 +2,8 @@ import React from "react";
 import './ConfirmModal.css';
 import Modal from "./Modal";
 
-const ConfirmModal = props => {
-
-    return <Modal {...props}>
+const ConfirmModal = props =>
+    <Modal {...props}>
         {props.content || props.children}
         <div className="ConfirmModal-buttonGroup">
             <button className="DemoShop-button_secondary"
@@ -16,8 +15,7 @@ const ConfirmModal = props => {
                 {props.confirmLabel}
             </button>
         </div>
-    </Modal>
-};
+    </Modal>;
 
 ConfirmModal.defaultProps = {
     confirmLabel: "Confirm",

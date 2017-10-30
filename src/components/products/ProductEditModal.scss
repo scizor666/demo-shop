@@ -1,0 +1,21 @@
+@import "../../components/shared/shared.scss";
+
+.ProductEdit-field {
+  @extend .DemoShop-field;
+  width: 100%;
+}
+
+.ProductEdit-select {
+  @extend .DemoShop-select;
+  line-height: 29px;
+  width: 100%;
+}
+
+.ProductEdit-inputLabel {
+  margin-bottom: 5px;
+}
+
+.ProductEdit-inputGroup {
+  margin-bottom: 10px;
+  text-align: left;
+}

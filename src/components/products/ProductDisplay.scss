@@ -77,25 +77,3 @@ $name-margin-size: 10px;
   bottom: 0;
   right: 0;
 }
-
-// edit modal
-
-.ProductDisplay-field {
-  @extend .DemoShop-field;
-  width: 100%;
-}
-
-.ProductDisplay-select {
-  @extend .DemoShop-select;
-  line-height: 29px;
-  width: 100%;
-}
-
-.ProductDisplay-inputLabel {
-  margin-bottom: 5px;
-}
-
-.ProductDisplay-inputGroup {
-  margin-bottom: 10px;
-  text-align: left;
-}
