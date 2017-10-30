@@ -9,7 +9,7 @@ const ProductEditModal = props =>
         title={`Edit "${props.name}"`}
         {...props}>
         <Row>
-            <Col sm={6}>
+            <Col xs={12} sm={6}>
                 <div className="ProductEdit-inputGroup">
                     <label className="ProductEdit-inputLabel">Name:</label>
                     <input className="ProductEdit-field"
@@ -44,7 +44,7 @@ const ProductEditModal = props =>
                     <textarea/>
                 </div>
             </Col>
-            <Col sm={6}>
+            <Col xs={12} sm={6}>
                 <div className="ProductEdit-inputGroup">
                     <label className="ProductEdit-inputLabel">Link to image:</label>
                     <input className="ProductEdit-field"
