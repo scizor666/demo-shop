@@ -11,6 +11,10 @@
   border-color: transparentize($main-color, .7);
 }
 
+.DemoShop-field:invalid {
+  border-color: $invalid-color;
+}
+
 .DemoShop-fieldIcon {
   position: absolute;
   left: calc(100% - 20px);

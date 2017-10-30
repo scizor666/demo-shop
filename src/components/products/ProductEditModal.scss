@@ -19,3 +19,8 @@
   margin-bottom: 10px;
   text-align: left;
 }
+
+.ProductEdit-descriptionWrapper {
+  @extend .ProductEdit-inputGroup;
+  height: 160px;
+}

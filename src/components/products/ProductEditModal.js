@@ -39,12 +39,18 @@ const ProductEditModal = props =>
                             </label>)}
                     </div>
                 </div>
+                <div className="ProductEdit-descriptionWrapper">
+                    <label className="ProductEdit-inputLabel">Description:</label>
+                    <textarea/>
+                </div>
             </Col>
             <Col sm={6}>
                 <div className="ProductEdit-inputGroup">
                     <label className="ProductEdit-inputLabel">Link to image:</label>
                     <input className="ProductEdit-field"
-                           placeholder="Please enter link to image..."/>
+                           placeholder="Please enter link to image..."
+                           type="url"
+                           pattern="^https?\://.+$"/>
                 </div>
                 <div className="ProductEdit-inputGroup">
                     <img className="DemoShop-image"
@@ -53,6 +59,9 @@ const ProductEditModal = props =>
                 <div className="ProductEdit-inputGroup">
                     <label className="ProductEdit-inputLabel">Price:</label>
                     <input className="ProductEdit-field"
+                           min={1}
+                           type="number"
+                           step="any"
                            placeholder="Please enter price..."/>
                 </div>
                 <div className="ProductEdit-inputGroup">
