@@ -42,21 +42,21 @@ const FilterModal = props => {
         <div className="FilterModal-arrowUp"/>
         <Grid fluid className="FilterModal-wrapper">
             <Row>
-                <Col xs={3}>
+                <Col xs={12} sm={3.75}>
                     {renderDelivery()}
                 </Col>
-                <Col xs={6}>
+                <Col xs={12} sm={4.5}>
                     {renderSizes()}
                 </Col>
-                <Col xs={3}>
+                <Col xs={12} sm={3.75}>
                     {renderCategories()}
                 </Col>
             </Row>
             <Row>
-                <Col xs={4}>
+                <Col xs={12} sm={4}>
                     <FilterRating/>
                 </Col>
-                <Col xs={8}>
+                <Col xs={12} sm={8}>
                     <FilterPrice/>
                 </Col>
             </Row>
