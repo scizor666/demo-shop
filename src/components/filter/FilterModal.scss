@@ -25,7 +25,7 @@
     min-width: 520px;
     position: absolute;
     margin-top: 5px;
-    right: calc(10% + 2em);
+    right: 10%;
 
     .row > div {
       padding-bottom: 10px;
@@ -46,7 +46,7 @@
 
   .FilterModal-arrowUp {
     position: absolute;
-    right: calc(10% + 2em + 212px);
+    right: calc(10% + 212px);
   }
 }
 

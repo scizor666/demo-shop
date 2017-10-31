@@ -9,7 +9,7 @@ import DataUtils from "../../utils/DataUtils";
 const ProductList = props => {
 
     const renderProducts = products => products.map((product, i) =>
-        <Col key={i} sm={6} md={4}><ProductCard {...product}/></Col>
+        <Col key={i} xs={12} sm={6} md={4}><ProductCard {...product}/></Col>
     );
 
     return <div className="ProductList-wrapper">
