@@ -4,9 +4,11 @@ $data-padding: 10px;
 $data-margin: $data-padding;
 
 .ProductCard-wrapper {
-  margin: 0 auto 20px;
-  height: 100%;
+  margin: 0 0 20px;
   min-width: calc(#{$button-width} + 100px);
+  display: flex;
+  flex-flow: column;
+  flex: 1
 }
 
 .ProductCard-image {
@@ -25,10 +27,10 @@ $data-margin: $data-padding;
 
 .ProductCard-data {
   background-color: #f1f2f1;
-  display: block;
   padding: $data-padding;
   position: relative;
   padding-bottom: calc(#{$data-padding} * 2 + #{$button-height});
+  flex: 1;
 }
 
 .ProductCard-button {

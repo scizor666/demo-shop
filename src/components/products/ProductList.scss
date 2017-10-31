@@ -6,3 +6,8 @@
 .ProductList-wrapper > .container-fluid {
   padding: 0;
 }
+
+.ProductList-wrapper .row > div {
+  display: flex;
+  flex-flow: column;
+}
