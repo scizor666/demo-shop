@@ -1,11 +1,13 @@
 @import '../shared/shared.scss';
 
 .ProductPrice-wrapper {
-  font-size: 1.5rem;
-  font-weight: 800;
+  height: 29px;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 32px;
 }
 
 .ProductPrice-currency {
   color: $main-color;
-  font-size: 110%;
 }

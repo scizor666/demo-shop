@@ -6,7 +6,7 @@ const Rating = props =>
     <div className="Rating-wrapper">
         {ArrayUtils.times(props.max, i => {
             const starState = `Rating-star_${i < props.value ? 'full' : 'blank'}`;
-            return <i key={i} className={`fa fa-star Rating-star ${starState}`} aria-hidden="true"/>;
+            return <i key={i} className={starState}/>;
         })
         }
     </div>;

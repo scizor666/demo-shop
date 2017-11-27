@@ -6,10 +6,12 @@ import DataUtils from "../../utils/DataUtils";
 
 const ProductCard = props => {
     return <div className="ProductCard-wrapper">
-        <img className="ProductCard-image"
-             src={props.imageUrl}
-             alt="No Picture found"/>
-        <Rating value={props.rating}/>
+        <div className={"ProductCard-imageContainer"}>
+            <img className="ProductCard-image"
+                 src={props.imageUrl}
+                 alt="No Picture found"/>
+            <Rating value={props.rating}/>
+        </div>
         <div className="ProductCard-data">
             <div className="ProductCard-title">{props.name}</div>
             <div className="ProductCard-description">{props.description}</div>

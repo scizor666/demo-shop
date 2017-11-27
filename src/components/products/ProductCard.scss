@@ -11,6 +11,11 @@ $data-margin: $data-padding;
   flex: 1
 }
 
+.ProductCard-imageContainer {
+  position: relative;
+  width: 100%;
+}
+
 .ProductCard-image {
   width: 100%;
   display: block;

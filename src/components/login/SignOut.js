@@ -5,7 +5,7 @@ const SignOut = () =>
     <div>
         <div className="SignOut-username">Hello, Username</div>
         {' '}
-        <i className="fa fa-2x fa-sign-out" aria-hidden="true"/>
+        <img src="/images/header-logout.svg"/>
     </div>;
 
 export default SignOut;

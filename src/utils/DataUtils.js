@@ -8,10 +8,9 @@ export default class DataUtils {
 
     static randomImage() {
         const options = [
-            "https://s3-us-west-1.amazonaws.com/cookery-book/user_uploads/ff5aced0-f78d-478f-bb53-1aed680da5f9/6f2db64af78a9f2a338985524acc7669.jpeg",
-            "https://s3-us-west-1.amazonaws.com/cookery-book/user_uploads/96ba7bbc-d0ad-406f-9843-bc5abbd3e557/images.jpeg",
-            "https://s3-us-west-1.amazonaws.com/cookery-book/user_uploads/ce0bcd9b-fc47-4859-a024-1427a557f726/Supreme_pizza.jpg",
-            "https://s3-us-west-1.amazonaws.com/cookery-book/user_uploads/705f14c8-3abb-40a4-972d-74d657d99f34/c700x420.jpg"
+            "/images/1.jpg",
+            "/images/2.jpg",
+            "/images/3.jpg"
         ];
         return ArrayUtils.randomItem(options)
     }
@@ -22,21 +21,17 @@ export default class DataUtils {
 
     static randomDescription() {
         const options = [
-            "Пепперони, ветчина, шампиньоны, моцарелла и пармезан",
-            "Бекон, пармезан, моцарелла, сливочный соус",
-            "Курица, ананасы, соус сливочный, моцарелла",
-            "Свинина, курица, пепперони, ветчина, бекон, помидоры",
-            "Свинина, курица, пепперони, ветчина, бекон, помидоры, ветчина, шампиньоны, моцарелла, ананасы, соус сливочный и пармезан"
+            "Auribus teneo lupum, nam neque quomodo a me amittam invenio neque uti retineam scio.",
+            "Auribus teneo lupum, nam neque quomodo a me amittam invenio neque uti retineam scio. Auribus teneo lupum, nam neque quomodo a me amittam invenio neque uti retineam scio. Auribus teneo lupum, nam neque quomodo a me amittam invenio neque uti retineam scio."
         ];
         return ArrayUtils.randomItem(options);
     }
 
     static randomName() {
         const options = [
-            "Пицца Деревенская",
-            "Пицца Классика",
-            "Пицца Карбонара",
-            "Пицца Гавайская"
+            "Active Coat Lorem 1",
+            "Active Coat Lorem 2",
+            "Active Coat Lorem Ipsum Dolor Sit Amet Consectetur Adipisicing Elit.3"
         ];
         return ArrayUtils.randomItem(options);
     }

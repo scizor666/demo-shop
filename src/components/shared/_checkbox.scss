@@ -1,8 +1,9 @@
-$switch-width: 40px;
-$switch-height: 21px;
+$switch-width: 42px;
+$switch-height: 24px;
 
 $slider-handle-padding: 2px;
 $slider-handle-size: $switch-height - $slider-handle-padding * 2;
+$slider-border-size: 1px;
 
 .DemoShop-switch {
   position: relative;
@@ -20,7 +21,10 @@ $slider-handle-size: $switch-height - $slider-handle-padding * 2;
 
 .DemoShop-switch .DemoShop-switchLabel {
   padding-left: $switch-width + $slider-handle-padding * 2;
-  font-size: 0.8em;
+  color: #000000;
+  font-family: "PT Sans", sans-serif;
+  font-size: 14px;
+  line-height: 19px;
   white-space: nowrap;
   vertical-align:middle;
 }
@@ -31,10 +35,11 @@ $slider-handle-size: $switch-height - $slider-handle-padding * 2;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: $white-color;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 34px;
+  border: $slider-border-size solid $main-color;
 }
 
 .DemoShop-slider:before {
@@ -42,9 +47,9 @@ $slider-handle-size: $switch-height - $slider-handle-padding * 2;
   content: "";
   height: $slider-handle-size;
   width: $slider-handle-size;
-  left: $slider-handle-padding;
-  bottom: $slider-handle-padding;
-  background-color: $white-color;
+  left: $slider-handle-padding - $slider-border-size;
+  bottom: $slider-handle-padding - $slider-border-size;
+  background-color: $main-color;
   -webkit-transition: .4s;
   transition: .4s;
   border-radius: 50%;
@@ -63,6 +68,7 @@ input:checked + .DemoShop-slider:before {
   -webkit-transform: translateX($transition-x);
   -ms-transform: translateX($transition-x);
   transform: translateX($transition-x);
+  background-color: $white-color;
 }
 
 .DemoShop-switch input:checked ~ .DemoShop-switchLabel {

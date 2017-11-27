@@ -4,15 +4,9 @@ import './LoginForm.css'
 const LoginForm = () =>
     <div className="LoginForm-wrapper">
         Your login:
-        <div className="LoginForm-fieldGroup">
-            <input className="LoginForm-field" pattern="[A-Za-z]{6,15}" minLength="6"/>
-            <span className="LoginForm-fieldIcon fa fa-user"/>
-        </div>
+        <input className="LoginForm-loginField" pattern="[A-Za-z]{6,15}" minLength="6"/>
         Your password:
-        <div className="LoginForm-fieldGroup">
-            <input type="password" minLength="6" className="LoginForm-field"/>
-            <span className="LoginForm-fieldIcon fa fa-lock"/>
-        </div>
+        <input className="LoginForm-passwordField" type="password" minLength="6"/>
         <button className="LoginForm-submit" type="submit">Submit</button>
     </div>;
 

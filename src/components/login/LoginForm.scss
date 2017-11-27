@@ -2,48 +2,54 @@
 
 .LoginForm-wrapper {
   margin: 0 auto;
-  width: 80%;
-}
-
-.LoginForm-fieldGroup {
-  position: relative;
-  width: 100%;
+  width: 450px;
 }
 
 .LoginForm-field {
-  $padding-left: 10px;
-  $padding-right: 30px;
+  @extend .DemoShop-field;
 
+  width: 100%;
+  height: 60px;
+  padding-left: 20px;
+  padding-right: 60px;
+
+  background-repeat: no-repeat;
   display: block;
-  width: calc(100% - #{$padding-left + $padding-right});
-  height: 30px;
-  border-radius: 5px;
-  margin: 5px 0 15px 0;
-  font-size: 1rem;
-  border: 1px solid transparent;
-  padding-left: $padding-left;
-  padding-right: $padding-right;
+  margin-bottom: 30px;
 }
 
-.LoginForm-fieldIcon {
-  @extend .DemoShop-fieldIcon;
-  top: 8px;
+.LoginForm-loginField {
+  @extend .LoginForm-field;
+  background-size: 10% 100%;
+  background-position: 390px top;
+  background-image: url('/images/login-inactive.svg');
 }
 
-.LoginForm-field:focus {
-  border-color: $valid-color;
-  outline: none;
+.LoginForm-loginField:focus {
+  background-image: url('/images/login-active.svg');
 }
 
-.LoginForm-field:invalid {
-  border-color: $invalid-color;
+.LoginForm-loginField:invalid {
+  background-image: url('/images/login-invalid.svg');
 }
 
-.LoginForm-field:invalid + .fa {
-  color: $invalid-color;
+.LoginForm-passwordField {
+  @extend .LoginForm-field;
+  background-size: 8% 100%;
+  background-position: 395px top;
+  background-image: url('/images/password-inactive.svg');
 }
+
+.LoginForm-passwordField:focus {
+  background-image: url('/images/password-active.svg');
+}
+
+.LoginForm-passwordField:invalid {
+  background-image: url('/images/password-invalid.svg');
+}
+
 
 .LoginForm-submit {
-  @extend .DemoShop-button;
+  @extend .DemoShop-button_big;
   float: right;
 }

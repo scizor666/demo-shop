@@ -10,7 +10,7 @@ import ProductDisplay from "./components/products/ProductDisplay";
 const App = () =>
     <div className="App">
         <header className="App-header">
-            <i className="fa fa-2x fa-shopping-cart" aria-hidden="true"/>
+            <img src="/images/logo.svg"/>
             <SignOut/>
         </header>
         <main className="App-main">
