@@ -1,7 +1,6 @@
 import React from "react";
 import './ProductList.css';
 import ProductCard from "./ProductCard";
-import {Grid, Row, Col} from 'react-flexbox-grid';
 import ArrayUtils from "../../utils/ArrayUtils";
 import Filter from "../filter/Filter";
 import DataUtils from "../../utils/DataUtils";
@@ -9,14 +8,15 @@ import DataUtils from "../../utils/DataUtils";
 const ProductList = props => {
 
     const renderProducts = products => products.map((product, i) =>
-        <Col key={i} xs={12} sm={6} md={4}><ProductCard {...product}/></Col>
+        <div className="ProductList-item col-xs-12 col-sm-6 col-md-4" key={i} ><ProductCard {...product}/>
+        </div>
     );
 
     return <div className="ProductList-wrapper">
         <Filter/>
-        <Grid fluid>
-            <Row>{renderProducts(props.products)}</Row>
-        </Grid>
+        <div className="container-fluid">
+            <div className="row">{renderProducts(props.products)}</div>
+        </div>
     </div>
 };
 

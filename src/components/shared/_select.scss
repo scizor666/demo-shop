@@ -1,10 +1,15 @@
 .DemoShop-select {
+  $select-width: 100%;
+  width: 100%;
   display: block;
+  font-size: 14px;
+  line-height: 19px;
+  height: 35px;
   border-radius: 5px;
   border: 0;
-  padding: 0 10px;
-  $main-color-arrow: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="32px" height="16px"><g><path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" fill="#{$main-color}"/></g></svg>';
-  background: url($main-color-arrow) no-repeat right $white-color;
+  padding: 0 42px 0 17px;
+  background: url("/images/down2.svg") no-repeat calc(#{$select-width} - 10px) $white-color;
+  background-size: 24px;
   //reset
   -webkit-appearance: none;
   -moz-appearance: none;

@@ -3,7 +3,7 @@ import FilterRange from "./FilterRange";
 
 const FilterPrice = props =>
     <div>
-        Price:
+        <span className="FilterModal-filterName">Price:</span>
         <FilterRange {...props}/>
     </div>;
 

@@ -2,10 +2,9 @@ import React from 'react';
 import './SignOut.css';
 
 const SignOut = () =>
-    <div>
-        <div className="SignOut-username">Hello, Username</div>
-        {' '}
-        <img src="/images/header-logout.svg"/>
+    <div className="SignOut-wrapper">
+        <span className="SignOut-username">Hello, <i>{'\u00A0'}John_Doe</i></span>
+        <img id="SignOut-icon" src="/images/header-logout.svg"/>
     </div>;
 
-export default SignOut;
+export default SignOut

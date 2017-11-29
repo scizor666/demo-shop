@@ -2,12 +2,23 @@
 
 .FilterModal-wrapper {
   background-color: $white-color;
-  border-radius: 5px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  border-radius: 15px;
   text-align: left;
-  padding: 20px 25px;
+  padding: 20px;
+  z-index: 100;
+  position: absolute;
+  margin-top: 12px;
+  min-width: 100%;
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+  }
 
   .row > div {
-    border-bottom: 1px solid $main-color;
+    border-bottom: 0.5px solid $main-color;
     padding-bottom: 25px;
     margin-bottom: 10px;
     padding-left: 0;
@@ -20,12 +31,22 @@
   }
 }
 
-@media screen and (min-width: 48em) {
+.FilterModal-arrowUp {
+  width: 0;
+  height: 0;
+  margin-left: 55px;
+  position: absolute;
+  margin-top: 4px;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-bottom: 15px solid $white-color;
+  z-index: 110;
+}
+
+@media screen and (min-width: 800px) {
   .FilterModal-wrapper {
-    min-width: 520px;
-    position: absolute;
-    margin-top: 5px;
-    right: 10%;
+    min-width: 750px;
+    right: 0;
 
     .row > div {
       padding-bottom: 10px;
@@ -45,34 +66,23 @@
   }
 
   .FilterModal-arrowUp {
-    position: absolute;
-    right: calc(10% + 212px);
+    right: 305px;
   }
 }
 
-.FilterModal-arrowUp {
-  width: 0;
-  height: 0;
-  margin-left: 50px;
-  border-left: 5px solid transparent;
-  border-right: 5px solid transparent;
-  border-bottom: 5px solid $white-color;
-}
-
-.FilterModal-deliveryOption {
+.FilterModal-availabilityOption {
   display: block !important;
 }
 
 .FilterModal-categorySelect {
   @extend .DemoShop-select;
-  $white-arrow: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 129 129" enable-background="new 0 0 129 129" width="20px" height="16px"><g><path d="m121.3,34.6c-1.6-1.6-4.2-1.6-5.8,0l-51,51.1-51.1-51.1c-1.6-1.6-4.2-1.6-5.8,0-1.6,1.6-1.6,4.2 0,5.8l53.9,53.9c0.8,0.8 1.8,1.2 2.9,1.2 1,0 2.1-0.4 2.9-1.2l53.9-53.9c1.7-1.6 1.7-4.2 0.1-5.8z" fill="%23FFFFFF"/></g></svg>';
-  background: url($white-arrow) no-repeat right $main-color;
-  width: 100%;
-  line-height: 20px;
-  height: 20px;
-  max-width: 200px;
+  background: url("/images/down.svg") no-repeat $main-color;
+  background-size: 24px;
+  background-position: 203px;
+  width: 235px;
 }
 
-.FilterModal-sizeWrapper {
-  width: 100%;
+.FilterModal-filterName {
+  font-size: 12px;
+  line-height: 15px;
 }

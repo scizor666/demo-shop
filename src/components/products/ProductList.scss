@@ -1,13 +1,23 @@
+@import "../../components/shared/shared.scss";
+
 .ProductList-wrapper {
-  margin: 20px auto;
-  width: 80%;
+  @include main-wrapper;
+
+  & > .container-fluid {
+    padding: 0;
+  }
+
+  & .row {
+    display: flex;
+    flex-wrap: wrap;
+
+    & > div {
+      display: flex;
+      flex-flow: column;
+    }
+  }
 }
 
-.ProductList-wrapper > .container-fluid {
-  padding: 0;
-}
-
-.ProductList-wrapper .row > div {
-  display: flex;
-  flex-flow: column;
+.ProductList-item {
+  margin-bottom: 30px;
 }

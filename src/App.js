@@ -10,7 +10,7 @@ import ProductDisplay from "./components/products/ProductDisplay";
 const App = () =>
     <div className="App">
         <header className="App-header">
-            <img src="/images/logo.svg"/>
+            <img id="App-logo" src="/images/logo.svg"/>
             <SignOut/>
         </header>
         <main className="App-main">
@@ -24,7 +24,7 @@ const App = () =>
                 </Switch>
             </Router>
         </main>
-        <footer className="App-footer">Copyright "Demo Shop", 2017</footer>
+        <footer className="App-footer">Copyright "<u>Demo Shop</u>", 2017</footer>
     </div>;
 
 export default App;

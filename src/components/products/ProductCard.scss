@@ -1,10 +1,9 @@
 @import '../shared/shared.scss';
 
-$data-padding: 10px;
-$data-margin: $data-padding;
+$data-padding: 20px;
+$data-margin: 10px;
 
 .ProductCard-wrapper {
-  margin: 0 0 20px;
   min-width: calc(#{$button-width} + 100px);
   display: flex;
   flex-flow: column;
@@ -22,8 +21,9 @@ $data-margin: $data-padding;
 }
 
 .ProductCard-title {
-  font-weight: 800;
-  padding-bottom: $data-padding;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: $data-padding/2;
   margin-bottom: $data-margin;
   border-bottom: solid;
   border-color: $main-color;
@@ -31,22 +31,26 @@ $data-margin: $data-padding;
 }
 
 .ProductCard-data {
-  background-color: #f1f2f1;
+  background-image: url("/images/modal-bg.png");
   padding: $data-padding;
   position: relative;
   padding-bottom: calc(#{$data-padding} * 2 + #{$button-height});
   flex: 1;
 }
 
+.ProductCard-description {
+  font-size: 14px;
+}
+
 .ProductCard-button {
   @extend .DemoShop-button;
   position: absolute;
   right: $data-padding;
-  bottom: $data-padding;
+  bottom: 15px;
 }
 
 .ProductCard-price {
   position: absolute;
-  bottom: $data-padding;
+  bottom: 15px;
   left: $data-padding;
 }

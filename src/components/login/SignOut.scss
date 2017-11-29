@@ -1,9 +1,17 @@
 @import '../shared/shared.scss';
 
 .SignOut-username {
-    height: 100%;
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: middle;
-    color: $white-color;
+  height: 100%;
+  margin-right: 8px;
+  color: $white-color;
+}
+
+.SignOut-wrapper {
+  line-height: 25px;
+  font-size: 15px;
+  vertical-align: middle;
+}
+
+#SignOut-icon {
+  width: 16px;
 }

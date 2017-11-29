@@ -2,36 +2,35 @@ import React from 'react';
 import './FilterModal.css'
 import FilterRating from "./FilterRating";
 import FilterPrice from "./FilterPrice";
-import {Grid, Row, Col} from 'react-flexbox-grid';
 
 const FilterModal = props => {
 
-    const renderDelivery = () =>
+    const renderAvailability = () =>
         <div>
-            Delivery:
-            <label className="DemoShop-switch FilterModal-deliveryOption">
-                <input id="deliverable" type="checkbox" name="deliverable" value={1}/>
+            <span className="FilterModal-filterName">Availability</span>:
+            <label className="DemoShop-switch FilterModal-availabilityOption">
+                <input id="available" type="checkbox" name="available" value={1}/>
                 <span className="DemoShop-slider"/>
-                <span className="DemoShop-switchLabel">Delivery available</span>
+                <span className="DemoShop-switchLabel">Available only</span>
             </label>
         </div>;
 
-    const renderSizes = () =>
-        <div className="FilterModal-sizeWrapper">
-            Size:
+    const renderGenders = () =>
+        <div>
+            <span className="FilterModal-filterName">Gender:</span>
             <div className="DemoShop-radioOptionWrapper">
-                {Object.entries(props.sizes)
+                {Object.entries(props.genders)
                     .map(([key, name]) => <label key={key}>
-                        <input id={`FilterModal-size${key}`} className="DemoShop-radioInput" type="radio" name="size"
-                               value={key}/>
-                        <label htmlFor={`FilterModal-size${key}`} className="DemoShop-radioLabel">{name}</label>
+                        <input id={`FilterModal-gender_${key}`} className="DemoShop-radioInput" type="radio" name="gender"
+                               value={key} defaultChecked={props.selectedGender === name}/>
+                        <label htmlFor={`FilterModal-gender_${key}`} className="DemoShop-radioLabel">{name}</label>
                     </label>)}
             </div>
         </div>;
 
     const renderCategories = () =>
         <div>
-            Category:
+            <span className="FilterModal-filterName">Category:</span>
             <select className="FilterModal-categorySelect">
                 {Object.entries(props.categories)
                     .map(([key, label]) => <option key={key} value={key}>{label}</option>)}
@@ -40,43 +39,43 @@ const FilterModal = props => {
 
     return <div>
         <div className="FilterModal-arrowUp"/>
-        <Grid fluid className="FilterModal-wrapper">
-            <Row>
-                <Col xs={12} sm={3.75}>
-                    {renderDelivery()}
-                </Col>
-                <Col xs={12} sm={4.5}>
-                    {renderSizes()}
-                </Col>
-                <Col xs={12} sm={3.75}>
+        <div className="container-fluid FilterModal-wrapper">
+            <div className="row">
+                <div className="col-xs-12 col-sm-4">
+                    {renderAvailability()}
+                </div>
+                <div className="col-xs-12 col-sm-4">
+                    {renderGenders()}
+                </div>
+                <div className="col-xs-12 col-sm-4">
                     {renderCategories()}
-                </Col>
-            </Row>
-            <Row>
-                <Col xs={12} sm={4}>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-xs-12 col-sm-4">
                     <FilterRating/>
-                </Col>
-                <Col xs={12} sm={8}>
+                </div>
+                <div className="col-xs-12 col-sm-8">
                     <FilterPrice/>
-                </Col>
-            </Row>
-        </Grid>
+                </div>
+            </div>
+        </div>
     </div>;
 };
 
 FilterModal.defaultProps = {
     categories: {
-        pan: 'Pan',
-        thickCrust: 'Thick Crust',
-        thinCrust: 'Thin Crust',
-        vegan: 'Vegan',
-        glutenFree: 'Gluten Free'
+        activeWear: 'Active Wear',
+        dresses: 'Dresses',
+        jeans: 'Jeans',
+        coats: 'Coats'
     },
-    sizes: {
-        classic: 'Classic',
-        large: 'Large',
-        xLarge: 'X-Large'
-    }
+    genders: {
+        man: 'Man',
+        woman: 'Woman',
+        unisex: 'Unisex'
+    },
+    selectedGender: 'Unisex'
 };
 
 export default FilterModal;

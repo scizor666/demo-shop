@@ -3,7 +3,6 @@ import './ProductDisplay.css';
 import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
 import DataUtils from "../../utils/DataUtils";
-import {Col, Grid, Row} from "react-flexbox-grid";
 import Modal from "../shared/Modal";
 import ConfirmModal from "../shared/ConfirmModal";
 import ProductEditModal from './ProductEditModal'
@@ -21,19 +20,21 @@ class ProductDisplay extends Component {
 
     renderNotAvailable = () => <b> (<span className="ProductDisplay-notAvailable">not available</span>)</b>;
 
-    renderOrderButton = () => {
+    renderBuyButton = () => {
         return <div>
-            <button className="DemoShop-button" onClick={this.toggleOrderModal}>Order</button>
-            <Modal
-                title="Thank you!"
-                show={this.state.orderModalOpen}>
-                <div className="ProductDisplay-modalContent">
-                    <span>The item was added to your order.</span>
-                    <button className="DemoShop-button ProductDisplay-orderModalButton"
-                            onClick={this.toggleOrderModal}>Continue order
-                    </button>
-                </div>
-            </Modal>
+            <button className="DemoShop-button" onClick={this.toggleOrderModal}>Buy</button>
+            <div className="ProductDisplay-buyModal">
+                <Modal
+                    title="Thank you!"
+                    show={this.state.orderModalOpen}>
+                    <div className="ProductDisplay-BuyModalText">You successfully purchased this item.</div>
+                    <div className="ProductDisplay-buyModalButtonWrapper">
+                        <button className="DemoShop-button_big"
+                                onClick={this.toggleOrderModal}>Continue shopping
+                        </button>
+                    </div>
+                </Modal>
+            </div>
         </div>;
     };
 
@@ -41,20 +42,20 @@ class ProductDisplay extends Component {
 
     toggleModal = name => this.setState({[name]: !this.state[name]});
 
-    toggleMakeUnavailableModal = () => this.toggleModal('makeUnavailableModalOpen');
+    toggleDeleteModal = () => this.toggleModal('makeUnavailableModalOpen');
 
     toggleEditModal = () => this.toggleModal('editModalOpen');
 
     toggleOrderModal = () => this.toggleModal('orderModalOpen');
 
 
-    handleAddMoreDays = () => alert("5 More days added");
+    handleAddMore = () => alert("add 5 more");
 
     renderAdminActions = () => {
         return <div className="ProductDisplay-adminActions">
-            You can make it available for <a href="javascript:void(0);" onClick={this.handleAddMoreDays}>5 more days</a>.
-            You can also <a href="javascript:void(0);" onClick={this.toggleEditModal}>edit</a> details or <a
-            href="javascript:void(0);" onClick={this.toggleMakeUnavailableModal}>make unavailable</a>.
+            You can <a href="javascript:void(0);" onClick={this.handleAddMore}>add 5 more</a>.
+            You can also <a href="javascript:void(0);" onClick={this.toggleEditModal}>edit details</a> or <a
+            href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
 
             <ProductEditModal
                 cancelAction={this.toggleEditModal}
@@ -63,12 +64,12 @@ class ProductDisplay extends Component {
                 {...this.props}/>
 
             <ConfirmModal
-                title="Thank you!"
-                cancelAction={this.toggleMakeUnavailableModal}
-                confirmAction={this.toggleMakeUnavailableModal}
+                title="Are you sure?"
+                cancelAction={this.toggleDeleteModal}
+                confirmAction={this.toggleDeleteModal}
                 show={this.state.makeUnavailableModalOpen}>
-                <div className="ProductDisplay-modalContent">
-                    <span>You're trying to make the current item unavailable for order.</span>
+                <div className="ProductDisplay-DeleteModalText">
+                    <span>You are trying to delete this product.</span>
                     {' '}
                     <div>Are you sure you want this?</div>
                 </div>
@@ -81,42 +82,44 @@ class ProductDisplay extends Component {
     render() {
         return <div className="ProductDisplay-wrapper">
             <div className="ProductDisplay-nav">
-                <label>Back</label>
-                <label>Category: {this.props.category}</label>
+                <a>Back</a>
+                <label>Category: <b>{this.props.category}</b></label>
             </div>
-            <Grid className="ProductDisplay-card">
-                <Row>
-                    <Col sm={6} className="ProductDisplay-ratedImage">
-                        <img className="ProductDisplay-image"
-                             src={this.props.imageUrl}
-                             alt="No Picture found"/>
-                        <Rating value={this.props.rating}/>
-                    </Col>
-                    <Col sm={6}>
+            <div className="ProductDisplay-card">
+                <div className="row">
+                    <div className="col-xs-12 col-sm-6">
+                        <div className="ProductDisplay-ratedImage">
+                            <img className="ProductDisplay-image"
+                                 src={this.props.imageUrl}
+                                 alt="No Picture found"/>
+                            <Rating value={this.props.rating}/>
+                        </div>
+                    </div>
+                    <div className="col-xs-12 col-sm-6">
                         <h2 className="ProductDisplay-name">{this.props.name}</h2>
                         <div className="ProductDisplay-details">
                             <div className="ProductDisplay-description">
                                 {this.props.description}
                                 {this.props.editMode ? this.renderAdminActions() : ""}
                             </div>
-                            <div className="ProductDisplay-order">
+                            <div className="ProductDisplay-buy">
                                 <div>
                                     <ProductPrice {...this.props.price}/>
                                     {this.isAvailable() ? "" : this.renderNotAvailable()}
                                     {this.isAvailable() && this.props.editMode ? this.renderDaysLeft(this.props.daysLeft) : ""}
                                 </div>
-                                {this.isAvailable() ? this.renderOrderButton() : ""}
+                                {this.isAvailable() ? this.renderBuyButton() : ""}
                             </div>
                         </div>
-                    </Col>
-                </Row>
-            </Grid>
+                    </div>
+                </div>
+            </div>
         </div>
     }
 }
 
 ProductDisplay.defaultProps = {
-    category: "Thin Crust/Less Calories",
+    category: "Man / Active Wear",
     daysLeft: Math.floor(Math.random() * 2),
     imageUrl: DataUtils.randomImage(),
     rating: DataUtils.randomRating(),
@@ -125,16 +128,15 @@ ProductDisplay.defaultProps = {
     price: {},
     editMode: false,
     categories: {
-        pan: 'Pan',
-        thickCrust: 'Thick Crust',
-        thinCrust: 'Thin Crust',
-        vegan: 'Vegan',
-        glutenFree: 'Gluten Free'
+        activeWear: 'Active Wear',
+        dresses: 'Dresses',
+        jeans: 'Jeans',
+        coats: 'Coats'
     },
-    sizes: {
-        classic: 'Classic',
-        large: 'Large',
-        xLarge: 'X-Large'
+    genders: {
+        man: 'Man',
+        woman: 'Woman',
+        unisex: 'Unisex'
     }
 };
 

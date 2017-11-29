@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './FIlter.css'
+import './Filter.css'
 import FilterSearch from "./FilterSearch";
 import FilterModal from "./FilterModal";
 
@@ -18,7 +18,7 @@ export default class Filter extends Component {
 
     render() {
         return <div className="Filter-wrapper">
-            <button className="DemoShop-button" onClick={() => this.triggerFilterModal()}>Filter options</button>
+            <button className="Filter-button" onClick={() => this.triggerFilterModal()}>Filter options</button>
             <FilterSearch/>
             {(() => {
                 if (this.state.filterOpen) return <FilterModal/>
