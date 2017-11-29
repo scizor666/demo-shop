@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Login from "./components/login/Login";
 import Modal from "./components/shared/Modal";
 import ProductDisplay from "./components/products/ProductDisplay";
+import Statistics from "./components/management/Statistics";
 
 const App = () =>
     <div className="App">
@@ -18,6 +19,7 @@ const App = () =>
                 <Switch>
                     <Route exact path="/login" component={Login}/>
                     <Route exact path="/modal" component={Modal}/>
+                    <Route exact path="/statistics" component={Statistics}/>
                     <Route exact path="/product" component={ProductDisplay}/>
                     <Route exact path="/product/edit" render={() => <ProductDisplay editMode={true}/>}/>
                     <Route component={ProductList}/>
