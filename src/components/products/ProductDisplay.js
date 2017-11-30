@@ -23,18 +23,17 @@ class ProductDisplay extends Component {
     renderBuyButton = () => {
         return <div>
             <button className="DemoShop-button" onClick={this.toggleOrderModal}>Buy</button>
-            <div className="ProductDisplay-buyModal">
+            {this.state.orderModalOpen ?
                 <Modal
                     title="Thank you!"
-                    show={this.state.orderModalOpen}>
+                    className="ProductDisplay-buyModal">
                     <div className="ProductDisplay-BuyModalText">You successfully purchased this item.</div>
                     <div className="ProductDisplay-buyModalButtonWrapper">
                         <button className="DemoShop-button_big"
                                 onClick={this.toggleOrderModal}>Continue shopping
                         </button>
                     </div>
-                </Modal>
-            </div>
+                </Modal> : ''}
         </div>;
     };
 
@@ -57,23 +56,23 @@ class ProductDisplay extends Component {
             You can also <a href="javascript:void(0);" onClick={this.toggleEditModal}>edit details</a> or <a
             href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
 
-            <ProductEditModal
-                cancelAction={this.toggleEditModal}
-                confirmAction={this.toggleEditModal}
-                show={this.state.editModalOpen}
-                {...this.props}/>
+            {this.state.editModalOpen ?
+                <ProductEditModal
+                    cancelAction={this.toggleEditModal}
+                    confirmAction={this.toggleEditModal}
+                    {...this.props}/> : ''}
 
+            {this.state.makeUnavailableModalOpen ?
             <ConfirmModal
                 title="Are you sure?"
                 cancelAction={this.toggleDeleteModal}
-                confirmAction={this.toggleDeleteModal}
-                show={this.state.makeUnavailableModalOpen}>
+                confirmAction={this.toggleDeleteModal}>
                 <div className="ProductDisplay-DeleteModalText">
                     <span>You are trying to delete this product.</span>
                     {' '}
                     <div>Are you sure you want this?</div>
                 </div>
-            </ConfirmModal>
+            </ConfirmModal> : ''}
         </div>;
     };
 

@@ -5,8 +5,7 @@ import './ProductEditModal.css';
 import ConfirmButtons from "../shared/ConfirmButtons";
 
 const ProductEditModal = props =>
-    <div className="ProductEdit-wrapper">
-        <Modal
+        <Modal className="ProductEdit-wrapper"
             title={`Edit "${props.name}"`}
             {...props}>
             <div className="row">
@@ -78,7 +77,6 @@ const ProductEditModal = props =>
                 </div>
             </div>
             <ConfirmButtons {...props}/>
-        </Modal>
-    </div>;
+        </Modal>;
 
 export default ProductEditModal;

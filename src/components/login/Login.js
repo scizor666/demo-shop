@@ -4,10 +4,8 @@ import LoginForm from "./LoginForm";
 import './Login.css';
 
 const Login = () =>
-    <div className="Login-wrapper">
-        <Modal title='Login to "Demo Shop"' show={true}>
-            <LoginForm/>
-        </Modal>
-    </div>;
+    <Modal className="Login-wrapper" title='Login to "Demo Shop"'>
+        <LoginForm/>
+    </Modal>;
 
 export default Login;

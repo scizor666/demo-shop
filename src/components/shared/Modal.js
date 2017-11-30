@@ -1,16 +1,41 @@
 import React from "react";
+import ReactDOM from 'react-dom';
 import './Modal.css';
 
-const Modal = props => {
+export default class Modal extends React.PureComponent {
 
-    if (!props.show) return null;
+    componentDidMount() {
+        this.popup = document.createElement('div');
 
-    return <div className="Modal-back">
-        <div className="Modal-wrapper">
-            <div className="Modal-title">{props.title}</div>
-            <div className="Modal-content">{props.children || props.content}</div>
-        </div>
-    </div>;
+        if(this.props.id) this.popup.setAttribute('id', this.props.id);
+        if(this.props.className) this.popup.setAttribute("class", this.props.className);
+
+        document.body.appendChild(this.popup);
+        this._render();
+    }
+
+    componentDidUpdate() {
+        this._render();
+    }
+
+    componentWillUnmount() {
+        ReactDOM.unmountComponentAtNode(this.popup);
+        document.body.removeChild(this.popup);
+    }
+
+    _render() {
+        ReactDOM.render(<div>
+            <div className="Modal-back"/>
+            <div className="Modal-wrapper">
+                <div className="Modal-title">{this.props.title}</div>
+                <div className="Modal-content">{this.props.children || this.props.content}</div>
+            </div>
+        </div>, this.popup);
+    }
+
+    render() {
+        return null;
+    }
 };
 
 Modal.defaultProps = {
@@ -23,6 +48,4 @@ Modal.defaultProps = {
         return res;
     })()
 };
-
-export default Modal;
 
