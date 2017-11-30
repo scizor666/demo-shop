@@ -2,6 +2,7 @@
 
 .ProductList-wrapper {
   @include main-wrapper;
+  padding-bottom: $footer-height;
 
   & > .container-fluid {
     padding: 0;

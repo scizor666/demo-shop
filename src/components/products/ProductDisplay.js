@@ -63,51 +63,54 @@ class ProductDisplay extends Component {
                     {...this.props}/> : ''}
 
             {this.state.makeUnavailableModalOpen ?
-            <ConfirmModal
-                title="Are you sure?"
-                cancelAction={this.toggleDeleteModal}
-                confirmAction={this.toggleDeleteModal}>
-                <div className="ProductDisplay-DeleteModalText">
-                    <span>You are trying to delete this product.</span>
-                    {' '}
-                    <div>Are you sure you want this?</div>
-                </div>
-            </ConfirmModal> : ''}
+                <ConfirmModal
+                    title="Are you sure?"
+                    cancelAction={this.toggleDeleteModal}
+                    confirmAction={this.toggleDeleteModal}>
+                    <div className="ProductDisplay-DeleteModalText">
+                        <span>You are trying to delete this product.</span>
+                        {' '}
+                        <div>Are you sure you want this?</div>
+                    </div>
+                </ConfirmModal> : ''}
         </div>;
     };
 
     isAvailable = () => this.props.daysLeft > 0;
 
     render() {
-        return <div className="ProductDisplay-wrapper">
-            <div className="ProductDisplay-nav">
-                <a>Back</a>
-                <label>Category: <b>{this.props.category}</b></label>
-            </div>
-            <div className="ProductDisplay-card">
-                <div className="row">
-                    <div className="col-xs-12 col-sm-6">
-                        <div className="ProductDisplay-ratedImage">
-                            <img className="ProductDisplay-image"
-                                 src={this.props.imageUrl}
-                                 alt="No Picture found"/>
-                            <Rating value={this.props.rating}/>
-                        </div>
-                    </div>
-                    <div className="col-xs-12 col-sm-6">
-                        <h2 className="ProductDisplay-name">{this.props.name}</h2>
-                        <div className="ProductDisplay-details">
-                            <div className="ProductDisplay-description">
-                                {this.props.description}
-                                {this.props.editMode ? this.renderAdminActions() : ""}
+        return <div>
+            <div className="App-shadow"/>
+            <div className="ProductDisplay-wrapper">
+                <div className="ProductDisplay-nav">
+                    <a>Back</a>
+                    <label>Category: <b>{this.props.category}</b></label>
+                </div>
+                <div className="ProductDisplay-card">
+                    <div className="row">
+                        <div className="col-xs-12 col-sm-6">
+                            <div className="ProductDisplay-ratedImage">
+                                <img className="ProductDisplay-image"
+                                     src={this.props.imageUrl}
+                                     alt="No Picture found"/>
+                                <Rating value={this.props.rating}/>
                             </div>
-                            <div className="ProductDisplay-buy">
-                                <div>
-                                    <ProductPrice {...this.props.price}/>
-                                    {this.isAvailable() ? "" : this.renderNotAvailable()}
-                                    {this.isAvailable() && this.props.editMode ? this.renderDaysLeft(this.props.daysLeft) : ""}
+                        </div>
+                        <div className="col-xs-12 col-sm-6">
+                            <h2 className="ProductDisplay-name">{this.props.name}</h2>
+                            <div className="ProductDisplay-details">
+                                <div className="ProductDisplay-description">
+                                    {this.props.description}
+                                    {this.props.editMode ? this.renderAdminActions() : ""}
                                 </div>
-                                {this.isAvailable() ? this.renderBuyButton() : ""}
+                                <div className="ProductDisplay-buy">
+                                    <div>
+                                        <ProductPrice {...this.props.price}/>
+                                        {this.isAvailable() ? "" : this.renderNotAvailable()}
+                                        {this.isAvailable() && this.props.editMode ? this.renderDaysLeft(this.props.daysLeft) : ""}
+                                    </div>
+                                    {this.isAvailable() ? this.renderBuyButton() : ""}
+                                </div>
                             </div>
                         </div>
                     </div>
