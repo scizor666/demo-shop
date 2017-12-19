@@ -1,5 +1,4 @@
 import React from 'react';
-import './FilterSearch.css'
 
 const FilterSearch = props =>
     <div className="FilterSearch-fieldGroup">

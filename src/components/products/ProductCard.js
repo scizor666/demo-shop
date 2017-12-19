@@ -1,5 +1,4 @@
 import React from "react";
-import './ProductCard.css';
 import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
 import DataUtils from "../../utils/DataUtils";

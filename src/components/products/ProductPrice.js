@@ -1,6 +1,5 @@
 import React from 'react';
 import DataUtils from "../../utils/DataUtils";
-import './ProductPrice.css';
 
 const ProductPrice = props =>
     <span className="ProductPrice-wrapper">

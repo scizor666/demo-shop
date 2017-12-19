@@ -1,5 +1,4 @@
 import React from "react";
-import './Rating.css';
 import ArrayUtils from "../../utils/ArrayUtils";
 
 const Rating = props =>

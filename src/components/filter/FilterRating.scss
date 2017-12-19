@@ -1,4 +1,9 @@
 .FilterRating-wrapper {
   max-width: 270px;
   padding-right: 35px;
+
+  .FilterModal-filterName {
+    margin-bottom: 8px;
+    display: inline-block;
+  }
 }

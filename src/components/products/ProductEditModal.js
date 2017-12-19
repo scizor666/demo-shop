@@ -1,7 +1,6 @@
 import React from 'react';
 import Modal from "../shared/Modal";
 import ArrayUtils from "../../utils/ArrayUtils";
-import './ProductEditModal.css';
 import ConfirmButtons from "../shared/ConfirmButtons";
 
 const ProductEditModal = props =>
@@ -27,7 +26,7 @@ const ProductEditModal = props =>
                             <label className="ProductEdit-inputLabel">Size:</label>
                             <div className="DemoShop-radioOptionWrapper">
                                 {Object.entries(props.genders)
-                                    .map(([key, name]) => <label key={key}>
+                                    .map(([key, name]) => <span key={key}>
                                         <input id={`ProductEdit-size${key}`}
                                                className="DemoShop-radioInput"
                                                type="radio"
@@ -37,12 +36,12 @@ const ProductEditModal = props =>
                                                className="DemoShop-radioLabel">
                                             {name}
                                         </label>
-                                    </label>)}
+                                    </span>)}
                             </div>
                         </div>
                         <div className="ProductEdit-descriptionWrapper">
                             <label className="ProductEdit-inputLabel">Description:</label>
-                            <textarea/>
+                            <textarea className="DemoShop-textarea"/>
                         </div>
                     </div>
                 </div>

@@ -5,9 +5,13 @@
   outline: none;
   box-sizing: border-box;
   padding: 0 10px;
-  font-family: "PT Sans", sans-serif;
   font-size: 14px;
   text-overflow: ellipsis;
+}
+
+.DemoShop-field::placeholder {
+  color: #999999;
+  font-style: italic;
 }
 
 .DemoShop-field:focus {

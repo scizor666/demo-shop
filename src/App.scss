@@ -1,10 +1,7 @@
-@import './bootstrap-grid-and-normalize.css';
-@import './components/shared/shared.scss';
-
 .App-header {
   margin: 0 auto;
   height: 45px;
-  background: $main-color;
+  background: linear-gradient(180deg, #449587 0%, #2A8676 100%);
   padding: 10px $main-margin-width;
   display: flex;
   justify-content: space-between;
@@ -18,8 +15,21 @@
   }
 }
 
+.App-main:before {
+  content: "";
+  background-image: url("/images/bg.jpg");
+  z-index: -1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
 #App-logo {
- width: 24px;
+ width: 28px;
+ height: 28px;
+ margin-top: -1px;
 }
 
 .App-footer {
@@ -58,6 +68,9 @@ body {
   line-height: 1.42857143;
   margin: 0;
   padding: 0;
-  background-image: url("/images/bg.jpg");
-  width: 100%;
+  width: 100%;;
+}
+
+body, html, .App {
+  height: 100%;
 }

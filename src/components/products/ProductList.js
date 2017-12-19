@@ -1,5 +1,4 @@
 import React from "react";
-import './ProductList.css';
 import ProductCard from "./ProductCard";
 import ArrayUtils from "../../utils/ArrayUtils";
 import Filter from "../filter/Filter";

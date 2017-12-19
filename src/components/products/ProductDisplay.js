@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import './ProductDisplay.css';
 import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
 import DataUtils from "../../utils/DataUtils";
@@ -52,9 +51,10 @@ class ProductDisplay extends Component {
 
     renderAdminActions = () => {
         return <div className="ProductDisplay-adminActions">
-            You can <a href="javascript:void(0);" onClick={this.handleAddMore}>add 5 more</a>.
-            You can also <a href="javascript:void(0);" onClick={this.toggleEditModal}>edit details</a> or <a
-            href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
+            You can <a className="DemoShop-link" href="javascript:void(0);" onClick={this.handleAddMore}>add 5 more</a>.
+            You can also <a className="DemoShop-link" href="javascript:void(0);" onClick={this.toggleEditModal}>edit
+            details</a> or <a className="DemoShop-link"
+                              href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
 
             {this.state.editModalOpen ?
                 <ProductEditModal
@@ -68,9 +68,8 @@ class ProductDisplay extends Component {
                     cancelAction={this.toggleDeleteModal}
                     confirmAction={this.toggleDeleteModal}>
                     <div className="ProductDisplay-DeleteModalText">
-                        <span>You are trying to delete this product.</span>
-                        {' '}
-                        <div>Are you sure you want this?</div>
+                        <span>You are trying to delete this product.</span><br/>
+                        <span>Are you sure you want this?</span>
                     </div>
                 </ConfirmModal> : ''}
         </div>;

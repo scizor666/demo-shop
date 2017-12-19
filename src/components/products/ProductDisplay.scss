@@ -1,4 +1,3 @@
-@import "../../components/shared/shared.scss";
 
 $name-size: 24px;
 $description-border-size: 2px;
@@ -85,12 +84,23 @@ $name-margin-size: 10px;
 .ProductDisplay-description {
   border-top: $description-border-size solid #3FC5CB;
   padding-top: 15px;
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .ProductDisplay-buy {
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
+}
+
+.ProductDisplay-left {
+  font-weight: normal;
+}
+
+.ProductDisplay-left, .ProductDisplay-notAvailable {
+  font-size: 16px;
+  line-height: 20px;
 }
 
 .ProductDisplay-notAvailable {

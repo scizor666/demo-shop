@@ -1,5 +1,4 @@
 import React from 'react';
-import './SignOut.css';
 
 const SignOut = () =>
     <div className="SignOut-wrapper">

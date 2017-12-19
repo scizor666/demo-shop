@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import './Modal.css';
 
 export default class Modal extends React.PureComponent {
 
@@ -11,6 +10,7 @@ export default class Modal extends React.PureComponent {
         if(this.props.className) this.popup.setAttribute("class", this.props.className);
 
         document.body.appendChild(this.popup);
+        document.querySelector(".App").className += ' ' + 'App-blur';
         this._render();
     }
 
@@ -21,6 +21,7 @@ export default class Modal extends React.PureComponent {
     componentWillUnmount() {
         ReactDOM.unmountComponentAtNode(this.popup);
         document.body.removeChild(this.popup);
+        document.querySelector(".App").classList.remove('App-blur');
     }
 
     _render() {

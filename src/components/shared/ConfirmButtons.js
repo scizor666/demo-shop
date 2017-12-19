@@ -1,5 +1,4 @@
 import React from "react";
-import "./ConfirmButtons.css";
 
 const ConfirmButtons = (props) => <div className="ConfirmButtons-wrapper">
     <button className="DemoShop-button_bigSecondary"

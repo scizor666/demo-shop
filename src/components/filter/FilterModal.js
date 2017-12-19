@@ -1,5 +1,4 @@
 import React from 'react';
-import './FilterModal.css'
 import FilterRating from "./FilterRating";
 import FilterPrice from "./FilterPrice";
 
@@ -20,11 +19,11 @@ const FilterModal = props => {
             <span className="FilterModal-filterName">Gender:</span>
             <div className="DemoShop-radioOptionWrapper">
                 {Object.entries(props.genders)
-                    .map(([key, name]) => <label key={key}>
+                    .map(([key, name]) => <span key={key}>
                         <input id={`FilterModal-gender_${key}`} className="DemoShop-radioInput" type="radio" name="gender"
                                value={key} defaultChecked={props.selectedGender === name}/>
                         <label htmlFor={`FilterModal-gender_${key}`} className="DemoShop-radioLabel">{name}</label>
-                    </label>)}
+                    </span>)}
             </div>
         </div>;
 
