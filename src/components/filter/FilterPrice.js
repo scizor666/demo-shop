@@ -2,7 +2,7 @@ import React from 'react';
 import FilterRange from "./FilterRange";
 
 const FilterPrice = props =>
-    <div>
+    <div className="FilterModal-filter FilterPrice-wrapper">
         <span className="FilterModal-filterName">Price:</span>
         <FilterRange {...props}/>
     </div>;

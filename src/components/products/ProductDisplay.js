@@ -78,7 +78,7 @@ class ProductDisplay extends Component {
     isAvailable = () => this.props.daysLeft > 0;
 
     render() {
-        return <div>
+        return <React.Fragment>
             <div className="App-shadow"/>
             <div className="ProductDisplay-wrapper">
                 <div className="ProductDisplay-nav">
@@ -115,7 +115,7 @@ class ProductDisplay extends Component {
                     </div>
                 </div>
             </div>
-        </div>
+        </React.Fragment>
     }
 }
 

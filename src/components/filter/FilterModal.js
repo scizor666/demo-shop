@@ -5,7 +5,7 @@ import FilterPrice from "./FilterPrice";
 const FilterModal = props => {
 
     const renderAvailability = () =>
-        <div>
+        <div className="FilterModal-filter">
             <span className="FilterModal-filterName">Availability</span>:
             <label className="DemoShop-switch FilterModal-availabilityOption">
                 <input id="available" type="checkbox" name="available" value={1}/>
@@ -15,20 +15,20 @@ const FilterModal = props => {
         </div>;
 
     const renderGenders = () =>
-        <div>
+        <div className="FilterModal-filter">
             <span className="FilterModal-filterName">Gender:</span>
             <div className="DemoShop-radioOptionWrapper">
                 {Object.entries(props.genders)
-                    .map(([key, name]) => <span key={key}>
+                    .map(([key, name]) => <React.Fragment key={key}>
                         <input id={`FilterModal-gender_${key}`} className="DemoShop-radioInput" type="radio" name="gender"
                                value={key} defaultChecked={props.selectedGender === name}/>
                         <label htmlFor={`FilterModal-gender_${key}`} className="DemoShop-radioLabel">{name}</label>
-                    </span>)}
+                    </React.Fragment>)}
             </div>
         </div>;
 
     const renderCategories = () =>
-        <div>
+        <div className="FilterModal-filter">
             <span className="FilterModal-filterName">Category:</span>
             <select className="FilterModal-categorySelect">
                 {Object.entries(props.categories)
@@ -36,7 +36,7 @@ const FilterModal = props => {
             </select>
         </div>;
 
-    return <div>
+    return <React.Fragment>
         <div className="FilterModal-arrowUp"/>
         <div className="container-fluid FilterModal-wrapper">
             <div className="row">
@@ -59,7 +59,7 @@ const FilterModal = props => {
                 </div>
             </div>
         </div>
-    </div>;
+    </React.Fragment>;
 };
 
 FilterModal.defaultProps = {

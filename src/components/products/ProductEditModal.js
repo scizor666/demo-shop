@@ -26,7 +26,7 @@ const ProductEditModal = props =>
                             <label className="ProductEdit-inputLabel">Size:</label>
                             <div className="DemoShop-radioOptionWrapper">
                                 {Object.entries(props.genders)
-                                    .map(([key, name]) => <span key={key}>
+                                    .map(([key, name]) => <React.Fragment key={key}>
                                         <input id={`ProductEdit-size${key}`}
                                                className="DemoShop-radioInput"
                                                type="radio"
@@ -36,7 +36,7 @@ const ProductEditModal = props =>
                                                className="DemoShop-radioLabel">
                                             {name}
                                         </label>
-                                    </span>)}
+                                    </React.Fragment>)}
                             </div>
                         </div>
                         <div className="ProductEdit-descriptionWrapper">

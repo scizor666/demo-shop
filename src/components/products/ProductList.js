@@ -11,7 +11,7 @@ const ProductList = props => {
         </div>
     );
 
-    return <div>
+    return <React.Fragment>
         <div className="App-shadow"/>
         <div className="ProductList-wrapper">
 
@@ -20,7 +20,7 @@ const ProductList = props => {
                 <div className="row">{renderProducts(props.products)}</div>
             </div>
         </div>
-    </div>
+    </React.Fragment>
 };
 
 ProductList.defaultProps = {
