@@ -1,12 +1,31 @@
 import React from 'react';
 
-const LoginForm = () =>
+const LoginForm = props =>
+
     <div className="LoginForm-wrapper">
+        <div className="LoginForm-error">{props.error}</div>
         Your login:
-        <input className="LoginForm-loginField" pattern="[A-Za-z]{6,15}" minLength="6"/>
+        <input className="LoginForm-loginField"
+               onChange={props.onUserInput}
+               name="login"
+               pattern="[A-Za-z]{3,15}"
+               minLength="3"
+               value={props.login}
+        />
         Your password:
-        <input className="LoginForm-passwordField" type="password" minLength="6"/>
-        <button className="LoginForm-submit" type="submit">Submit</button>
+        <input className="LoginForm-passwordField"
+               onChange={props.onUserInput}
+               name="password"
+               type="password"
+               minLength="6"
+               value={props.password}
+        />
+        <button className="LoginForm-submit"
+                onClick={props.handleSubmit}
+                type="submit"
+                disabled={!props.login || !props.password}>
+            Submit
+        </button>
     </div>;
 
 export default LoginForm;

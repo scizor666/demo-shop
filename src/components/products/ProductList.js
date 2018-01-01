@@ -1,39 +1,37 @@
 import React from "react";
 import ProductCard from "./ProductCard";
-import ArrayUtils from "../../utils/ArrayUtils";
 import Filter from "../filter/Filter";
-import DataUtils from "../../utils/DataUtils";
+import {connect} from 'react-redux';
+import {fetchProducts} from "../../actions";
+import _ from 'lodash';
 
-const ProductList = props => {
+class ProductList extends React.Component {
 
-    const renderProducts = products => products.map((product, i) =>
-        <div className="ProductList-item col-xs-12 col-sm-6 col-md-4" key={i}><ProductCard {...product}/>
+    componentDidMount() {
+        this.props.fetchProducts();
+    }
+
+    renderProducts = products => _.map(products, (product, i) =>
+        <div className="ProductList-item col-xs-12 col-sm-6 col-md-4" key={i}>
+            <ProductCard {...product}/>
         </div>
     );
 
-    return <React.Fragment>
-        <div className="App-shadow"/>
-        <div className="ProductList-wrapper">
+    render() {
+        console.log(this.props);
+        return <React.Fragment>
+            <div className="App-shadow"/>
+            <div className="ProductList-wrapper">
 
-            <Filter/>
-            <div className="container-fluid">
-                <div className="row">{renderProducts(props.products)}</div>
+                <Filter/>
+                <div className="container-fluid">
+                    <div className="row">{this.renderProducts(this.props.products)}</div>
+                </div>
             </div>
-        </div>
-    </React.Fragment>
-};
+        </React.Fragment>
+    }
+}
 
-ProductList.defaultProps = {
-    products: ArrayUtils.times(Math.floor((Math.random() * 50) + 10), () => {
-            return {
-                name: DataUtils.randomName(),
-                imageUrl: DataUtils.randomImage(),
-                description: DataUtils.randomDescription(),
-                rating: DataUtils.randomRating(),
-                price: {value: DataUtils.randomPrice()}
-            }
-        }
-    )
-};
+const mapStateToProps = ({products}) => ({products});
 
-export default ProductList;
+export default connect(mapStateToProps, {fetchProducts})(ProductList);

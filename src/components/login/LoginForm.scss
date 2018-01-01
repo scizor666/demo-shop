@@ -51,8 +51,18 @@
   background-image: url('/images/password-invalid.svg');
 }
 
-
 .LoginForm-submit {
   @extend .DemoShop-button_big;
   float: right;
+}
+
+.LoginForm-wrapper input:invalid ~ .LoginForm-submit {
+  @extend .DemoShop-button:disabled;
+
+}
+
+.LoginForm-error {
+  color: #c11313;
+  text-align: center;
+  height: 25px;
 }

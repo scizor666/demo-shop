@@ -1,13 +1,13 @@
 import React from "react";
 import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
-import DataUtils from "../../utils/DataUtils";
+import {Link} from 'react-router-dom';
 
 const ProductCard = props => {
     return <div className="ProductCard-wrapper">
         <div className={"ProductCard-imageContainer"}>
             <img className="ProductCard-image"
-                 src={props.imageUrl}
+                 src={props.image}
                  alt="No Picture found"/>
             <Rating value={props.rating}/>
         </div>
@@ -17,17 +17,11 @@ const ProductCard = props => {
             <div className='ProductCard-price'>
                 <ProductPrice {...props.price}/>
             </div>
-            <button className="ProductCard-button">Show more</button>
+            <Link to={`/products/${props.id}`}>
+                <button className="ProductCard-button">Show More</button>
+            </Link>
         </div>
     </div>;
-};
-
-ProductCard.defaultProps = {
-    imageUrl: DataUtils.randomImage(),
-    rating: DataUtils.randomRating(),
-    name: DataUtils.randomName(),
-    description: DataUtils.randomDescription(),
-    price: {}
 };
 
 
