@@ -1,5 +1,4 @@
 import React from 'react';
-import DataUtils from "../../utils/DataUtils";
 
 const ProductPrice = props =>
     <span className="ProductPrice-wrapper">
@@ -9,7 +8,6 @@ const ProductPrice = props =>
 
 ProductPrice.defaultProps = {
     currency: '$',
-    value: DataUtils.randomPrice()
 };
 
 export default ProductPrice;

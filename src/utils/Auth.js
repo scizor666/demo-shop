@@ -4,11 +4,6 @@ export default class Auth {
 
     static sessionTokenHeader = ENV['sessionTokenHeader'];
 
-    static isAuthenticated() {
-        return Boolean(localStorage.getItem(this.sessionTokenHeader));
-    }
-
-
     static authenticate(data) {
         return fetch(`${ENV["apiRoot"]}/login`, {
             method: 'post',
@@ -21,12 +16,11 @@ export default class Auth {
         });
     }
 
-    static signout() {
-        const sessionToken = localStorage.removeItem(this.sessionTokenHeader);
+    static signout(token, login) {
         fetch(`${ENV["apiRoot"]}/logout`, {
             method: 'post',
-            headers: {...[ENV['defaultHeaders']], [this.sessionTokenHeader]: sessionToken},
-            body: JSON.stringify({login: localStorage.getItem('login')})
+            headers: {...[ENV['defaultHeaders']], [this.sessionTokenHeader]: token},
+            body: JSON.stringify({login})
         }).then(response => {
             if (response.status === 200) console.log("signed out")
         });

@@ -1,7 +1,8 @@
 import React from 'react';
-import SignOutContainer from "./components/login/SignOutContainer";
+import Header from "./components/shared/Header";
+import Footer from "./components/shared/Footer";
 import ProductList from "./components/products/ProductList";
-import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from "./components/login/Login";
 import ProductDisplay from "./components/products/ProductDisplay";
 import Statistics from "./components/management/Statistics";
@@ -10,30 +11,34 @@ import {applyMiddleware, createStore} from 'redux';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import requireLogin from './components/login/RequireLogin';
+import Auth from "./utils/Auth";
+import {AUTH_SUCCESS} from "./actions/types";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
+const store = createStoreWithMiddleware(reducers);
+const token = localStorage.getItem(Auth.sessionTokenHeader);
+if (token) {
+    store.dispatch({
+            type: AUTH_SUCCESS,
+            payload: localStorage.getItem("login")
+        }
+    );
+}
 
 const App = () =>
-    <Provider store={createStoreWithMiddleware(reducers)}>
-        <div className="App">
-            <header className="App-header">
-                <img id="App-logo" src="/images/logo.svg"/>
-                <SignOutContainer/>
-            </header>
-            <main className="App-main">
-                <Router>
-                    <Switch>
-                        <Redirect exact path="/" to="/login"/>
-                        <Route exact path="/login" component={Login}/>
-                        <Route exact path="/statistics" component={Statistics}/>
-                        <Route exact path="/products/:id" component={ProductDisplay}/>
-                        <Route exact path="/products/:id/edit" render={() => <ProductDisplay editMode={true}/>}/>
-                        <Route exact path="/main" component={requireLogin(ProductList)}/>
-                    </Switch>
-                </Router>
-            </main>
-            <footer className="App-footer">Copyright "<u>Demo Shop</u>", 2017</footer>
-        </div>
+    <Provider store={store}>
+        <Router>
+            <div className="App">
+                <Header/>
+                <main className="App-main">
+                    <Route exact path="/login" component={Login}/>
+                    <Route exact path="/" component={requireLogin(ProductList)}/>
+                    <Route exact path="/products/:id" component={requireLogin(ProductDisplay)}/>
+                    <Route exact path="/statistics" component={requireLogin(Statistics)}/>
+                </main>
+                <Footer/>
+            </div>
+        </Router>
     </Provider>;
 
 export default App;

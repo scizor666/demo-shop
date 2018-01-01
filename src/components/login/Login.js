@@ -23,7 +23,7 @@ class Login extends React.Component {
     };
 
     render() {
-        if (this.props.isAuthenticated) return <Redirect to="/main"/>;
+        if (this.props.isAuthenticated) return <Redirect to="/"/>;
 
         return <Modal className="Login-wrapper" title='Login to "Demo Shop"'>
             <LoginForm login={this.state.login}

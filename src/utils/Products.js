@@ -12,4 +12,15 @@ export default class Auth {
             return err;
         });
     }
+
+    static fetchProduct(id, token) {
+        return fetch(`${ENV['apiRoot']}/products/${id}`, {
+            method: 'get',
+            headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token},
+        }).then(response => {
+            return response
+        }).catch(err => {
+            return err;
+        })
+    }
 }

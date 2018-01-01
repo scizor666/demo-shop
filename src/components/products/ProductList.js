@@ -18,7 +18,6 @@ class ProductList extends React.Component {
     );
 
     render() {
-        console.log(this.props);
         return <React.Fragment>
             <div className="App-shadow"/>
             <div className="ProductList-wrapper">

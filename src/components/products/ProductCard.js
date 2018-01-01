@@ -15,7 +15,7 @@ const ProductCard = props => {
             <div className="ProductCard-title">{props.name}</div>
             <div className="ProductCard-description">{props.description}</div>
             <div className='ProductCard-price'>
-                <ProductPrice {...props.price}/>
+                <ProductPrice value={props.cost}/>
             </div>
             <Link to={`/products/${props.id}`}>
                 <button className="ProductCard-button">Show More</button>

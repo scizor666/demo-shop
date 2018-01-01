@@ -1,10 +1,12 @@
 import React, {Component} from "react";
 import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
-import DataUtils from "../../utils/DataUtils";
 import Modal from "../shared/Modal";
 import ConfirmModal from "../shared/ConfirmModal";
 import ProductEditModal from './ProductEditModal'
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {fetchProduct} from "../../actions";
 
 class ProductDisplay extends Component {
 
@@ -15,6 +17,10 @@ class ProductDisplay extends Component {
             makeUnavailableModalOpen: false,
             orderModalOpen: false
         }
+    }
+
+    componentDidMount() {
+        this.props.fetchProduct(this.props.match.params.id)
     }
 
     renderNotAvailable = () => <b> (<span className="ProductDisplay-notAvailable">not available</span>)</b>;
@@ -36,7 +42,7 @@ class ProductDisplay extends Component {
         </div>;
     };
 
-    renderDaysLeft = amount => <span>{` (${amount} day${amount === 1 ? "" : "s"} left)`}</span>;
+    renderAmountLeft = amount => <span>{` (${amount} left)`}</span>;
 
     toggleModal = name => this.setState({[name]: !this.state[name]});
 
@@ -75,14 +81,14 @@ class ProductDisplay extends Component {
         </div>;
     };
 
-    isAvailable = () => this.props.daysLeft > 0;
+    isAvailable = () => this.props.count > 0;
 
     render() {
         return <React.Fragment>
             <div className="App-shadow"/>
             <div className="ProductDisplay-wrapper">
                 <div className="ProductDisplay-nav">
-                    <a>Back</a>
+                    <Link to='/'>Back</Link>
                     <label>Category: <b>{this.props.category}</b></label>
                 </div>
                 <div className="ProductDisplay-card">
@@ -90,7 +96,7 @@ class ProductDisplay extends Component {
                         <div className="col-xs-12 col-sm-6">
                             <div className="ProductDisplay-ratedImage">
                                 <img className="ProductDisplay-image"
-                                     src={this.props.imageUrl}
+                                     src={this.props.image}
                                      alt="No Picture found"/>
                                 <Rating value={this.props.rating}/>
                             </div>
@@ -104,9 +110,9 @@ class ProductDisplay extends Component {
                                 </div>
                                 <div className="ProductDisplay-buy">
                                     <div>
-                                        <ProductPrice {...this.props.price}/>
+                                        <ProductPrice value={this.props.cost}/>
                                         {this.isAvailable() ? "" : this.renderNotAvailable()}
-                                        {this.isAvailable() && this.props.editMode ? this.renderDaysLeft(this.props.daysLeft) : ""}
+                                        {this.isAvailable() && this.props.editMode ? this.renderAmountLeft(this.props.count) : ""}
                                     </div>
                                     {this.isAvailable() ? this.renderBuyButton() : ""}
                                 </div>
@@ -121,12 +127,6 @@ class ProductDisplay extends Component {
 
 ProductDisplay.defaultProps = {
     category: "Man / Active Wear",
-    daysLeft: Math.floor(Math.random() * 2),
-    imageUrl: DataUtils.randomImage(),
-    rating: DataUtils.randomRating(),
-    name: DataUtils.randomName(),
-    description: DataUtils.randomDescription(),
-    price: {},
     editMode: false,
     categories: {
         activeWear: 'Active Wear',
@@ -141,4 +141,6 @@ ProductDisplay.defaultProps = {
     }
 };
 
-export default ProductDisplay;
+const mapStateToProps = ({products}, ownProps) => ({...products[ownProps.match.params.id]});
+
+export default connect(mapStateToProps, {fetchProduct})(ProductDisplay);

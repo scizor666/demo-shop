@@ -2,7 +2,7 @@ import React from 'react';
 
 const LoginForm = props =>
 
-    <div className="LoginForm-wrapper">
+    <form className="LoginForm-wrapper">
         <div className="LoginForm-error">{props.error}</div>
         Your login:
         <input className="LoginForm-loginField"
@@ -26,6 +26,6 @@ const LoginForm = props =>
                 disabled={!props.login || !props.password}>
             Submit
         </button>
-    </div>;
+    </form>;
 
 export default LoginForm;

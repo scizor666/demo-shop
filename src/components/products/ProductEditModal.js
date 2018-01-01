@@ -56,7 +56,7 @@ const ProductEditModal = props =>
                         </div>
                         <div className="ProductEdit-inputGroup">
                             <img className="DemoShop-image"
-                                 src={props.imageUrl}/>
+                                 src={props.image}/>
                         </div>
                         <div className="ProductEdit-inputGroup">
                             <label className="ProductEdit-inputLabel">Price:</label>
