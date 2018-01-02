@@ -9,7 +9,7 @@ import {
     CHANGE_FILTER, RESET_FILTER
 } from './types';
 
-export const authSuccess = (login) => {
+export const authSuccess = login => {
     return {
         type: AUTH_SUCCESS,
         payload: login
@@ -23,21 +23,16 @@ export const authFailure = () => {
     }
 };
 
-export const login = (credentials) => {
-    return dispatch => {
-        Auth.authenticate(credentials)
-            .then(response => {
-                if (response.status === 200) {
-                    localStorage.setItem(Auth.sessionTokenHeader, response.headers.get(Auth.sessionTokenHeader));
-                    localStorage.setItem("login", credentials.login);
-                    dispatch(authSuccess(credentials.login));
-                } else {
-                    dispatch(authFailure());
-                }
-            })
-            .catch(() => {
-                dispatch(authFailure());
-            });
+export const login = credentials => {
+    return async dispatch => {
+        const response = await Auth.authenticate(credentials);
+        if (response.status === 200) {
+            localStorage.setItem(Auth.sessionTokenHeader, response.headers.get(Auth.sessionTokenHeader));
+            localStorage.setItem("login", credentials.login);
+            dispatch(authSuccess(credentials.login));
+        } else {
+            dispatch(authFailure());
+        }
     };
 };
 
@@ -50,69 +45,56 @@ export const signout = () => {
 };
 
 export const fetchProducts = () => {
-    return dispatch => {
-        Products.fetchProducts(localStorage.getItem(Auth.sessionTokenHeader))
-            .then(response => {
-                if (response.status === 200) {
-                    response.json()
-                        .then(products => dispatch({type: FETCH_PRODUCTS, payload: _.mapKeys(products, 'id')}))
-                    // catch @TODO
-                } else {
-                    //@TODO
-                }
-            })
-        // catch @TODO
+    return async dispatch => {
+        const response = await Products.fetchProducts(localStorage.getItem(Auth.sessionTokenHeader));
+        if (response.status === 200) {
+            const products = await response.json();
+            dispatch({type: FETCH_PRODUCTS, payload: _.mapKeys(products, 'id')});
+            // catch @TODO
+        } else {
+            //@TODO
+        }
     }
 };
 
 export const fetchProduct = id => {
-    return dispatch => {
-        Products.fetchProduct(id, localStorage.getItem(Auth.sessionTokenHeader))
-            .then(response => {
-                if (response.status === 200) {
-                    response.json()
-                        .then(product => {
-                            dispatch({type: FETCH_PRODUCT, payload: {[product.id]: product}});
-                            dispatch(fetchCategory(product.categoryId));
-                        })
-                    // catch @TODO
-                } else {
-                    // catch @TODO
-                }
-            })
-        // catch @TODO
+    return async dispatch => {
+        const response = await Products.fetchProduct(id, localStorage.getItem(Auth.sessionTokenHeader));
+
+        if (response.status === 200) {
+            const product = await response.json();
+            dispatch({type: FETCH_PRODUCT, payload: {[product.id]: product}});
+            dispatch(fetchCategory(product.categoryId));
+            // catch @TODO
+        } else {
+            // catch @TODO
+        }
     }
 };
 
 export const fetchCategories = () => {
-    return dispatch => {
-        Categories.fetchCategories(localStorage.getItem(Auth.sessionTokenHeader))
-            .then(response => {
-                if (response.status === 200) {
-                    response.json()
-                        .then(categories => dispatch({type: FETCH_CATEGORIES, payload: _.mapKeys(categories, 'id')}));
-                    // catch @TODO
-                } else {
-                    // catch @TODO
-                }
-            })
-        // catch @TODO
+    return async dispatch => {
+        const response = await Categories.fetchCategories(localStorage.getItem(Auth.sessionTokenHeader));
+        if (response.status === 200) {
+            const categories = await response.json();
+            dispatch({type: FETCH_CATEGORIES, payload: _.mapKeys(categories, 'id')});
+            // catch @TODO
+        } else {
+            // catch @TODO
+        }
     }
 };
 
 export const fetchCategory = id => {
-    return dispatch => {
-        Categories.fetchCategory(id, localStorage.getItem(Auth.sessionTokenHeader))
-            .then(response => {
-                if (response.status === 200) {
-                    response.json()
-                        .then(category => dispatch({type: FETCH_CATEGORY, payload: {[category.id]: category}}));
-                    // catch @TODO
-                } else {
-                    // catch @TODO
-                }
-            })
-        // catch @TODO
+    return async dispatch => {
+        const response = await Categories.fetchCategory(id, localStorage.getItem(Auth.sessionTokenHeader));
+        if (response.status === 200) {
+            const category = await response.json();
+            dispatch({type: FETCH_CATEGORY, payload: {[category.id]: category}});
+            // catch @TODO
+        } else {
+            // catch @TODO
+        }
     }
 };
 

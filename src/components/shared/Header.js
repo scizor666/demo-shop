@@ -7,7 +7,7 @@ const Header = props => {
     if (!props.isAuthenticated) return '';
 
     return <header className="App-header">
-        <Link to='/'><img id="App-logo" src="/images/logo.svg"/></Link>
+        <Link to='/'><img id="App-logo" src="/images/logo.svg" alt="Demo Shop"/></Link>
         <SignOut/>
     </header>
 };

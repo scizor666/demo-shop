@@ -10,7 +10,7 @@ export default class Modal extends React.PureComponent {
         if(this.props.className) this.popup.setAttribute("class", this.props.className);
 
         document.body.appendChild(this.popup);
-        document.querySelector(".App").className += ' ' + 'App-blur';
+        document.querySelector(".App").className += '  App-blur';
         this._render();
     }
 
