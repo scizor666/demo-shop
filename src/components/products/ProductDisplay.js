@@ -20,7 +20,7 @@ class ProductDisplay extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchProduct(this.props.match.params.id)
+        this.props.fetchProduct(this.props.match.params.id);
     }
 
     renderNotAvailable = () => <b> (<span className="ProductDisplay-notAvailable">not available</span>)</b>;
@@ -126,7 +126,6 @@ class ProductDisplay extends Component {
 }
 
 ProductDisplay.defaultProps = {
-    category: "Man / Active Wear",
     editMode: false,
     categories: {
         activeWear: 'Active Wear',
@@ -141,6 +140,11 @@ ProductDisplay.defaultProps = {
     }
 };
 
-const mapStateToProps = ({products}, ownProps) => ({...products[ownProps.match.params.id]});
+const mapStateToProps = ({products, categories}, ownProps) => {
+    const product = products[ownProps.match.params.id];
+    const props = {...product};
+    if (product && categories[product.categoryId]) props['category'] = categories[product.categoryId].name;
+    return props;
+};
 
 export default connect(mapStateToProps, {fetchProduct})(ProductDisplay);

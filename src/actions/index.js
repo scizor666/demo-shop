@@ -1,6 +1,7 @@
 import Auth from '../utils/Auth';
+import Categories from "../utils/Categories";
 import Products from '../utils/Products';
-import {AUTH_SUCCESS, AUTH_FAILURE, UNAUTH, FETCH_PRODUCTS, FETCH_PRODUCT} from './types';
+import {AUTH_SUCCESS, AUTH_FAILURE, UNAUTH, FETCH_PRODUCTS, FETCH_PRODUCT, FETCH_CATEGORY} from './types';
 import _ from 'lodash';
 
 export const authSuccess = (login) => {
@@ -65,7 +66,26 @@ export const fetchProduct = id => {
             .then(response => {
                 if (response.status === 200) {
                     response.json()
-                        .then(product => dispatch({type: FETCH_PRODUCT, payload: product}));
+                        .then(product => {
+                            dispatch({type: FETCH_PRODUCT, payload: {[product.id]: product}});
+                            dispatch(fetchCategory(product.categoryId));
+                        })
+                    // catch @TODO
+                } else {
+                    // catch @TODO
+                }
+            })
+        // catch @TODO
+    }
+};
+
+export const fetchCategory = id => {
+    return dispatch => {
+        Categories.fetchCategory(id, localStorage.getItem(Auth.sessionTokenHeader))
+            .then(response => {
+                if (response.status === 200) {
+                    response.json()
+                        .then(category => dispatch({type: FETCH_CATEGORY, payload: {[category.id]: category}}));
                     // catch @TODO
                 } else {
                     // catch @TODO

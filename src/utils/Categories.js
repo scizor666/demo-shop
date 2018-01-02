@@ -1,9 +1,9 @@
 import ENV from './Env.json';
 
-export default class Products {
+export default class Categories {
 
-    static fetchProducts(token) {
-        return fetch(`${ENV['apiRoot']}/products`, {
+    static fetchCategories(token) {
+        return fetch(`${ENV['apiRoot']}/categories`, {
             method: 'get',
             headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token},
         }).then(response => {
@@ -13,8 +13,8 @@ export default class Products {
         });
     }
 
-    static fetchProduct(id, token) {
-        return fetch(`${ENV['apiRoot']}/products/${id}`, {
+    static fetchCategory(id, token) {
+        return fetch(`${ENV['apiRoot']}/categories/${id}`, {
             method: 'get',
             headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token},
         }).then(response => {
