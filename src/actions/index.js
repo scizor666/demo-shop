@@ -5,7 +5,8 @@ import _ from 'lodash';
 import {
     AUTH_SUCCESS, AUTH_FAILURE, UNAUTH,
     FETCH_PRODUCTS, FETCH_PRODUCT,
-    FETCH_CATEGORIES, FETCH_CATEGORY
+    FETCH_CATEGORIES, FETCH_CATEGORY,
+    CHANGE_FILTER, RESET_FILTER
 } from './types';
 
 export const authSuccess = (login) => {
@@ -114,3 +115,7 @@ export const fetchCategory = id => {
         // catch @TODO
     }
 };
+
+export const changeFilter = (name, value) => ({type: CHANGE_FILTER, payload: {[name]: value}});
+
+export const resetFilter = () => ({type: RESET_FILTER});

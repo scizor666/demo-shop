@@ -7,3 +7,6 @@ export const FETCH_PRODUCT = 'FETCH_PRODUCT';
 
 export const FETCH_CATEGORY = 'FETCH_CATEGORY';
 export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
+
+export const CHANGE_FILTER = 'CHANGE_FILTER';
+export const RESET_FILTER = 'RESET_FILTER';

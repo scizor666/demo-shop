@@ -59,8 +59,8 @@
       border-color: transparent;
     }
 
-    .row:last-child > div {
-      margin-bottom: 0;
+    .row:nth-last-child(2) > div {
+      margin-bottom: 20px;
     }
   }
 
@@ -85,4 +85,13 @@
 .FilterModal-filterName {
   font-size: 12px;
   line-height: 15px;
+}
+
+.FilterModal-buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  .DemoShop-button:last-child {
+    margin-right: 0;
+  }
 }

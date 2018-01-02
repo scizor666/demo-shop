@@ -1,15 +1,19 @@
 import React from 'react';
-import FilterRange from "./FilterRange";
+import FilterRange from './FilterRange';
+import {changeFilter} from '../../actions';
+import {connect} from 'react-redux';
 
 const FilterRating = props =>
     <div className="FilterModal-filter FilterRating-wrapper">
         <span className="FilterModal-filterName">Rating:</span>
-        <FilterRange {...props}/>
+        <FilterRange {...props} handleChange={newRange => props.changeFilter('rating', newRange)}/>
     </div>;
 
 FilterRating.defaultProps = {
     range: {min: 0, max: 5},
-    start: [1, 3],
+    selected: [1, 3],
 };
 
-export default FilterRating;
+const mapStateToProps = ({filter: {rating}}) => ({selected: rating});
+
+export default connect(mapStateToProps, {changeFilter})(FilterRating)

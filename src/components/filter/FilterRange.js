@@ -1,39 +1,24 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {Range} from 'rc-slider';
 
-export default class FilterRange extends Component {
+const FilterRange = props => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            marks: this.rangeToMarks(props.start)
-        };
-    }
-
-    rangeToMarks(marksRange) {
+    const rangeToMarks = marksRange => {
         return marksRange.reduce((map, i) => {
             map[i] = i.toString();
             return map;
         }, {})
-    }
+    };
 
-    handleChange(newRange) {
-        this.setState({marks: this.rangeToMarks(newRange)})
-    }
-
-    render() {
-        return <div className="DemoShop-rangeWrapper">
-            <Range marks={this.state.marks}
-                   min={this.props.range.min}
-                   max={this.props.range.max}
-                   step={this.props.step}
-                   defaultValue={this.props.start}
-                   onChange={e => this.handleChange(e)}
-            />
-        </div>
-    }
-}
-
-FilterRange.defaultProps = {
-    step: 1
+    return <div className="DemoShop-rangeWrapper">
+        <Range marks={rangeToMarks(props.selected)}
+               min={props.range.min}
+               max={props.range.max}
+               step={props.step}
+               value={props.selected}
+               onChange={newRange => props.handleChange(newRange)}
+        />
+    </div>;
 };
+
+export default FilterRange;
