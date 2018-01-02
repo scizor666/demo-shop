@@ -15,7 +15,7 @@ class ProductDisplay extends Component {
         this.state = {
             editModalOpen: false,
             makeUnavailableModalOpen: false,
-            orderModalOpen: false
+            buyModalOpen: false
         }
     }
 
@@ -26,20 +26,20 @@ class ProductDisplay extends Component {
     renderNotAvailable = () => <b> (<span className="ProductDisplay-notAvailable">not available</span>)</b>;
 
     renderBuyButton = () => {
-        return <div>
-            <button className="DemoShop-button" onClick={this.toggleOrderModal}>Buy</button>
-            {this.state.orderModalOpen ?
+        return <React.Fragment>
+            <button className="DemoShop-button" onClick={this.toggleBuyModal}>Buy</button>
+            {this.state.buyModalOpen ?
                 <Modal
                     title="Thank you!"
                     className="ProductDisplay-buyModal">
                     <div className="ProductDisplay-BuyModalText">You successfully purchased this item.</div>
                     <div className="ProductDisplay-buyModalButtonWrapper">
                         <button className="DemoShop-button_big"
-                                onClick={this.toggleOrderModal}>Continue shopping
+                                onClick={this.toggleBuyModal}>Continue shopping
                         </button>
                     </div>
                 </Modal> : ''}
-        </div>;
+        </React.Fragment>;
     };
 
     renderAmountLeft = amount => <span>{` (${amount} left)`}</span>;
@@ -50,7 +50,7 @@ class ProductDisplay extends Component {
 
     toggleEditModal = () => this.toggleModal('editModalOpen');
 
-    toggleOrderModal = () => this.toggleModal('orderModalOpen');
+    toggleBuyModal = () => this.toggleModal('buyModalOpen');
 
 
     handleAddMore = () => alert("add 5 more");
@@ -89,7 +89,7 @@ class ProductDisplay extends Component {
             <div className="ProductDisplay-wrapper">
                 <div className="ProductDisplay-nav">
                     <Link to='/'>Back</Link>
-                    <label>Category: <b>{this.props.category}</b></label>
+                    <label>Category: <b>{this.props.category || 'Loading...'}</b></label>
                 </div>
                 <div className="ProductDisplay-card">
                     <div className="row">
@@ -143,7 +143,9 @@ ProductDisplay.defaultProps = {
 const mapStateToProps = ({products, categories}, ownProps) => {
     const product = products[ownProps.match.params.id];
     const props = {...product};
-    if (product && categories[product.categoryId]) props['category'] = categories[product.categoryId].name;
+    if (product && categories[product.categoryId]) {
+        props['category'] = product.gender + '/' + categories[product.categoryId].name;
+    }
     return props;
 };
 

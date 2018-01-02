@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Range} from 'rc-slider';
-import 'rc-slider/assets/index.css';
 
 export default class FilterRange extends Component {
 
@@ -13,7 +12,7 @@ export default class FilterRange extends Component {
 
     rangeToMarks(marksRange) {
         return marksRange.reduce((map, i) => {
-            map[i] = i;
+            map[i] = i.toString();
             return map;
         }, {})
     }
@@ -23,9 +22,18 @@ export default class FilterRange extends Component {
     }
 
     render() {
-        return <div>
-            <Range marks={this.state.marks} min={this.props.range.min} max={this.props.range.max}
-                   defaultValue={this.props.start} onChange={e => this.handleChange(e)}/>
+        return <div className="DemoShop-rangeWrapper">
+            <Range marks={this.state.marks}
+                   min={this.props.range.min}
+                   max={this.props.range.max}
+                   step={this.props.step}
+                   defaultValue={this.props.start}
+                   onChange={e => this.handleChange(e)}
+            />
         </div>
     }
 }
+
+FilterRange.defaultProps = {
+    step: 1
+};

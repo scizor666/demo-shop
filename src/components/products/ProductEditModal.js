@@ -2,11 +2,14 @@ import React from 'react';
 import Modal from "../shared/Modal";
 import ArrayUtils from "../../utils/ArrayUtils";
 import ConfirmButtons from "../shared/ConfirmButtons";
+import {fetchCategories} from "../../actions";
+import {connect} from "react-redux";
 
-const ProductEditModal = props =>
-        <Modal className="ProductEdit-wrapper"
-            title={`Edit "${props.name}"`}
-            {...props}>
+class ProductEditModal extends React.Component {
+    render() {
+        return <Modal className="ProductEdit-wrapper"
+                      title={`Edit "${this.props.name}"`}
+                      {...this.props}>
             <div className="row">
                 <div className="col col-xs-12 col-sm-6">
                     <div className="ProductEdit-fields">
@@ -18,14 +21,15 @@ const ProductEditModal = props =>
                         <div className="ProductEdit-inputGroup">
                             <label className="ProductEdit-inputLabel">Category:</label>
                             <select className="ProductEdit-select">
-                                {Object.entries(props.categories)
-                                    .map(([key, label]) => <option key={key} value={key}>{label}</option>)}
+                                {Object.entries(this.props.categories)
+                                    .map(([key, category]) =>
+                                        <option key={key} value={category.id}>{category.name}</option>)}
                             </select>
                         </div>
                         <div className="ProductEdit-inputGroup">
                             <label className="ProductEdit-inputLabel">Size:</label>
                             <div className="DemoShop-radioOptionWrapper">
-                                {Object.entries(props.genders)
+                                {Object.entries(this.props.genders)
                                     .map(([key, name]) => <React.Fragment key={key}>
                                         <input id={`ProductEdit-size${key}`}
                                                className="DemoShop-radioInput"
@@ -56,7 +60,7 @@ const ProductEditModal = props =>
                         </div>
                         <div className="ProductEdit-inputGroup">
                             <img className="DemoShop-image"
-                                 src={props.image}/>
+                                 src={this.props.image}/>
                         </div>
                         <div className="ProductEdit-inputGroup">
                             <label className="ProductEdit-inputLabel">Price:</label>
@@ -75,7 +79,11 @@ const ProductEditModal = props =>
                     </div>
                 </div>
             </div>
-            <ConfirmButtons {...props}/>
+            <ConfirmButtons {...this.props}/>
         </Modal>;
+    }
+}
 
-export default ProductEditModal;
+const mapStateToProps = ({categories}) => ({categories: {...categories, '-1': {id: -1, name: 'None'}}});
+
+export default connect(mapStateToProps, {fetchCategories})(ProductEditModal);

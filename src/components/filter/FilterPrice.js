@@ -10,6 +10,7 @@ const FilterPrice = props =>
 FilterPrice.defaultProps = {
     range: {min: 0, max: 1000},
     start: [300, 600],
+    step: 50,
 };
 
 export default FilterPrice;
