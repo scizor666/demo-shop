@@ -6,19 +6,27 @@ import {fetchCategories, fetchProducts, resetFilter, changeFilter} from "../../a
 
 class FilterModal extends React.Component {
 
-    componentDidMount() {
-        this.props.fetchCategories();
-    }
+    componentDidMount = () => this.props.fetchCategories();
 
     handleInputChange = e =>
         this.props.changeFilter(e.target.name, e.target.type === 'checkbox' ? e.target.checked : e.target.value);
 
     handleSubmit = e => {
         e.preventDefault();
-        this.props.fetchProducts();
+        // default values shouldn't be in the store until the filters applied by "Apply" button, so
+        // defaultProps and this call used instead of initial state in the reducer
+        this.ensureFilterStates();
+        this.props.fetchProducts({...this.props, replace: true});
     };
 
-    handleReset = () => this.props.resetFilter();
+    ensureFilterStates = () =>
+        ['gender', 'available', 'category', 'price', 'rating']
+            .forEach(filter => this.props.changeFilter(filter, this.props[filter]));
+
+    handleReset = () => {
+        this.props.resetFilter();
+        this.props.fetchProducts({query: this.props.query});
+    };
 
     renderAvailability = () =>
         <div className="FilterModal-filter">
@@ -54,7 +62,7 @@ class FilterModal extends React.Component {
     renderCategories = () =>
         <div className="FilterModal-filter">
             <span className="FilterModal-filterName">Category:</span>
-            <select name='category' value={this.props.category.id}
+            <select name='category' value={this.props.category}
                     className="FilterModal-categorySelect"
                     onChange={this.handleInputChange}>
                 {Object.entries(this.props.categories)
@@ -62,37 +70,35 @@ class FilterModal extends React.Component {
             </select>
         </div>;
 
-    render() {
-        return <React.Fragment>
-            <div className="FilterModal-arrowUp"/>
-            <form className="container-fluid FilterModal-wrapper">
-                <div className="row">
-                    <div className="col-xs-12 col-sm-4">
-                        {this.renderAvailability()}
-                    </div>
-                    <div className="col-xs-12 col-sm-4">
-                        {this.renderGenders()}
-                    </div>
-                    <div className="col-xs-12 col-sm-4">
-                        {this.renderCategories()}
-                    </div>
+    render = () => <React.Fragment>
+        <div className="FilterModal-arrowUp"/>
+        <form className="container-fluid FilterModal-wrapper">
+            <div className="row">
+                <div className="col-xs-12 col-sm-4">
+                    {this.renderAvailability()}
                 </div>
-                <div className="row">
-                    <div className="col-xs-12 col-sm-4">
-                        <FilterRating/>
-                    </div>
-                    <div className="col-xs-12 col-sm-8">
-                        <FilterPrice/>
-                    </div>
+                <div className="col-xs-12 col-sm-4">
+                    {this.renderGenders()}
                 </div>
-                <div className="row FilterModal-buttons">
-                    <button type="submit" className="DemoShop-button" onClick={this.handleSubmit}>Apply</button>
-                    <button type="button" className="DemoShop-button_secondary" onClick={this.handleReset}>Cancel
-                    </button>
+                <div className="col-xs-12 col-sm-4">
+                    {this.renderCategories()}
                 </div>
-            </form>
-        </React.Fragment>;
-    }
+            </div>
+            <div className="row">
+                <div className="col-xs-12 col-sm-4">
+                    <FilterRating selected={this.props.rating}/>
+                </div>
+                <div className="col-xs-12 col-sm-8">
+                    <FilterPrice selected={this.props.price}/>
+                </div>
+            </div>
+            <div className="row FilterModal-buttons">
+                <button type="submit" className="DemoShop-button" onClick={this.handleSubmit}>Apply</button>
+                <button type="button" className="DemoShop-button_secondary" onClick={this.handleReset}>Clear
+                </button>
+            </div>
+        </form>
+    </React.Fragment>;
 }
 
 FilterModal.defaultProps = {
@@ -103,13 +109,19 @@ FilterModal.defaultProps = {
     },
     gender: 'Unisex',
     available: false,
-    category: {id: -1, name: 'None'}
+    category: -1,
+    price: [300, 600],
+    rating: [3, 5]
 };
 
-const mapStateToProps = ({categories, filter}) => {
+const mapStateToProps = ({categories, filter, query}) => {
     return {
-        categories: {...categories, [FilterModal.defaultProps.category.id]: FilterModal.defaultProps.category},
-        ...filter
+        categories: {
+            ...categories,
+            [FilterModal.defaultProps.category]: {id: FilterModal.defaultProps.category, name: 'None'}
+        },
+        ...filter,
+        query
     }
 };
 

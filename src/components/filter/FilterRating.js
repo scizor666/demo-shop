@@ -11,9 +11,6 @@ const FilterRating = props =>
 
 FilterRating.defaultProps = {
     range: {min: 0, max: 5},
-    selected: [1, 3],
 };
 
-const mapStateToProps = ({filter: {rating}}) => ({selected: rating});
-
-export default connect(mapStateToProps, {changeFilter})(FilterRating)
+export default connect(null, {changeFilter})(FilterRating)

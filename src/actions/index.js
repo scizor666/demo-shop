@@ -6,7 +6,7 @@ import {
     AUTH_SUCCESS, AUTH_FAILURE, UNAUTH,
     FETCH_PRODUCTS, FETCH_PRODUCT, FETCH_PRODUCTS_WITH_REPLACEMENT,
     FETCH_CATEGORIES, FETCH_CATEGORY,
-    CHANGE_FILTER, RESET_FILTER
+    CHANGE_FILTER, RESET_FILTER, CHANGE_SEARCH_TEXT
 } from './types';
 
 export const authSuccess = login => {
@@ -102,3 +102,5 @@ export const fetchCategory = id => {
 export const changeFilter = (name, value) => ({type: CHANGE_FILTER, payload: {[name]: value}});
 
 export const resetFilter = () => ({type: RESET_FILTER});
+
+export const changeSearchText = (query) => ({type: CHANGE_SEARCH_TEXT, payload: query});

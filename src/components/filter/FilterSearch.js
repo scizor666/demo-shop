@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchProducts, changeFilter} from "../../actions";
+import {fetchProducts, changeSearchText} from "../../actions";
 import _ from 'lodash';
 
 class FilterSearch extends React.Component {
@@ -11,27 +11,23 @@ class FilterSearch extends React.Component {
     }
 
     handleUserInput = e => {
-        this.props.changeFilter(e.target.name, e.target.value);
-        this.fetchProducts({[e.target.name]: e.target.value, replace: true});
+        this.props.changeSearchText(e.target.value);
+        this.fetchProducts({...this.props.filter, query: e.target.value, replace: true});
     };
 
-    render() {
-        return <div className="FilterSearch-fieldGroup">
-            <input className="FilterSearch-field"
-                   name="query"
-                   placeholder={this.props.placeHolder}
-                   onChange={this.handleUserInput}
-                   value={this.props.query}
-            />
-        </div>;
-    }
+    render = () => <div className="FilterSearch-fieldGroup">
+        <input className="FilterSearch-field"
+               placeholder={this.props.placeHolder}
+               onChange={this.handleUserInput}
+               value={this.props.query}
+        />
+    </div>;
 }
 
 FilterSearch.defaultProps = {
     placeHolder: 'Filter by text...',
-    query: ''
 };
 
-const mapStateToProps = ({filter: {query}}) => ({query});
+const mapStateToProps = ({filter, query}) => ({filter, query});
 
-export default connect(mapStateToProps, {fetchProducts, changeFilter})(FilterSearch);
+export default connect(mapStateToProps, {fetchProducts, changeSearchText})(FilterSearch);

@@ -11,10 +11,7 @@ const FilterPrice = props =>
 
 FilterPrice.defaultProps = {
     range: {min: 0, max: 1000},
-    selected: [300, 600],
     step: 50,
 };
 
-const mapStateToProps = ({filter: {price}}) => ({selected: price});
-
-export default connect(mapStateToProps, {changeFilter})(FilterPrice);
+export default connect(null, {changeFilter})(FilterPrice);
