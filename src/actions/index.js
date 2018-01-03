@@ -4,7 +4,7 @@ import Products from '../utils/Products';
 import _ from 'lodash';
 import {
     AUTH_SUCCESS, AUTH_FAILURE, UNAUTH,
-    FETCH_PRODUCTS, FETCH_PRODUCT,
+    FETCH_PRODUCTS, FETCH_PRODUCT, FETCH_PRODUCTS_WITH_REPLACEMENT,
     FETCH_CATEGORIES, FETCH_CATEGORY,
     CHANGE_FILTER, RESET_FILTER
 } from './types';
@@ -44,12 +44,13 @@ export const signout = () => {
     }
 };
 
-export const fetchProducts = () => {
+export const fetchProducts = (props = {replace: false}) => {
     return async dispatch => {
-        const response = await Products.fetchProducts(localStorage.getItem(Auth.sessionTokenHeader));
+        const response = await Products.fetchProducts(localStorage.getItem(Auth.sessionTokenHeader), props);
         if (response.status === 200) {
             const products = await response.json();
-            dispatch({type: FETCH_PRODUCTS, payload: _.mapKeys(products, 'id')});
+            const type = props.replace ? FETCH_PRODUCTS_WITH_REPLACEMENT : FETCH_PRODUCTS;
+            dispatch({type, payload: _.mapKeys(products, 'id')});
             // catch @TODO
         } else {
             //@TODO

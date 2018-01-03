@@ -8,7 +8,7 @@ import _ from 'lodash';
 class ProductList extends React.Component {
 
     componentDidMount() {
-        this.props.fetchProducts();
+        this.props.fetchProducts({query: this.props.filter.query});
     }
 
     renderProducts = products => _.map(products, (product, i) =>
@@ -31,6 +31,6 @@ class ProductList extends React.Component {
     }
 }
 
-const mapStateToProps = ({products}) => ({products});
+const mapStateToProps = ({products, filter}) => ({products, filter});
 
 export default connect(mapStateToProps, {fetchProducts})(ProductList);
