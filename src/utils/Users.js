@@ -21,7 +21,7 @@ export default class Users {
     static signout(token, login) {
         fetch(`${ENV["apiRoot"]}/logout`, {
             method: 'post',
-            headers: {...[ENV['defaultHeaders']], [this.sessionTokenHeader]: token},
+            headers: {...ENV['defaultHeaders'], [this.sessionTokenHeader]: token},
             body: JSON.stringify({login})
         }).then(response => {
             if (response.status === 200) console.log("signed out")
@@ -31,7 +31,7 @@ export default class Users {
     static userInfo(token, login) {
         return fetch(`${ENV['apiRoot']}/users?login=${login}`, {
             method: 'get',
-            headers: {...[ENV['defaultHeaders']], [this.sessionTokenHeader]: token},
+            headers: {...ENV['defaultHeaders'], [this.sessionTokenHeader]: token},
         })
             .then(response => response)
             .catch(err => err);
@@ -40,7 +40,7 @@ export default class Users {
     static role(token, id) {
         return fetch(`${ENV['apiRoot']}/roles?id=${id}`, {
             method: 'get',
-            headers: {...[ENV['defaultHeaders']], [this.sessionTokenHeader]: token},
+            headers: {...ENV['defaultHeaders'], [this.sessionTokenHeader]: token},
         })
             .then(response => response)
             .catch(err => err);
