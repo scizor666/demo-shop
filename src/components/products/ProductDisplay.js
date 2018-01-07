@@ -7,6 +7,7 @@ import ProductEditModal from './ProductEditModal'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProduct} from "../../actions";
+import Users from '../../utils/Users';
 
 class ProductDisplay extends Component {
 
@@ -140,9 +141,9 @@ ProductDisplay.defaultProps = {
     }
 };
 
-const mapStateToProps = ({products, categories}, ownProps) => {
+const mapStateToProps = ({products, categories, role}, ownProps) => {
     const product = products[ownProps.match.params.id];
-    const props = {...product};
+    const props = {...product, editMode: role === Users.ADMIN};
     if (product && categories[product.categoryId]) {
         props['category'] = product.gender + '/' + categories[product.categoryId].name;
     }

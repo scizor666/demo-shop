@@ -11,18 +11,15 @@ import {applyMiddleware, createStore} from 'redux';
 import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import requireLogin from './components/login/RequireLogin';
-import Auth from "./utils/Auth";
-import {AUTH_SUCCESS} from "./actions/types";
+import Auth from "./utils/Users";
+import {AUTH_SUCCESS, SET_ROLE} from "./actions/types";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 const token = localStorage.getItem(Auth.sessionTokenHeader);
 if (token) {
-    store.dispatch({
-            type: AUTH_SUCCESS,
-            payload: localStorage.getItem("login")
-        }
-    );
+    store.dispatch({type: AUTH_SUCCESS, payload: localStorage.getItem("login")});
+    store.dispatch({type: SET_ROLE, payload: localStorage.getItem("role")});
 }
 
 const App = () =>

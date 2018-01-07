@@ -12,3 +12,5 @@ export const FETCH_CATEGORIES = 'FETCH_CATEGORIES';
 export const CHANGE_FILTER = 'CHANGE_FILTER';
 export const RESET_FILTER = 'RESET_FILTER';
 export const CHANGE_SEARCH_TEXT = 'CHANGE_SEARCH_TEXT';
+
+export const SET_ROLE = 'SET_ROLE';

@@ -4,13 +4,15 @@ import ProductsReducer from './ProductsReducer';
 import CategoriesReducer from "./CategoriesReducer";
 import FilterReducer from "./FilterReducer"
 import SearchTextReducer from "./SearchTextReducer";
+import RoleReducer from './RoleReducer';
 
 const rootReducer = combineReducers({
     auth: AuthReducer,
     products: ProductsReducer,
     categories: CategoriesReducer,
     filter: FilterReducer,
-    query: SearchTextReducer
+    query: SearchTextReducer,
+    role: RoleReducer
 });
 
 export default rootReducer;
