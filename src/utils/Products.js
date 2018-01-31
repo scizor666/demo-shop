@@ -46,6 +46,14 @@ export default class Products {
         });
     }
 
+    static createProduct(token, payload) {
+        return fetch(`${ENV['apiRoot']}/products`, {
+            method: 'post',
+            headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token},
+            body: JSON.stringify(payload)
+        });
+    }
+
     static updateProduct(id, token, payload) {
         return fetch(`${ENV['apiRoot']}/products/${id}`, {
             method: 'put',

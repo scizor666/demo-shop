@@ -25,7 +25,11 @@
 .ProductList-actions {
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
+  justify-content: flex-end;
   margin-bottom: 5px;
   flex-wrap: wrap;
+
+  & .DemoShop-button {
+    margin-right: 10px;
+  }
 }

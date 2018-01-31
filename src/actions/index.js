@@ -6,7 +6,7 @@ import {
     AUTH_SUCCESS, AUTH_FAILURE, UNAUTH, SET_ROLE,
     FETCH_PRODUCTS, FETCH_PRODUCT, FETCH_PRODUCTS_WITH_REPLACEMENT,
     FETCH_CATEGORIES, FETCH_CATEGORY,
-    CHANGE_FILTER, RESET_FILTER, CHANGE_SEARCH_TEXT, UPDATE_PRODUCT, DELETE_PRODUCT
+    CHANGE_FILTER, RESET_FILTER, CHANGE_SEARCH_TEXT, UPDATE_PRODUCT, DELETE_PRODUCT, PUT_PRODUCT
 } from './types';
 
 export const authSuccess = login => {
@@ -94,6 +94,24 @@ export const fetchProduct = id => {
             dispatch(fetchCategory(product.categoryId));
         } else {
             console.log(response);
+        }
+    }
+};
+
+export const createProduct = (payload, successCallback, errorCallback) => {
+    return async dispatch => {
+        try {
+            const response = await Products.createProduct(localStorage.getItem(Users.sessionTokenHeader), payload);
+
+            if (response.status === 201) {
+                const product = await response.json();
+                dispatch({type: PUT_PRODUCT, payload: {[product.id]: product}});
+                successCallback(product.id);
+            } else {
+                errorCallback(response);
+            }
+        } catch (error) {
+            errorCallback(error);
         }
     }
 };

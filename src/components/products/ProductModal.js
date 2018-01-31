@@ -8,8 +8,8 @@ class ProductModal extends React.Component {
 
     constructor(props) {
         super(props);
-        const {name, image, rating, gender, description, categoryId, cost, count, soldCount} = props;
-        this.state = {name, image, rating, gender, description, categoryId, cost, count, soldCount};
+        const {id, name, image, rating, gender, description, categoryId, cost, count, soldCount} = props;
+        this.state = {id, name, image, rating, gender, description, categoryId, cost, count, soldCount};
     }
 
     componentDidMount = () => this.props.fetchCategories();
@@ -19,14 +19,13 @@ class ProductModal extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
-        const errorCallback = e => console.log("render error message to the form instead", e);
-        this.props.updateProduct(this.props.id, this.state, this.props.cancelAction, errorCallback);
+        this.props.submitAction(this.state)
     };
 
 
     render() {
         return <Modal className="ProductModal-wrapper"
-                      title={`Edit "${this.props.name}"`}
+                      title={this.props.name ? `Edit "${this.props.name}"` : this.props.addNewTitle}
                       {...this.props}>
             <ProductForm
                 handleInputChange={this.handleInputChange}
@@ -38,6 +37,31 @@ class ProductModal extends React.Component {
         </Modal>;
     }
 }
+
+ProductModal.defaultProps = {
+    categories: {
+        activeWear: 'Active Wear',
+        dresses: 'Dresses',
+        jeans: 'Jeans',
+        coats: 'Coats'
+    },
+    genders: {
+        man: 'Man',
+        woman: 'Woman',
+        unisex: 'Unisex'
+    },
+    addNewTitle: 'Add Product',
+    id: null,
+    name: '',
+    image: '',
+    rating: 1,
+    gender: 'Unisex',
+    description: '',
+    categoryId: 1,
+    cost: 1.00,
+    count: 1,
+    soldCount: 0
+};
 
 const mapStateToProps = ({categories}) => ({categories: {...categories, '-1': {id: -1, name: 'None'}}});
 

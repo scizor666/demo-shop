@@ -14,7 +14,7 @@ class ProductDisplay extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            editModalOpen: false,
+            productModalOpen: false,
             deleteModalOpen: false,
             buyModalOpen: false
         };
@@ -29,7 +29,7 @@ class ProductDisplay extends Component {
     renderBuyButton = () => {
         return <React.Fragment>
             <button className="DemoShop-button" onClick={this.toggleBuyModal}>Buy</button>
-            {this.state.buyModalOpen ?
+            {this.state.buyModalOpen &&
                 <Modal
                     title="Thank you!"
                     className="ProductDisplay-buyModal">
@@ -39,7 +39,7 @@ class ProductDisplay extends Component {
                                 onClick={this.toggleBuyModal}>Continue shopping
                         </button>
                     </div>
-                </Modal> : ''}
+                </Modal>}
         </React.Fragment>;
     };
 
@@ -49,7 +49,7 @@ class ProductDisplay extends Component {
 
     toggleDeleteModal = () => this.toggleModal('deleteModalOpen');
 
-    toggleEditModal = () => this.toggleModal('editModalOpen');
+    toggleEditModal = () => this.toggleModal('productModalOpen');
 
     toggleBuyModal = () => this.toggleModal('buyModalOpen');
 
@@ -75,18 +75,21 @@ class ProductDisplay extends Component {
             this.props.deleteProduct(this.props.id, () => this.props.history.push('/'), err => console.log(err))
         };
 
+        const handleEditProduct = product => {
+            const errorCallback = e => console.log("render error message to the form instead", e);
+            this.props.updateProduct(product.id, product, this.toggleEditModal, errorCallback);
+        };
+
         return <div className="ProductDisplay-adminActions">
             You can <a className="DemoShop-link" href="javascript:void(0);" onClick={this.handleAddMore}>add 5 more</a>.
             You can also <a className="DemoShop-link" href="javascript:void(0);" onClick={this.toggleEditModal}>edit
             details</a> or <a className="DemoShop-link"
                               href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
 
-            {this.state.editModalOpen ?
-                <ProductModal
-                    cancelAction={this.toggleEditModal}
-                    {...this.props}/> : ''}
+            {this.state.productModalOpen &&
+            <ProductModal cancelAction={this.toggleEditModal} submitAction={handleEditProduct} {...this.props}/>}
 
-            {this.state.deleteModalOpen ?
+            {this.state.deleteModalOpen &&
                 <ConfirmModal
                     title="Are you sure?"
                     cancelAction={this.toggleDeleteModal}
@@ -95,7 +98,7 @@ class ProductDisplay extends Component {
                         <span>You are trying to delete this product.</span><br/>
                         <span>Are you sure you want this?</span>
                     </div>
-                </ConfirmModal> : ''}
+                </ConfirmModal>}
         </div>;
     };
 
@@ -124,15 +127,15 @@ class ProductDisplay extends Component {
                             <div className="ProductDisplay-details">
                                 <div className="ProductDisplay-description">
                                     {this.props.description}
-                                    {this.props.editMode ? this.renderAdminActions() : ""}
+                                    {this.props.editMode && this.renderAdminActions()}
                                 </div>
                                 <div className="ProductDisplay-buy">
                                     <div>
                                         <ProductPrice value={this.props.cost}/>
-                                        {this.isAvailable() ? "" : this.renderNotAvailable()}
-                                        {this.isAvailable() && this.props.editMode ? this.renderAmountLeft(this.props.count) : ""}
+                                        {!this.isAvailable() && this.renderNotAvailable()}
+                                        {this.isAvailable() && this.props.editMode && this.renderAmountLeft(this.props.count)}
                                     </div>
-                                    {this.isAvailable() ? this.renderBuyButton() : ""}
+                                    {this.isAvailable() && this.renderBuyButton()}
                                 </div>
                             </div>
                         </div>
@@ -144,18 +147,7 @@ class ProductDisplay extends Component {
 }
 
 ProductDisplay.defaultProps = {
-    editMode: false,
-    categories: {
-        activeWear: 'Active Wear',
-        dresses: 'Dresses',
-        jeans: 'Jeans',
-        coats: 'Coats'
-    },
-    genders: {
-        man: 'Man',
-        woman: 'Woman',
-        unisex: 'Unisex'
-    }
+    editMode: false
 };
 
 const mapStateToProps = ({products, categories, role}, ownProps) => {
