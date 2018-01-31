@@ -21,8 +21,10 @@ class ProductList extends React.Component {
         return <React.Fragment>
             <div className="App-shadow"/>
             <div className="ProductList-wrapper">
-
-                <Filter/>
+                <div className="ProductList-actions">
+                    <button className="DemoShop-button">Add Product</button>
+                    <Filter/>
+                </div>
                 <div className="container-fluid">
                     <div className="row">{this.renderProducts(this.props.products)}</div>
                 </div>

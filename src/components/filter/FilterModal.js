@@ -72,7 +72,7 @@ class FilterModal extends React.Component {
 
     render = () => <React.Fragment>
         <div className="FilterModal-arrowUp"/>
-        <form className="container-fluid FilterModal-wrapper">
+        <form className="container-fluid FilterModal-wrapper" onSubmit={this.handleSubmit}>
             <div className="row">
                 <div className="col-xs-12 col-sm-4">
                     {this.renderAvailability()}
@@ -93,7 +93,7 @@ class FilterModal extends React.Component {
                 </div>
             </div>
             <div className="row FilterModal-buttons">
-                <button type="submit" className="DemoShop-button" onClick={this.handleSubmit}>Apply</button>
+                <button type="submit" className="DemoShop-button">Apply</button>
                 <button type="button" className="DemoShop-button_secondary" onClick={this.handleReset}>Clear
                 </button>
             </div>

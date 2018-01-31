@@ -11,10 +11,6 @@ export default class Users {
             method: 'post',
             headers: ENV['defaultHeaders'],
             body: JSON.stringify(credentials)
-        }).then(response => {
-            return response
-        }).catch(err => {
-            return err;
         });
     }
 
@@ -32,17 +28,13 @@ export default class Users {
         return fetch(`${ENV['apiRoot']}/users?login=${login}`, {
             method: 'get',
             headers: {...ENV['defaultHeaders'], [this.sessionTokenHeader]: token},
-        })
-            .then(response => response)
-            .catch(err => err);
+        });
     }
 
     static role(token, id) {
         return fetch(`${ENV['apiRoot']}/roles?id=${id}`, {
             method: 'get',
             headers: {...ENV['defaultHeaders'], [this.sessionTokenHeader]: token},
-        })
-            .then(response => response)
-            .catch(err => err);
+        });
     }
 };

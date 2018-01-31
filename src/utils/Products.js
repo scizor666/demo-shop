@@ -2,7 +2,16 @@ import ENV from './Env.json';
 
 export default class Products {
 
-    static fetchProducts(token, {query = '', gender = '', available = false, category = null, price = null, rating= null}) {
+    static fetchProducts(token, {
+        query = '',
+        gender = '',
+        available = false,
+        category = null,
+        price = null,
+        rating = null,
+        page = 1,
+        limit = 6
+    }) {
         let url = `${ENV['apiRoot']}/products?`;
         if (query) url += `q=${query}`;
         if (gender) url += `&gender=${gender}`;
@@ -25,25 +34,30 @@ export default class Products {
 
             }
         }
+        // url += `&_page=${page}&_limit=${limit}`;
         return fetch(url, {
-            method: 'get',
-            headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token
-            },
-        }).then(response => {
-            return response
-        }).catch(err => {
-            return err;
+            headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token}
         });
     }
 
     static fetchProduct(id, token) {
         return fetch(`${ENV['apiRoot']}/products/${id}`, {
-            method: 'get',
+            headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token}
+        });
+    }
+
+    static updateProduct(id, token, payload) {
+        return fetch(`${ENV['apiRoot']}/products/${id}`, {
+            method: 'put',
             headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token},
-        }).then(response => {
-            return response
-        }).catch(err => {
-            return err;
-        })
+            body: JSON.stringify(payload)
+        });
+    }
+
+    static deleteProduct(id, token) {
+        return fetch(`${ENV['apiRoot']}/products/${id}`, {
+            method: 'delete',
+            headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token},
+        });
     }
 }

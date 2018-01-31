@@ -1,12 +1,12 @@
 import React from "react";
 
-const ConfirmButtons = (props) => <div className="ConfirmButtons-wrapper">
+const ConfirmButtons = props => <div className="ConfirmButtons-wrapper">
     <button className="DemoShop-button_bigSecondary"
             onClick={props.cancelAction}>
         {props.cancelLabel}
     </button>
-    <button className="DemoShop-button_big"
-            onClick={props.confirmAction}>
+    <button type="submit"
+            className="DemoShop-button_big">
         {props.confirmLabel}
     </button>
 </div>;

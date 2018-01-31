@@ -1,4 +1,8 @@
-import {FETCH_PRODUCT, FETCH_PRODUCTS, FETCH_PRODUCTS_WITH_REPLACEMENT} from '../actions/types';
+import {
+    UPDATE_PRODUCT, DELETE_PRODUCT, FETCH_PRODUCT, FETCH_PRODUCTS,
+    FETCH_PRODUCTS_WITH_REPLACEMENT
+} from '../actions/types';
+import _ from 'lodash';
 
 export default (state = {}, action) => {
     switch (action.type) {
@@ -8,6 +12,10 @@ export default (state = {}, action) => {
             return action.payload;
         case FETCH_PRODUCT:
             return {...state, ...action.payload};
+        case UPDATE_PRODUCT:
+            return {...state, ...action.payload};
+        case DELETE_PRODUCT:
+            return _.omit(state, action.payload);
         default:
             return state;
     }

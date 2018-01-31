@@ -3,10 +3,10 @@ import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
 import Modal from "../shared/Modal";
 import ConfirmModal from "../shared/ConfirmModal";
-import ProductEditModal from './ProductEditModal'
+import ProductModal from './ProductModal'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchProduct} from "../../actions";
+import {fetchProduct, deleteProduct, updateProduct} from "../../actions";
 import Users from '../../utils/Users';
 
 class ProductDisplay extends Component {
@@ -15,9 +15,9 @@ class ProductDisplay extends Component {
         super(props);
         this.state = {
             editModalOpen: false,
-            makeUnavailableModalOpen: false,
+            deleteModalOpen: false,
             buyModalOpen: false
-        }
+        };
     }
 
     componentDidMount() {
@@ -47,16 +47,34 @@ class ProductDisplay extends Component {
 
     toggleModal = name => this.setState({[name]: !this.state[name]});
 
-    toggleDeleteModal = () => this.toggleModal('makeUnavailableModalOpen');
+    toggleDeleteModal = () => this.toggleModal('deleteModalOpen');
 
     toggleEditModal = () => this.toggleModal('editModalOpen');
 
     toggleBuyModal = () => this.toggleModal('buyModalOpen');
 
 
-    handleAddMore = () => alert("add 5 more");
+    handleAddMore = () => {
+        const {name, image, rating, gender, description, categoryId, cost, count, soldCount} = this.props;
+        this.props.updateProduct(this.props.id, {
+            name,
+            image,
+            rating,
+            gender,
+            description,
+            categoryId,
+            cost,
+            soldCount,
+            count: count + 5
+        }, null, error => console.log(error));
+    };
 
     renderAdminActions = () => {
+        const confirmDelete = e => {
+            e.preventDefault();
+            this.props.deleteProduct(this.props.id, () => this.props.history.push('/'), err => console.log(err))
+        };
+
         return <div className="ProductDisplay-adminActions">
             You can <a className="DemoShop-link" href="javascript:void(0);" onClick={this.handleAddMore}>add 5 more</a>.
             You can also <a className="DemoShop-link" href="javascript:void(0);" onClick={this.toggleEditModal}>edit
@@ -64,16 +82,15 @@ class ProductDisplay extends Component {
                               href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
 
             {this.state.editModalOpen ?
-                <ProductEditModal
+                <ProductModal
                     cancelAction={this.toggleEditModal}
-                    confirmAction={this.toggleEditModal}
                     {...this.props}/> : ''}
 
-            {this.state.makeUnavailableModalOpen ?
+            {this.state.deleteModalOpen ?
                 <ConfirmModal
                     title="Are you sure?"
                     cancelAction={this.toggleDeleteModal}
-                    confirmAction={this.toggleDeleteModal}>
+                    confirmAction={confirmDelete}>
                     <div className="ProductDisplay-DeleteModalText">
                         <span>You are trying to delete this product.</span><br/>
                         <span>Are you sure you want this?</span>
@@ -150,4 +167,4 @@ const mapStateToProps = ({products, categories, role}, ownProps) => {
     return props;
 };
 
-export default connect(mapStateToProps, {fetchProduct})(ProductDisplay);
+export default connect(mapStateToProps, {fetchProduct, deleteProduct, updateProduct})(ProductDisplay);

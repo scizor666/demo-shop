@@ -6,7 +6,7 @@ import {
     AUTH_SUCCESS, AUTH_FAILURE, UNAUTH, SET_ROLE,
     FETCH_PRODUCTS, FETCH_PRODUCT, FETCH_PRODUCTS_WITH_REPLACEMENT,
     FETCH_CATEGORIES, FETCH_CATEGORY,
-    CHANGE_FILTER, RESET_FILTER, CHANGE_SEARCH_TEXT
+    CHANGE_FILTER, RESET_FILTER, CHANGE_SEARCH_TEXT, UPDATE_PRODUCT, DELETE_PRODUCT
 } from './types';
 
 export const authSuccess = login => {
@@ -25,15 +25,20 @@ export const authFailure = () => {
 
 export const login = credentials => {
     return async dispatch => {
-        const response = await Users.authenticate(credentials);
-        if (response.status === 200) {
-            localStorage.setItem(Users.sessionTokenHeader, response.headers.get(Users.sessionTokenHeader));
-            localStorage.setItem("login", credentials.login);
-            dispatch(authSuccess(credentials.login));
-            dispatch(fetchRole(credentials.login))
-        } else {
-            dispatch(authFailure());
+        try {
+            const response = await Users.authenticate(credentials);
+            if (response.status === 200) {
+                localStorage.setItem(Users.sessionTokenHeader, response.headers.get(Users.sessionTokenHeader));
+                localStorage.setItem("login", credentials.login);
+                dispatch(authSuccess(credentials.login));
+                dispatch(fetchRole(credentials.login))
+            } else {
+                dispatch(authFailure());
+            }
+        } catch (error) {
+            dispatch(authFailure())
         }
+
     };
 };
 
@@ -48,8 +53,12 @@ export const fetchRole = login => {
                     const roles = await response.json();
                     dispatch({type: SET_ROLE, payload: roles[0].name});
                     localStorage.setItem("role", roles[0].name);
+                } else {
+                    console.log(response);
                 }
             });
+        } else {
+            console.log(response);
         }
     };
 };
@@ -69,9 +78,8 @@ export const fetchProducts = (props = {replace: false}) => {
             const products = await response.json();
             const type = props.replace ? FETCH_PRODUCTS_WITH_REPLACEMENT : FETCH_PRODUCTS;
             dispatch({type, payload: _.mapKeys(products, 'id')});
-            // catch @TODO
         } else {
-            //@TODO
+            console.log(response);
         }
     }
 };
@@ -84,10 +92,45 @@ export const fetchProduct = id => {
             const product = await response.json();
             dispatch({type: FETCH_PRODUCT, payload: {[product.id]: product}});
             dispatch(fetchCategory(product.categoryId));
-            // catch @TODO
         } else {
-            // catch @TODO
+            console.log(response);
         }
+    }
+};
+
+export const deleteProduct = (id, successCallback, errorCallback) => {
+    return async dispatch => {
+        try {
+            const response = await Products.deleteProduct(id, localStorage.getItem(Users.sessionTokenHeader));
+
+            if (response.status === 200) {
+                successCallback();
+                dispatch({type: DELETE_PRODUCT, payload: id});
+            } else {
+                errorCallback(response)
+            }
+        } catch (error) {
+            errorCallback(error)
+        }
+    }
+};
+
+export const updateProduct = (id, productData, successCallback, errorCallback) => {
+    return async dispatch => {
+        try {
+            const response = await Products.updateProduct(id, localStorage.getItem(Users.sessionTokenHeader), productData);
+
+            if (response.status === 200) {
+                if (successCallback) successCallback();
+                const product = await response.json();
+                dispatch({type: UPDATE_PRODUCT, payload: {[product.id]: product}})
+            } else {
+                errorCallback(response);
+            }
+        } catch (error) {
+            errorCallback(error);
+        }
+
     }
 };
 
@@ -97,9 +140,8 @@ export const fetchCategories = () => {
         if (response.status === 200) {
             const categories = await response.json();
             dispatch({type: FETCH_CATEGORIES, payload: _.mapKeys(categories, 'id')});
-            // catch @TODO
         } else {
-            // catch @TODO
+            console.log(response);
         }
     }
 };
@@ -110,9 +152,8 @@ export const fetchCategory = id => {
         if (response.status === 200) {
             const category = await response.json();
             dispatch({type: FETCH_CATEGORY, payload: {[category.id]: category}});
-            // catch @TODO
         } else {
-            // catch @TODO
+            console.log(response);
         }
     }
 };

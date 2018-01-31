@@ -1,0 +1,25 @@
+.ProductForm-field {
+  @extend .DemoShop-field;
+  width: 100%;
+}
+
+.ProductForm-select {
+  @extend .DemoShop-select;
+  line-height: 29px;
+  width: 100%;
+}
+
+.ProductForm-inputLabel {
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.ProductForm-inputGroup {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.ProductForm-descriptionWrapper {
+  @extend .ProductForm-inputGroup;
+  height: 160px;
+}

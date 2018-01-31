@@ -21,3 +21,11 @@
 .ProductList-item {
   margin-bottom: 30px;
 }
+
+.ProductList-actions {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+}
