@@ -6,6 +6,7 @@ const ConfirmButtons = props => <div className="ConfirmButtons-wrapper">
         {props.cancelLabel}
     </button>
     <button type="submit"
+            disabled={props.submitDisabled}
             className="DemoShop-button_big">
         {props.confirmLabel}
     </button>
@@ -13,7 +14,8 @@ const ConfirmButtons = props => <div className="ConfirmButtons-wrapper">
 
 ConfirmButtons.defaultProps = {
     confirmLabel: "Confirm",
-    cancelLabel: "Cancel"
+    cancelLabel: "Cancel",
+    submitDisabled: false
 };
 
 export default ConfirmButtons;

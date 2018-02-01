@@ -2,8 +2,13 @@ import React from 'react';
 import ArrayUtils from "../../utils/ArrayUtils";
 import ConfirmButtons from "../shared/ConfirmButtons";
 
-const ProductForm = props =>
-    <form onSubmit={props.handleSubmit}>
+const ProductForm = props => {
+
+    const isFormValid = () => props.name && props.rating && props.description &&
+        props.gender && props.image && props.cost >= 1 && props.categoryId > 0 &&
+        !document.querySelector('input:invalid');
+
+    return <form onSubmit={props.handleSubmit}>
         <div className="row">
             <div className="col col-xs-12 col-sm-6">
                 <div className="ProductForm-fields">
@@ -93,7 +98,8 @@ const ProductForm = props =>
                 </div>
             </div>
         </div>
-        <ConfirmButtons cancelAction={props.cancelAction}/>
-    </form>;
+        <ConfirmButtons cancelAction={props.cancelAction} submitDisabled={!isFormValid()}/>
+    </form>
+};
 
 export default ProductForm;
