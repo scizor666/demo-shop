@@ -65,17 +65,17 @@ class ProductDisplay extends Component {
             cost,
             soldCount,
             count: count + 5
-        }, null, error => console.log(error));
+        }, null, this.toErrorPage);
     };
 
     renderAdminActions = () => {
         const confirmDelete = e => {
             e.preventDefault();
-            this.props.deleteProduct(this.props.id, () => this.props.history.push('/'), err => console.log(err))
+            this.props.deleteProduct(this.props.id, () => this.props.history.push('/'), this.toErrorPage)
         };
 
         const handleEditProduct = product => {
-            this.props.updateProduct(product.id, product, this.toggleProductModal, () => this.props.history.push('/500'));
+            this.props.updateProduct(product.id, product, this.toggleProductModal, this.toErrorPage);
         };
 
         return <div className="ProductDisplay-adminActions">
@@ -99,6 +99,8 @@ class ProductDisplay extends Component {
             </ConfirmModal>}
         </div>;
     };
+
+    toErrorPage = () => this.props.history.push('/500');
 
     isAvailable = () => this.props.count > 0;
 
