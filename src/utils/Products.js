@@ -34,7 +34,7 @@ export default class Products {
 
             }
         }
-        // url += `&_page=${page}&_limit=${limit}`;
+        url += `&_page=${page}&_limit=${limit}`;
         return fetch(url, {
             headers: {...ENV['defaultHeaders'], [ENV['sessionTokenHeader']]: token}
         });

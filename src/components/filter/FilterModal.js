@@ -2,7 +2,7 @@ import React from 'react';
 import FilterRating from "./FilterRating";
 import FilterPrice from "./FilterPrice";
 import {connect} from 'react-redux';
-import {fetchCategories, fetchProducts, resetFilter, changeFilter} from "../../actions";
+import {fetchCategories, fetchProducts, resetFilter, changeFilter, setPageNumber} from "../../actions";
 
 class FilterModal extends React.Component {
 
@@ -16,7 +16,8 @@ class FilterModal extends React.Component {
         // default values shouldn't be in the store until the filters applied by "Apply" button, so
         // defaultProps and this call used instead of initial state in the reducer
         this.ensureFilterStates();
-        this.props.fetchProducts({...this.props, replace: true});
+        const page = 1;
+        this.props.fetchProducts({...this.props, page, replace: true}, () => this.props.setPageNumber(page));
     };
 
     ensureFilterStates = () =>
@@ -25,7 +26,8 @@ class FilterModal extends React.Component {
 
     handleReset = () => {
         this.props.resetFilter();
-        this.props.fetchProducts({query: this.props.query});
+        const page = 1;
+        this.props.fetchProducts({query: this.props.query, page, replace: true}, () => this.props.setPageNumber(page));
     };
 
     renderAvailability = () =>
@@ -126,5 +128,6 @@ export default connect(mapStateToProps, {
     changeFilter,
     resetFilter,
     fetchCategories,
-    fetchProducts
+    fetchProducts,
+    setPageNumber
 })(FilterModal);

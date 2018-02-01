@@ -75,8 +75,7 @@ class ProductDisplay extends Component {
         };
 
         const handleEditProduct = product => {
-            const errorCallback = e => console.log("render error message to the form instead", e);
-            this.props.updateProduct(product.id, product, this.toggleProductModal, errorCallback);
+            this.props.updateProduct(product.id, product, this.toggleProductModal, () => this.props.history.push('/500'));
         };
 
         return <div className="ProductDisplay-adminActions">

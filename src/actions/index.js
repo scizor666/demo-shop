@@ -7,7 +7,7 @@ import {
     FETCH_PRODUCTS, FETCH_PRODUCT, FETCH_PRODUCTS_WITH_REPLACEMENT,
     FETCH_CATEGORIES, FETCH_CATEGORY,
     CHANGE_FILTER, RESET_FILTER, CHANGE_SEARCH_TEXT, UPDATE_PRODUCT, DELETE_PRODUCT, PUT_PRODUCT,
-    SET_PRODUCT_MODAL_OPEN
+    SET_PRODUCT_MODAL_OPEN, SET_PAGE_NUMBER
 } from './types';
 
 export const authSuccess = login => {
@@ -72,13 +72,14 @@ export const signout = () => {
     }
 };
 
-export const fetchProducts = (props = {replace: false}) => {
+export const fetchProducts = (props = {replace: false}, successCallback) => {
     return async dispatch => {
         const response = await Products.fetchProducts(localStorage.getItem(Users.sessionTokenHeader), props);
         if (response.status === 200) {
             const products = await response.json();
             const type = props.replace ? FETCH_PRODUCTS_WITH_REPLACEMENT : FETCH_PRODUCTS;
             dispatch({type, payload: _.mapKeys(products, 'id')});
+            if (successCallback) successCallback();
         } else {
             console.log(response);
         }
@@ -186,3 +187,5 @@ export const changeSearchText = (query) => ({type: CHANGE_SEARCH_TEXT, payload: 
 export const setProductModalOpen = state => {
     return dispatch => dispatch({type: SET_PRODUCT_MODAL_OPEN, payload: state})
 };
+
+export const setPageNumber = page => dispatch => dispatch({type: SET_PAGE_NUMBER, payload: page});

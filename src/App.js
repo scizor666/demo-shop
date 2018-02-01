@@ -13,6 +13,7 @@ import withHeaderAndFooter from './components/shared/WithHeaderAndFooter';
 import Auth from "./utils/Users";
 import {AUTH_SUCCESS, SET_ROLE} from "./actions/types";
 import NotFound from "./components/errors/NotFound";
+import ServerError from "./components/errors/ServerError";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -33,6 +34,7 @@ const App = () =>
                         <Route exact path="/products/:id"
                                component={requireLogin(withHeaderAndFooter(ProductDisplay))}/>
                         <Route exact path="/statistics" component={requireLogin(withHeaderAndFooter(Statistics))}/>
+                        <Route exact path="/500" component={ServerError}/>
                         <Route component={NotFound}/>
                     </Switch>
                 </main>
