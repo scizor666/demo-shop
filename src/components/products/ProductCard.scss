@@ -40,11 +40,18 @@ $data-margin: 10px;
   line-height: 19px;
 }
 
-.ProductCard-button {
-  @extend .DemoShop-button;
+.ProductCard-buttons {
   position: absolute;
   right: $data-padding;
   bottom: 15px;
+
+  & .DemoShop-button {
+    width: 100px;
+
+    &:first-child {
+      margin-right: 10px;
+    }
+  }
 }
 
 .ProductCard-price {

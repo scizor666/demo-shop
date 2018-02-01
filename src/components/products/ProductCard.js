@@ -2,6 +2,8 @@ import React from "react";
 import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
 import {Link} from 'react-router-dom';
+import {setProductModalOpen} from '../../actions';
+import {connect} from 'react-redux';
 
 const ProductCard = props => {
     return <div className="ProductCard-wrapper">
@@ -17,12 +19,18 @@ const ProductCard = props => {
             <div className='ProductCard-price'>
                 <ProductPrice value={props.cost}/>
             </div>
-            <Link to={`/products/${props.id}`}>
-                <button className="ProductCard-button">Show More</button>
-            </Link>
+            <div className="ProductCard-buttons">
+                {props.editMode &&
+                <Link to={`/products/${props.id}`} onClick={() => props.setProductModalOpen(true)}>
+                    <button className="DemoShop-button">Edit</button>
+                </Link>}
+                <Link to={`/products/${props.id}`}>
+                    <button className="DemoShop-button">Show More</button>
+                </Link>
+            </div>
         </div>
     </div>;
 };
 
 
-export default ProductCard;
+export default connect(null, {setProductModalOpen})(ProductCard);

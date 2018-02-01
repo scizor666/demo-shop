@@ -17,3 +17,5 @@ export const RESET_FILTER = 'RESET_FILTER';
 export const CHANGE_SEARCH_TEXT = 'CHANGE_SEARCH_TEXT';
 
 export const SET_ROLE = 'SET_ROLE';
+
+export const SET_PRODUCT_MODAL_OPEN = 'SET_PRODUCT_MODAL_OPEN';

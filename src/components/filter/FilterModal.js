@@ -116,10 +116,7 @@ FilterModal.defaultProps = {
 
 const mapStateToProps = ({categories, filter, query}) => {
     return {
-        categories: {
-            ...categories,
-            [FilterModal.defaultProps.category]: {id: FilterModal.defaultProps.category, name: 'None'}
-        },
+        categories,
         ...filter,
         query
     }

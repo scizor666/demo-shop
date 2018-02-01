@@ -6,7 +6,7 @@ import ConfirmModal from "../shared/ConfirmModal";
 import ProductModal from './ProductModal'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchProduct, deleteProduct, updateProduct} from "../../actions";
+import {fetchProduct, deleteProduct, updateProduct, setProductModalOpen} from "../../actions";
 import Users from '../../utils/Users';
 
 class ProductDisplay extends Component {
@@ -14,7 +14,6 @@ class ProductDisplay extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productModalOpen: false,
             deleteModalOpen: false,
             buyModalOpen: false
         };
@@ -30,16 +29,16 @@ class ProductDisplay extends Component {
         return <React.Fragment>
             <button className="DemoShop-button" onClick={this.toggleBuyModal}>Buy</button>
             {this.state.buyModalOpen &&
-                <Modal
-                    title="Thank you!"
-                    className="ProductDisplay-buyModal">
-                    <div className="ProductDisplay-BuyModalText">You successfully purchased this item.</div>
-                    <div className="ProductDisplay-buyModalButtonWrapper">
-                        <button className="DemoShop-button_big"
-                                onClick={this.toggleBuyModal}>Continue shopping
-                        </button>
-                    </div>
-                </Modal>}
+            <Modal
+                title="Thank you!"
+                className="ProductDisplay-buyModal">
+                <div className="ProductDisplay-BuyModalText">You successfully purchased this item.</div>
+                <div className="ProductDisplay-buyModalButtonWrapper">
+                    <button className="DemoShop-button_big"
+                            onClick={this.toggleBuyModal}>Continue shopping
+                    </button>
+                </div>
+            </Modal>}
         </React.Fragment>;
     };
 
@@ -49,7 +48,7 @@ class ProductDisplay extends Component {
 
     toggleDeleteModal = () => this.toggleModal('deleteModalOpen');
 
-    toggleEditModal = () => this.toggleModal('productModalOpen');
+    toggleProductModal = () => this.props.setProductModalOpen(!this.props.productModalOpen);
 
     toggleBuyModal = () => this.toggleModal('buyModalOpen');
 
@@ -77,28 +76,28 @@ class ProductDisplay extends Component {
 
         const handleEditProduct = product => {
             const errorCallback = e => console.log("render error message to the form instead", e);
-            this.props.updateProduct(product.id, product, this.toggleEditModal, errorCallback);
+            this.props.updateProduct(product.id, product, this.toggleProductModal, errorCallback);
         };
 
         return <div className="ProductDisplay-adminActions">
             You can <a className="DemoShop-link" href="javascript:void(0);" onClick={this.handleAddMore}>add 5 more</a>.
-            You can also <a className="DemoShop-link" href="javascript:void(0);" onClick={this.toggleEditModal}>edit
+            You can also <a className="DemoShop-link" href="javascript:void(0);" onClick={this.toggleProductModal}>edit
             details</a> or <a className="DemoShop-link"
                               href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
 
-            {this.state.productModalOpen &&
-            <ProductModal cancelAction={this.toggleEditModal} submitAction={handleEditProduct} {...this.props}/>}
+            {this.props.productModalOpen &&
+            <ProductModal cancelAction={this.toggleProductModal} submitAction={handleEditProduct} {...this.props}/>}
 
             {this.state.deleteModalOpen &&
-                <ConfirmModal
-                    title="Are you sure?"
-                    cancelAction={this.toggleDeleteModal}
-                    confirmAction={confirmDelete}>
-                    <div className="ProductDisplay-DeleteModalText">
-                        <span>You are trying to delete this product.</span><br/>
-                        <span>Are you sure you want this?</span>
-                    </div>
-                </ConfirmModal>}
+            <ConfirmModal
+                title="Are you sure?"
+                cancelAction={this.toggleDeleteModal}
+                confirmAction={confirmDelete}>
+                <div className="ProductDisplay-DeleteModalText">
+                    <span>You are trying to delete this product.</span><br/>
+                    <span>Are you sure you want this?</span>
+                </div>
+            </ConfirmModal>}
         </div>;
     };
 
@@ -150,13 +149,15 @@ ProductDisplay.defaultProps = {
     editMode: false
 };
 
-const mapStateToProps = ({products, categories, role}, ownProps) => {
+const mapStateToProps = ({products, categories, role, productModalOpen}, ownProps) => {
     const product = products[ownProps.match.params.id];
-    const props = {...product, editMode: role === Users.ADMIN};
+    const props = {...product, productModalOpen, editMode: role === Users.ADMIN};
     if (product && categories[product.categoryId]) {
         props['category'] = product.gender + '/' + categories[product.categoryId].name;
     }
     return props;
 };
 
-export default connect(mapStateToProps, {fetchProduct, deleteProduct, updateProduct})(ProductDisplay);
+const mapDispatchToProps = {fetchProduct, deleteProduct, updateProduct, setProductModalOpen};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDisplay);

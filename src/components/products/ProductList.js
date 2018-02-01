@@ -20,7 +20,7 @@ class ProductList extends React.Component {
 
     renderProducts = products => _.map(products, (product, i) =>
         <div className="ProductList-item col-xs-12 col-sm-6 col-md-4" key={i}>
-            <ProductCard {...product}/>
+            <ProductCard {...product} editMode={this.props.editMode}/>
         </div>
     );
 

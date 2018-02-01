@@ -63,6 +63,6 @@ ProductModal.defaultProps = {
     soldCount: 0
 };
 
-const mapStateToProps = ({categories}) => ({categories: {...categories, '-1': {id: -1, name: 'None'}}});
+const mapStateToProps = ({categories}) => ({categories});
 
 export default connect(mapStateToProps, {fetchCategories, changeProduct: updateProduct})(ProductModal);
