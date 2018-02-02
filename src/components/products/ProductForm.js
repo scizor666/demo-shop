@@ -4,9 +4,9 @@ import ConfirmButtons from "../shared/ConfirmButtons";
 
 const ProductForm = props => {
 
-    const isFormValid = () => props.name && props.rating && props.description &&
-        props.gender && props.image && props.cost >= 1 && props.categoryId > -1 &&
-        !document.querySelector('input:invalid');
+    const isFormValid = () => props.name.trim() && props.rating && props.description.trim() &&
+        props.gender && props.image && props.cost > 0 && props.categoryId > -1 &&
+        Object.keys(props.categories).includes(props.categoryId.toString()) && !document.querySelector('input:invalid');
 
     return <form onSubmit={props.handleSubmit}>
         <div className="row">
@@ -67,7 +67,7 @@ const ProductForm = props => {
                                onChange={props.handleInputChange}
                                placeholder="Please enter link to image..."
                                type="url"
-                               pattern="^https?://.+$"
+                               pattern="^https?://.+\.(jpeg|jpg|gif|png)$$"
                                value={props.image}/>
                     </div>
                     <div className="ProductForm-inputGroup">
@@ -79,7 +79,7 @@ const ProductForm = props => {
                         <input className="ProductForm-field"
                                name="cost"
                                onChange={props.handleInputChange}
-                               min={1}
+                               min={0.01}
                                type="number"
                                step="any"
                                placeholder="Please enter price..."
