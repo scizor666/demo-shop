@@ -1,36 +1,50 @@
 import React from "react";
 import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import {Link} from 'react-router-dom';
-import {setProductModalOpen} from '../../actions';
+import {deleteProduct} from '../../actions';
 import {connect} from 'react-redux';
 
-const ProductCard = props => {
-    return <div className="ProductCard-wrapper">
+class ProductCard extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {deleteModalOpen: false};
+    }
+
+    toggleDeleteModal = () => this.setState({deleteModalOpen: !this.state.deleteModalOpen});
+
+    confirmDelete = e => {
+        e.preventDefault();
+        this.props.deleteProduct(this.props.id, () => {}, () => this.props.history.push('/500'));
+    };
+
+    render = () => <div className="ProductCard-wrapper">
         <div className={"ProductCard-imageContainer"}>
             <img className="ProductCard-image"
-                 src={props.image}
+                 src={this.props.image}
                  alt="No Picture found"/>
-            <Rating value={props.rating}/>
+            <Rating value={this.props.rating}/>
         </div>
         <div className="ProductCard-data">
-            <div className="ProductCard-title">{props.name}</div>
-            <div className="ProductCard-description">{props.description}</div>
+            <div className="ProductCard-title">{this.props.name}</div>
+            <div className="ProductCard-description">{this.props.description}</div>
             <div className='ProductCard-price'>
-                <ProductPrice value={props.cost}/>
+                <ProductPrice value={this.props.cost}/>
             </div>
             <div className="ProductCard-buttons">
-                {props.editMode &&
-                <Link to={`/products/${props.id}`} onClick={() => props.setProductModalOpen(true)}>
-                    <button className="DemoShop-button">Edit</button>
-                </Link>}
-                <Link to={`/products/${props.id}`}>
-                    <button className="DemoShop-button">Show More</button>
+                {this.props.editMode &&
+                <button className="DemoShop-button" onClick={this.toggleDeleteModal}>Delete</button>}
+                {this.state.deleteModalOpen &&
+                <ConfirmDeleteModal cancelAction={this.toggleDeleteModal}
+                                    confirmAction={this.confirmDelete}/>}
+                <Link to={`/products/${this.props.id}`}>
+                    <button className="DemoShop-button">Details</button>
                 </Link>
             </div>
         </div>
     </div>;
-};
+}
 
-
-export default connect(null, {setProductModalOpen})(ProductCard);
+export default connect(null, {deleteProduct})(ProductCard);

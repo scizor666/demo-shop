@@ -5,7 +5,7 @@ import ConfirmButtons from "../shared/ConfirmButtons";
 const ProductForm = props => {
 
     const isFormValid = () => props.name && props.rating && props.description &&
-        props.gender && props.image && props.cost >= 1 && props.categoryId > 0 &&
+        props.gender && props.image && props.cost >= 1 && props.categoryId > -1 &&
         !document.querySelector('input:invalid');
 
     return <form onSubmit={props.handleSubmit}>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from "../shared/Modal";
 import ProductForm from "./ProductForm";
-import {fetchCategories, updateProduct} from "../../actions";
+import {fetchCategories} from "../../actions";
 import {connect} from "react-redux";
 
 class ProductModal extends React.Component {
@@ -65,4 +65,4 @@ ProductModal.defaultProps = {
 
 const mapStateToProps = ({categories}) => ({categories});
 
-export default connect(mapStateToProps, {fetchCategories, changeProduct: updateProduct})(ProductModal);
+export default connect(mapStateToProps, {fetchCategories})(ProductModal);

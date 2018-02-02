@@ -10,7 +10,7 @@ export default class Products {
         price = null,
         rating = null,
         page = 1,
-        limit = 6
+        limit = 5
     }) {
         let url = `${ENV['apiRoot']}/products?`;
         if (query) url += `q=${query}`;

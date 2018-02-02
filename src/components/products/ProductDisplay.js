@@ -2,12 +2,12 @@ import React, {Component} from "react";
 import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
 import Modal from "../shared/Modal";
-import ConfirmModal from "../shared/ConfirmModal";
 import ProductModal from './ProductModal'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchProduct, deleteProduct, updateProduct, setProductModalOpen} from "../../actions";
+import {fetchProduct, deleteProduct, updateProduct, createProduct, setProductModalOpen} from "../../actions";
 import Users from '../../utils/Users';
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
 class ProductDisplay extends Component {
 
@@ -20,7 +20,7 @@ class ProductDisplay extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchProduct(this.props.match.params.id);
+        !this.props.newMode && this.props.fetchProduct(this.props.match.params.id);
     }
 
     renderNotAvailable = () => <b> (<span className="ProductDisplay-notAvailable">not available</span>)</b>;
@@ -52,7 +52,6 @@ class ProductDisplay extends Component {
 
     toggleBuyModal = () => this.toggleModal('buyModalOpen');
 
-
     handleAddMore = () => {
         const {name, image, rating, gender, description, categoryId, cost, count, soldCount} = this.props;
         this.props.updateProduct(this.props.id, {
@@ -68,41 +67,43 @@ class ProductDisplay extends Component {
         }, null, this.toErrorPage);
     };
 
-    renderAdminActions = () => {
-        const confirmDelete = e => {
-            e.preventDefault();
-            this.props.deleteProduct(this.props.id, () => this.props.history.push('/'), this.toErrorPage)
-        };
-
-        const handleEditProduct = product => {
-            this.props.updateProduct(product.id, product, this.toggleProductModal, this.toErrorPage);
-        };
-
-        return <div className="ProductDisplay-adminActions">
-            You can <a className="DemoShop-link" href="javascript:void(0);" onClick={this.handleAddMore}>add 5 more</a>.
-            You can also <a className="DemoShop-link" href="javascript:void(0);" onClick={this.toggleProductModal}>edit
-            details</a> or <a className="DemoShop-link"
-                              href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
-
-            {this.props.productModalOpen &&
-            <ProductModal cancelAction={this.toggleProductModal} submitAction={handleEditProduct} {...this.props}/>}
-
-            {this.state.deleteModalOpen &&
-            <ConfirmModal
-                title="Are you sure?"
-                cancelAction={this.toggleDeleteModal}
-                confirmAction={confirmDelete}>
-                <div className="ProductDisplay-DeleteModalText">
-                    <span>You are trying to delete this product.</span><br/>
-                    <span>Are you sure you want this?</span>
-                </div>
-            </ConfirmModal>}
-        </div>;
+    confirmDelete = e => {
+        e.preventDefault();
+        this.props.deleteProduct(this.props.id, () => this.props.history.push('/'), this.toErrorPage)
     };
+
+    handleEditProduct = product => this.props.updateProduct(product.id, product, this.toggleProductModal, this.toErrorPage);
+
+    handleCancelNew = () => {
+        this.props.history.push("/");
+        this.props.setProductModalOpen(false);
+    };
+
+    productCreatedCallback = id => {
+        this.props.history.push(`/products/${id}`);
+        this.toggleProductModal();
+    };
+
+    handleAddProduct = product => this.props.createProduct(product, this.productCreatedCallback, this.toErrorPage);
 
     toErrorPage = () => this.props.history.push('/500');
 
     isAvailable = () => this.props.count > 0;
+
+    renderAdminActions = () => <div className="ProductDisplay-adminActions">
+        You can <a className="DemoShop-link" href="javascript:void(0);" onClick={this.handleAddMore}>add 5 more</a>.
+        You can also <a className="DemoShop-link" href="javascript:void(0);" onClick={this.toggleProductModal}>edit
+        details</a> or <a className="DemoShop-link"
+                          href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
+
+        {this.props.productModalOpen && !this.props.newMode &&
+        <ProductModal cancelAction={this.toggleProductModal} submitAction={this.handleEditProduct} {...this.props}/>}
+        {this.props.productModalOpen && this.props.newMode &&
+        <ProductModal cancelAction={this.handleCancelNew} submitAction={this.handleAddProduct} {...this.props}/>}
+
+        {this.state.deleteModalOpen &&
+        <ConfirmDeleteModal cancelAction={this.toggleDeleteModal} confirmAction={this.confirmDelete}/>}
+    </div>;
 
     render() {
         return <React.Fragment>
@@ -152,13 +153,14 @@ ProductDisplay.defaultProps = {
 
 const mapStateToProps = ({products, categories, role, productModalOpen}, ownProps) => {
     const product = products[ownProps.match.params.id];
-    const props = {...product, productModalOpen, editMode: role === Users.ADMIN};
+    const editMode = role === Users.ADMIN;
+    const props = {...product, productModalOpen, editMode, newMode: editMode && isNaN(ownProps.match.params.id)};
     if (product && categories[product.categoryId]) {
         props['category'] = product.gender + '/' + categories[product.categoryId].name;
     }
     return props;
 };
 
-const mapDispatchToProps = {fetchProduct, deleteProduct, updateProduct, setProductModalOpen};
+const mapDispatchToProps = {fetchProduct, deleteProduct, updateProduct, createProduct, setProductModalOpen};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDisplay);

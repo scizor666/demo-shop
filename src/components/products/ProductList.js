@@ -1,22 +1,21 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 import Filter from "../filter/Filter";
-import ProductModal from './ProductModal';
 import Loading from "../shared/Loading";
 import {connect} from 'react-redux';
-import {fetchProducts, createProduct, setPageNumber} from "../../actions";
+import {fetchProducts, createProduct, setPageNumber, setProductModalOpen} from "../../actions";
 import _ from 'lodash';
 import Users from "../../utils/Users";
 
 class ProductList extends React.Component {
 
-    static perPage = 6;
+    static perPage = 5;
 
     constructor(props) {
         super(props);
         this.state = {
-            productModalOpen: false,
-            isLoading: false
+            isLoading: false,
+            deleteModalOpen: false
         }
     }
 
@@ -42,7 +41,8 @@ class ProductList extends React.Component {
 
     onScroll = () => {
         const productsCount = Object.keys(this.props.products).length;
-        if (window.innerHeight + window.scrollY === this.scrollHeight() &&
+        const offset = 500;
+        if (window.innerHeight + window.scrollY >= this.scrollHeight() - offset &&
             !this.state.isLoading && productsCount === this.props.page * ProductList.perPage) {
             this.onPaginatedSearch();
         }
@@ -56,14 +56,14 @@ class ProductList extends React.Component {
 
     renderProducts = products => _.map(products, (product, i) =>
         <div className="ProductList-item col-xs-12 col-sm-6 col-md-4" key={i}>
-            <ProductCard {...product} editMode={this.props.editMode}/>
+            <ProductCard {...product} editMode={this.props.editMode} history={this.props.history}/>
         </div>
     );
 
-    handleAddProduct = product => this.props.createProduct(product,
-        id => this.props.history.push(`/products/${id}`), () => this.props.history.push('/500'));
-
-    toggleProductModal = () => this.setState({productModalOpen: !this.state.productModalOpen});
+    toAddNewProduct = () => {
+        this.props.setProductModalOpen(true);
+        this.props.history.push('/products/new');
+    };
 
     render() {
         return <React.Fragment>
@@ -71,20 +71,28 @@ class ProductList extends React.Component {
             <div className="ProductList-wrapper">
                 <div className="ProductList-actions">
                     {this.props.editMode &&
-                    <button className="DemoShop-button" onClick={this.toggleProductModal}>Add Product</button>}
+                    <button className="DemoShop-button" onClick={this.toAddNewProduct}>Add Product</button>}
                     <Filter/>
                 </div>
                 <div className="container-fluid">
-                    <div className="row">{this.renderProducts(this.props.products)}</div>
+                    <div className="row">
+                        {this.renderProducts(this.props.products)}
+                        {this.state.isLoading &&
+                        <div className="col-xs-12 col-sm-6 col-md-4">
+                            <Loading/>
+                        </div>}
+                    </div>
                 </div>
-                {this.state.isLoading && <Loading/>}
             </div>
-            {this.state.productModalOpen &&
-            <ProductModal cancelAction={this.toggleProductModal} submitAction={this.handleAddProduct} {...this.props}/>}
         </React.Fragment>
     }
 }
 
 const mapStateToProps = ({products, filter, page, role}) => ({products, filter, page, editMode: role === Users.ADMIN});
 
-export default connect(mapStateToProps, {fetchProducts, createProduct, setPageNumber})(ProductList);
+export default connect(mapStateToProps, {
+    fetchProducts,
+    createProduct,
+    setPageNumber,
+    setProductModalOpen
+})(ProductList);
