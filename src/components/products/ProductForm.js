@@ -67,7 +67,7 @@ const ProductForm = props => {
                                onChange={props.handleInputChange}
                                placeholder="Please enter link to image..."
                                type="url"
-                               pattern="^https?://.+\.(jpeg|jpg|gif|png)$$"
+                               pattern="^https?://.+\.(jpeg|jpg|gif|png)(\?.*)?$$"
                                value={props.image}/>
                     </div>
                     <div className="ProductForm-inputGroup">
