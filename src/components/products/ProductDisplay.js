@@ -131,6 +131,8 @@ class ProductDisplay extends Component {
     </React.Fragment>;
 
     render = () => <React.Fragment>
+        {!this.props.id && !this.props.newMode && this.props.history.push('/403')}
+
         {!this.props.newMode && this.renderProduct()}
 
         {this.state.productModalOpen && !this.props.newMode &&

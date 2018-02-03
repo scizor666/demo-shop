@@ -14,6 +14,7 @@ import Auth from "./utils/Users";
 import {AUTH_SUCCESS, SET_ROLE} from "./actions/types";
 import NotFound from "./components/errors/NotFound";
 import ServerError from "./components/errors/ServerError";
+import Forbidden from "./components/errors/Forbidden";
 
 const createStoreWithMiddleware = applyMiddleware(reduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
@@ -35,6 +36,7 @@ const App = () =>
                                component={requireLogin(withHeaderAndFooter(ProductDisplay))}/>
                         <Route exact path="/statistics" component={requireLogin(withHeaderAndFooter(Statistics))}/>
                         <Route exact path="/500" component={ServerError}/>
+                        <Route exact path="/403" component={Forbidden}/>
                         <Route component={NotFound}/>
                     </Switch>
                 </main>

@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import Filter from "../filter/Filter";
 import Loading from "../shared/Loading";
 import {connect} from 'react-redux';
-import {fetchProducts, createProduct, setPageNumber, setProductModalOpen} from "../../actions";
+import {fetchProducts, createProduct, setPageNumber} from "../../actions";
 import _ from 'lodash';
 import Users from "../../utils/Users";
 
@@ -60,10 +60,7 @@ class ProductList extends React.Component {
         </div>
     );
 
-    toAddNewProduct = () => {
-        this.props.setProductModalOpen(true);
-        this.props.history.push('/products/new');
-    };
+    toAddNewProduct = () => this.props.history.push('/products/new');
 
     render() {
         return <React.Fragment>
@@ -90,9 +87,4 @@ class ProductList extends React.Component {
 
 const mapStateToProps = ({products, filter, page, role}) => ({products, filter, page, editMode: role === Users.ADMIN});
 
-export default connect(mapStateToProps, {
-    fetchProducts,
-    createProduct,
-    setPageNumber,
-    setProductModalOpen
-})(ProductList);
+export default connect(mapStateToProps, {fetchProducts, createProduct, setPageNumber})(ProductList);
