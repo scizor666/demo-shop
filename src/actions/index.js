@@ -6,8 +6,7 @@ import {
     AUTH_SUCCESS, AUTH_FAILURE, UNAUTH, SET_ROLE,
     FETCH_PRODUCTS, FETCH_PRODUCT, FETCH_PRODUCTS_WITH_REPLACEMENT,
     FETCH_CATEGORIES, FETCH_CATEGORY,
-    CHANGE_FILTER, RESET_FILTER, CHANGE_SEARCH_TEXT, UPDATE_PRODUCT, DELETE_PRODUCT, PUT_PRODUCT,
-    SET_PRODUCT_MODAL_OPEN, SET_PAGE_NUMBER
+    CHANGE_FILTER, RESET_FILTER, CHANGE_SEARCH_TEXT, UPDATE_PRODUCT, DELETE_PRODUCT, PUT_PRODUCT, SET_PAGE_NUMBER
 } from './types';
 
 export const authSuccess = login => {
@@ -183,9 +182,5 @@ export const changeFilter = (name, value) => ({type: CHANGE_FILTER, payload: {[n
 export const resetFilter = () => ({type: RESET_FILTER});
 
 export const changeSearchText = (query) => ({type: CHANGE_SEARCH_TEXT, payload: query});
-
-export const setProductModalOpen = state => {
-    return dispatch => dispatch({type: SET_PRODUCT_MODAL_OPEN, payload: state})
-};
 
 export const setPageNumber = page => dispatch => dispatch({type: SET_PAGE_NUMBER, payload: page});

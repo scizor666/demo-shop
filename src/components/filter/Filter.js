@@ -6,14 +6,10 @@ export default class Filter extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            filterOpen: false
-        };
+        this.state = {filterOpen: false};
     }
 
-    triggerFilterModal() {
-        this.setState({filterOpen: !this.state.filterOpen});
-    }
+    triggerFilterModal = () => this.setState({filterOpen: !this.state.filterOpen});
 
     render() {
         return <div className="Filter-wrapper">
@@ -21,9 +17,7 @@ export default class Filter extends Component {
                     onClick={() => this.triggerFilterModal()}>Filter options
             </button>
             <FilterSearch/>
-            {(() => {
-                if (this.state.filterOpen) return <FilterModal/>
-            })()}
+            {this.state.filterOpen && <FilterModal/>}
         </div>
     }
 }

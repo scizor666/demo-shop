@@ -31,7 +31,7 @@ const App = () =>
                     <Switch>
                         <Route exact path="/login" component={Login}/>
                         <Route exact path="/" component={requireLogin(withHeaderAndFooter(ProductList))}/>
-                        <Route exact path="/products/:id"
+                        <Route exact path="/products/:id(\d+|new)"
                                component={requireLogin(withHeaderAndFooter(ProductDisplay))}/>
                         <Route exact path="/statistics" component={requireLogin(withHeaderAndFooter(Statistics))}/>
                         <Route exact path="/500" component={ServerError}/>

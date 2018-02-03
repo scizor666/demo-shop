@@ -5,7 +5,7 @@ import Modal from "../shared/Modal";
 import ProductModal from './ProductModal'
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchProduct, deleteProduct, updateProduct, createProduct, setProductModalOpen} from "../../actions";
+import {fetchProduct, deleteProduct, updateProduct, createProduct} from "../../actions";
 import Users from '../../utils/Users';
 import ConfirmDeleteModal from "./ConfirmDeleteModal";
 
@@ -15,32 +15,29 @@ class ProductDisplay extends Component {
         super(props);
         this.state = {
             deleteModalOpen: false,
-            buyModalOpen: false
+            buyModalOpen: false,
+            productModalOpen: this.props.newMode
         };
     }
 
-    componentDidMount() {
-        !this.props.newMode && this.props.fetchProduct(this.props.match.params.id);
-    }
+    componentDidMount = () => !this.props.newMode && this.props.fetchProduct(this.props.match.params.id);
 
     renderNotAvailable = () => <b> (<span className="ProductDisplay-notAvailable">not available</span>)</b>;
 
-    renderBuyButton = () => {
-        return <React.Fragment>
-            <button className="DemoShop-button" onClick={this.toggleBuyModal}>Buy</button>
-            {this.state.buyModalOpen &&
-            <Modal
-                title="Thank you!"
-                className="ProductDisplay-buyModal">
-                <div className="ProductDisplay-BuyModalText">You successfully purchased this item.</div>
-                <div className="ProductDisplay-buyModalButtonWrapper">
-                    <button className="DemoShop-button_big"
-                            onClick={this.toggleBuyModal}>Continue shopping
-                    </button>
-                </div>
-            </Modal>}
-        </React.Fragment>;
-    };
+    renderBuyButton = () => <React.Fragment>
+        <button className="DemoShop-button" onClick={this.toggleBuyModal}>Buy</button>
+        {this.state.buyModalOpen &&
+        <Modal
+            title="Thank you!"
+            className="ProductDisplay-buyModal">
+            <div className="ProductDisplay-BuyModalText">You successfully purchased this item.</div>
+            <div className="ProductDisplay-buyModalButtonWrapper">
+                <button className="DemoShop-button_big"
+                        onClick={this.toggleBuyModal}>Continue shopping
+                </button>
+            </div>
+        </Modal>}
+    </React.Fragment>;
 
     renderAmountLeft = amount => <span>{` (${amount} left)`}</span>;
 
@@ -48,7 +45,7 @@ class ProductDisplay extends Component {
 
     toggleDeleteModal = () => this.toggleModal('deleteModalOpen');
 
-    toggleProductModal = () => this.props.setProductModalOpen(!this.props.productModalOpen);
+    toggleProductModal = () => this.toggleModal('productModalOpen');
 
     toggleBuyModal = () => this.toggleModal('buyModalOpen');
 
@@ -74,10 +71,7 @@ class ProductDisplay extends Component {
 
     handleEditProduct = product => this.props.updateProduct(product.id, product, this.toggleProductModal, this.toErrorPage);
 
-    handleCancelNew = () => {
-        this.props.history.push("/");
-        this.props.setProductModalOpen(false);
-    };
+    handleCancelNew = () => this.props.history.push("/");
 
     productCreatedCallback = id => {
         this.props.history.push(`/products/${id}`);
@@ -95,72 +89,76 @@ class ProductDisplay extends Component {
         You can also <a className="DemoShop-link" href="javascript:void(0);" onClick={this.toggleProductModal}>edit
         details</a> or <a className="DemoShop-link"
                           href="javascript:void(0);" onClick={this.toggleDeleteModal}>delete</a> them.
-
-        {this.props.productModalOpen && !this.props.newMode &&
-        <ProductModal cancelAction={this.toggleProductModal} submitAction={this.handleEditProduct} {...this.props}/>}
-        {this.props.productModalOpen && this.props.newMode &&
-        <ProductModal cancelAction={this.handleCancelNew} submitAction={this.handleAddProduct} {...this.props}/>}
-
-        {this.state.deleteModalOpen &&
-        <ConfirmDeleteModal cancelAction={this.toggleDeleteModal} confirmAction={this.confirmDelete}/>}
     </div>;
 
-    render() {
-        return <React.Fragment>
-            <div className="App-shadow"/>
-            <div className="ProductDisplay-wrapper">
-                <div className="ProductDisplay-nav">
-                    <Link to='/'>Back</Link>
-                    <label>Category: <b>{this.props.category || 'Loading...'}</b></label>
-                </div>
-                <div className="ProductDisplay-card">
-                    <div className="row">
-                        <div className="col-xs-12 col-sm-6">
-                            <div className="ProductDisplay-ratedImage">
-                                <img className="ProductDisplay-image"
-                                     src={this.props.image}
-                                     alt="No Picture found"/>
-                                <Rating value={this.props.rating}/>
-                            </div>
+    renderProduct = () => <React.Fragment>
+        <div className="App-shadow"/>
+        <div className="ProductDisplay-wrapper">
+            <div className="ProductDisplay-nav">
+                <Link to='/'>Back</Link>
+                <label>Category: <b>{this.props.category || 'Loading...'}</b></label>
+            </div>
+            <div className="ProductDisplay-card">
+                <div className="row">
+                    <div className="col-xs-12 col-sm-6">
+                        <div className="ProductDisplay-ratedImage">
+                            <img className="ProductDisplay-image"
+                                 src={this.props.image}
+                                 alt="No Picture found"/>
+                            <Rating value={this.props.rating}/>
                         </div>
-                        <div className="col-xs-12 col-sm-6">
-                            <h2 className="ProductDisplay-name">{this.props.name}</h2>
-                            <div className="ProductDisplay-details">
-                                <div className="ProductDisplay-description">
-                                    {this.props.description}
-                                    {this.props.editMode && this.renderAdminActions()}
+                    </div>
+                    <div className="col-xs-12 col-sm-6">
+                        <h2 className="ProductDisplay-name">{this.props.name}</h2>
+                        <div className="ProductDisplay-details">
+                            <div className="ProductDisplay-description">
+                                {this.props.description}
+                                {this.props.editMode && this.renderAdminActions()}
+                            </div>
+                            <div className="ProductDisplay-buy">
+                                <div>
+                                    <ProductPrice value={this.props.cost}/>
+                                    {!this.isAvailable() && this.renderNotAvailable()}
+                                    {this.isAvailable() && this.props.editMode && this.renderAmountLeft(this.props.count)}
                                 </div>
-                                <div className="ProductDisplay-buy">
-                                    <div>
-                                        <ProductPrice value={this.props.cost}/>
-                                        {!this.isAvailable() && this.renderNotAvailable()}
-                                        {this.isAvailable() && this.props.editMode && this.renderAmountLeft(this.props.count)}
-                                    </div>
-                                    {this.isAvailable() && this.renderBuyButton()}
-                                </div>
+                                {this.isAvailable() && this.renderBuyButton()}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </React.Fragment>
-    }
+        </div>
+    </React.Fragment>;
+
+    render = () => <React.Fragment>
+        {!this.props.newMode && this.renderProduct()}
+
+        {this.state.productModalOpen && !this.props.newMode &&
+        <ProductModal cancelAction={this.toggleProductModal} submitAction={this.handleEditProduct} {...this.props}/>}
+
+        {this.state.productModalOpen && this.props.newMode &&
+        <ProductModal cancelAction={this.handleCancelNew} submitAction={this.handleAddProduct} {...this.props}/>}
+
+        {this.state.deleteModalOpen &&
+        <ConfirmDeleteModal cancelAction={this.toggleDeleteModal} confirmAction={this.confirmDelete}/>}
+    </React.Fragment>;
 }
 
 ProductDisplay.defaultProps = {
     editMode: false
 };
 
-const mapStateToProps = ({products, categories, role, productModalOpen}, ownProps) => {
+const mapStateToProps = ({products, categories, role}, ownProps) => {
     const product = products[ownProps.match.params.id];
     const editMode = role === Users.ADMIN;
-    const props = {...product, productModalOpen, editMode, newMode: editMode && isNaN(ownProps.match.params.id)};
+    const newMode = editMode && ownProps.match.params.id === 'new';
+    const props = {...product, editMode, newMode};
     if (product && categories[product.categoryId]) {
         props['category'] = product.gender + '/' + categories[product.categoryId].name;
     }
     return props;
 };
 
-const mapDispatchToProps = {fetchProduct, deleteProduct, updateProduct, createProduct, setProductModalOpen};
+const mapDispatchToProps = {fetchProduct, deleteProduct, updateProduct, createProduct};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDisplay);

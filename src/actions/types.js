@@ -18,6 +18,4 @@ export const CHANGE_SEARCH_TEXT = 'CHANGE_SEARCH_TEXT';
 
 export const SET_ROLE = 'SET_ROLE';
 
-export const SET_PRODUCT_MODAL_OPEN = 'SET_PRODUCT_MODAL_OPEN';
-
 export const SET_PAGE_NUMBER = 'SET_PAGE_NUMBER';

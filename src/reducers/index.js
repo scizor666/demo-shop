@@ -5,7 +5,6 @@ import CategoriesReducer from "./CategoriesReducer";
 import FilterReducer from "./FilterReducer"
 import SearchTextReducer from "./SearchTextReducer";
 import RoleReducer from './RoleReducer';
-import ProductModalReducer from './ProductModalReducer';
 import PageReducer from "./PageReducer";
 
 const rootReducer = combineReducers({
@@ -15,7 +14,6 @@ const rootReducer = combineReducers({
     filter: FilterReducer,
     query: SearchTextReducer,
     role: RoleReducer,
-    productModalOpen: ProductModalReducer,
     page: PageReducer,
 });
 
