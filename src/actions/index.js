@@ -85,16 +85,21 @@ export const fetchProducts = (props = {replace: false}, successCallback) => {
     }
 };
 
-export const fetchProduct = id => {
+export const fetchProduct = (id, successCallback, errorCallback) => {
     return async dispatch => {
-        const response = await Products.fetchProduct(id, localStorage.getItem(Users.sessionTokenHeader));
+        try {
+            const response = await Products.fetchProduct(id, localStorage.getItem(Users.sessionTokenHeader));
 
-        if (response.status === 200) {
-            const product = await response.json();
-            dispatch({type: FETCH_PRODUCT, payload: {[product.id]: product}});
-            dispatch(fetchCategory(product.categoryId));
-        } else {
-            console.log(response);
+            if (response.status === 200) {
+                const product = await response.json();
+                dispatch({type: FETCH_PRODUCT, payload: {[product.id]: product}});
+                dispatch(fetchCategory(product.categoryId));
+                successCallback();
+            } else {
+                errorCallback(response)
+            }
+        } catch (error) {
+            errorCallback(error)
         }
     }
 };

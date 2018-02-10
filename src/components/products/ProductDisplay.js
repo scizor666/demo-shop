@@ -3,7 +3,7 @@ import Rating from "./Rating";
 import ProductPrice from "./ProductPrice";
 import Modal from "../shared/Modal";
 import ProductModal from './ProductModal'
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProduct, deleteProduct, updateProduct, createProduct} from "../../actions";
 import Users from '../../utils/Users';
@@ -20,7 +20,9 @@ class ProductDisplay extends Component {
         };
     }
 
-    componentDidMount = () => !this.props.newMode && this.props.fetchProduct(this.props.match.params.id);
+    componentDidMount = () =>
+        this.props.match.params.id !== 'new' &&
+        this.props.fetchProduct(this.props.match.params.id, () => {}, () => this.props.history.push('/404'));
 
     renderNotAvailable = () => <b> (<span className="ProductDisplay-notAvailable">not available</span>)</b>;
 
@@ -131,7 +133,7 @@ class ProductDisplay extends Component {
     </React.Fragment>;
 
     render = () => <React.Fragment>
-        {!this.props.id && !this.props.newMode && this.props.history.push('/403')}
+        {this.props.match.params.id === 'new' && !this.props.editMode && <Redirect to="/403"/>}
 
         {!this.props.newMode && this.renderProduct()}
 
